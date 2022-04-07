@@ -1,80 +1,91 @@
 <div class="u-content">
     <div class="u-body">
-        <!-- breadcumb-area -->
-        <section class="breadcumb-area card bg-gradient mb-5">
-            <div class="bread-cumb-content card-body d-flex align-items-center">
-                <div class="breadcumb-heading">
-                    <h2 class="text-white">Dashboard</h2>
-                </div>
-                <div class="breadcumb-image ml-auto">
-                    <img src="/public/admin-assets/img/breadcumb-dashboard.png" alt="">
-                </div>
-            </div>
-        </section>
-        <!-- End breadcumb-area -->
-        <!-- Deal Overview -->
+        <!-- Card Header -->
+        <header class="section-header mb-4">
+            <h2 class="h3 card-header-title">Dashboard</h2>
+        </header>
+        <!-- End Card Header -->
         <div class="card mb-4">
-            <!-- Card Header -->
-            <header class="card-header text-center">
-                <h2 class="h3 card-header-title text-dark pt-2">Attendances of the year</h2>
-            </header>
-            <!-- End Card Header -->
             <!-- Card Body -->
             <div class="card-body">
+                <!-- row -->
                 <div class="row">
                     <!-- Chart -->
+                    <h3 class="chart-heading">Admin Revenue This Year</h3>
                     <div class="col-md-12 mb-4 mb-md-0" style="min-height: 300px;">
-                        <canvas class="js-overall-income-chart" width="1000" height="300"></canvas>
+                        <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                            <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                            </div>
+                            <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                            </div>
+                        </div>
+                        <canvas class="js-overall-income-chart chartjs-render-monitor" width="742" height="300" style="display: block; width: 742px; height: 300px;"></canvas>
                     </div>
                     <!-- End Chart -->
                 </div>
+                <!-- End row -->
+
+
             </div>
             <!-- End Card Body -->
         </div>
-        <!-- End Deal Overview -->
-        <!-- highlight-area start -->
+
+
         <div class="row">
-            <div class="col-lg-3 col-md-6">
-                <div class="single-asset-counting-list-box bg-gradient bg-gradient-purple card border-0 text-center">
+            <div class="col-sm-6 col-xl-3 text-center">
+                <div class="card single-highlight">
                     <div class="card-body">
-                        <div class="single-asset-counting-list-image-wrap">
-                            <img src="/public/admin-assets/img/student.png" alt="">
+                        <div class="highlight-icon-image mb-3">
+                            <img src="public/admin-assets/img/icon/course.png" alt="">
                         </div>
-                        <h2 class="text-white mb-0">160 <small class="d-block mt-2">Students</small></h2>
+                        <div class="highlight-text">
+                            <h3 class="h2 mb-3 counter">15</h3>
+                            <h3>Number of Courses</h3>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="single-asset-counting-list-box bg-gradient bg-gradient-blue card border-0 text-center">
+            <div class="col-sm-6 col-xl-3 text-center">
+                <div class="card single-highlight">
                     <div class="card-body">
-                        <div class="single-asset-counting-list-image-wrap">
-                            <img src="/public/admin-assets/img/teacher.png" alt="">
+                        <div class="highlight-icon-image mb-3">
+                            <img src="public/admin-assets/img/icon/leson.png" alt="">
                         </div>
-                        <h2 class="text-white mb-0">15 <small class="d-block mt-2">Teachers</small></h2>
+                        <div class="highlight-text">
+                            <h3 class="h2 mb-3 counter">143</h3>
+                            <h3>Number of Lessons</h3>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="single-asset-counting-list-box bg-gradient bg-gradient-green card border-0 text-center">
+            <div class="col-sm-6 col-xl-3 text-center ">
+                <div class="card single-highlight">
                     <div class="card-body">
-                        <div class="single-asset-counting-list-image-wrap">
-                            <img src="/public/admin-assets/img/parent.png" alt="">
+                        <div class="highlight-icon-image mb-3">
+                            <img src="public/admin-assets/img/icon/student.png" alt="">
                         </div>
-                        <h2 class="text-white mb-0">160 <small class="d-block mt-2">Parent</small></h2>
+                        <div class="highlight-text">
+                            <h3 class="h2 mb-3 counter">120</h3>
+                            <h3>Number of Students</h3>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="single-asset-counting-list-box bg-gradient bg-gradient-yellow card border-0 text-center">
+            <div class="col-sm-6 col-xl-3 text-center">
+                <div class="card single-highlight">
                     <div class="card-body">
-                        <div class="single-asset-counting-list-image-wrap">
-                            <img src="/public/admin-assets/img/staff.png" alt="">
+                        <div class="highlight-icon-image mb-3">
+                            <img src="public/admin-assets/img/icon/enroll.png" alt="">
                         </div>
-                        <h2 class="text-white mb-0">10 <small class="d-block mt-2">Staff</small></h2>
+                        <div class="highlight-text">
+                            <h3 class="h2 mb-3 counter">122</h3>
+                            <h3>Number of Enrollments</h3>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- highlight-area End -->
     </div>
 </div>

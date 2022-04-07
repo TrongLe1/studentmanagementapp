@@ -6,15 +6,15 @@
         data: {
           labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
           datasets: [{
-            label: 'Total Students',
-            borderColor: '#6CE071',
+            label: 'Total Classes',
+            borderColor: 'rgba(143,103,255,1)',
             backgroundColor: 'rgba(0,0,0,0)',
-            data: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+            data: [0, 2700, 2600, 2550, 4000, 10000, 20000, 10000, 5000, 6000, 5500, 3000]
           }, {
-            label: 'Total Attendances',
-            borderColor: '#FA5D4E',
+            label: 'Total Students',
+            borderColor: 'rgba(255,103,145,1)',
             backgroundColor: 'rgba(0,0,0,0)',
-            data: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+            data: [2700, 2000, 3000, 18000, 10000, 5000, 4000, 5000, 8000, 5000, 2000, 2100]
           },]
         },
         options: {

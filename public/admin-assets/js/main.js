@@ -1,5 +1,8 @@
 (function ($) {
   $(document).on('ready', function () {
+      
+      
+      
     // Tooltips & Popovers
     $('[data-toggle="tooltip"]').tooltip();
     $('[data-toggle="popover"]').popover();
@@ -59,14 +62,10 @@
       scrollbarPosition: 'outside',
       scrollInertia: 150
     });
-
-    // niceSelect
-    $('.es-form select').niceSelect();
-
-    $( function() {
-      $( "#datepicker" ).datepicker();
-    } );
-
-
+    
+    
+    
   });
+    
+    $('select').niceSelect();
 })(jQuery);
