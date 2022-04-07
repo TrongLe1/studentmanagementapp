@@ -16,6 +16,9 @@
     "express-handlebars": "^6.0.4",
     "express-handlebars-sections": "^1.0.1",
     "express-session": "^1.17.2",
-    "morgan": "^1.10.0"
+    "knex": "^1.0.5",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3"
   }
 }

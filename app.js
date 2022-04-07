@@ -14,11 +14,13 @@ app.use(morgan('dev'));
 app.use(express.urlencoded({
     extended: true
 }))
+
 app.engine('hbs', engine({
     helpers: {
         section: express_section()
     }
 }))
+
 app.set('view engine', 'hbs')
 app.set('views', './views')
 app.use('/public', express.static('public'))
