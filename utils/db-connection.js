@@ -1,19 +1,19 @@
 import knex from "knex"
 
 const db =knex({
-    client: 'mysql',
+    client: 'mysql2',
     connection: {
-        host : HOST_NAME,
-        port: PORT,
-        user : DATABASE_USERNAME,
-        password : DATABASE_PASSWORD,
-        database : DATABASE_NAME
+        host : '127.0.0.1',
+        port: 3306,
+        user : 'root',
+        password : '',
+        database : 'std_management_app'
     },
     pool: {
-        max: MAX_POOL,
-        min: MIN_POOL
+        max: 10,
+        min: 0
     }
-});
 
+});
 
 export default db

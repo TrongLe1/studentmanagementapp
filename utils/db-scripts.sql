@@ -5,10 +5,11 @@ use std_management_app;
 
 drop table if exists TaiKhoan;
 create table TaiKhoan(
-    TenDangNhap text primary key,
-    Matkhau text not null,
-    TrangThai boolean default 1,
-    LoaiTaiKhoan integer
+                         MaTaiKhoan bigint primary key,
+                         TenDangNhap text,
+                         Matkhau text not null,
+                         TrangThai boolean default 1,
+                         LoaiTaiKhoan integer
 );
 
 drop table if exists HocSinh;
@@ -24,7 +25,7 @@ create table HocSinh
     DanToc      text null,
     TonGiao     text,
     ThuocLop    bigint,
-    TaiKhoan    text
+    TaiKhoan    bigint
 );
 
 drop table if exists GiaoVien;
@@ -37,7 +38,8 @@ create table GiaoVien
     GioiTinh    boolean null,
     DiaChi      text null,
     ThuocLop    bigint null,
-    ChuNhiemLop bigint null
+    ChuNhiemLop bigint null,
+    TaiKhoan    bigint null
 );
 
 drop table if exists PhuHuynh;
@@ -53,36 +55,38 @@ create table PhuHuynh
 
 drop table if exists CTPhuHuynh;
 create table CTPhuHuynh(
-    MaPHHS bigint primary key,
-    MaHocSinh bigint primary key,
-    QuanHe text not null
+                           MaPHHS bigint,
+                           MaHocSinh bigint,
+                           QuanHe text not null,
+                           primary key (MaPHHS, MaHocSinh)
 );
 
 
 drop table if exists ThanhTich;
 create table ThanhTich(
-    MaThanhTich bigint primary key,
-    TenHoatDong text,
-    NgayDienRa datetime
+                          MaThanhTich bigint primary key,
+                          TenHoatDong text,
+                          NgayDienRa datetime
 );
 
 drop table if exists CTThanhTich;
 create table CTThanhTich(
-    MaThanhTich bigint primary key,
-    MaHocSinh bigint primary key,
-    SoLanThamGia integer
+                            MaThanhTich bigint,
+                            MaHocSinh bigint,
+                            SoLanThamGia integer,
+                            primary key (MaThanhTich, MaHocSinh)
 );
 
 drop table if exists ViPham;
 create table ViPham(
-    MaThanhTich bigint primary key,
-    DiemTru float
+                       MaThanhTich bigint primary key,
+                       DiemTru float
 );
 
 drop table if exists KhenThuong;
 create table KhenThuong(
-    MaThanhTich bigint primary key,
-    DiemCong float
+                           MaThanhTich bigint primary key,
+                           DiemCong float
 );
 
 drop table if exists LopHoc;
@@ -109,9 +113,10 @@ create table HocPhi
 drop table if exists CTGiangDay;
 create table CTGiangDay
 (
-    MaHocPhi bigint primary key,
-    MaGV bigint primary key,
-    MonHoc bigint primary key
+    MaHocPhi bigint ,
+    MaGV bigint,
+    MonHoc bigint,
+    primary key (MaHocPhi,MaGV,MonHoc)
 );
 
 drop table if exists ThoiKhoaBieu;
@@ -125,18 +130,20 @@ create table ThoiKhoaBieu
 drop table if exists CTLTLH;
 create table CTLTLH
 (
-    MaLop   bigint primary key,
-    MaLichThi bigint primary key
+    MaLop   bigint ,
+    MaLichThi bigint,
+    primary key(MaLichThi, MaLop)
 );
 
 
 drop table if exists CTLTKB;
 create table CTLTKB
 (
-    MaLop   bigint primary key,
-    MaMon bigint primary key,
+    MaLop   bigint,
+    MaMon bigint,
     ThoiGianBD time,
-    NgayHoc date
+    NgayHoc date,
+    primary key (MaLop,MaMon)
 );
 
 drop table if exists LichThi;
@@ -150,12 +157,13 @@ create table LichThi
 drop table if exists CTLTMH;
 create table CTLTMH
 (
-    MaMon   bigint primary key,
-    MaLichThi   bigint primary key,
+    MaMon   bigint,
+    MaLichThi   bigint,
     NgayThi date null,
     ThoiGianBD time null,
     ThoiGianKt time null,
-    PhongThi  text null
+    PhongThi  text null,
+    primary key (MaMon,MaLichThi)
 );
 
 drop table if exists MonHoc;
@@ -169,11 +177,12 @@ create table MonHoc
 drop table if exists Diem;
 create table Diem
 (
-    MaHocSinh   bigint primary key auto_increment,
-    MaMon   bigint primary key ,
-    HocKy   bigint primary key ,
-    NamHoc   bigint primary key ,
+    MaHocSinh   bigint auto_increment,
+    MaMon   bigint,
+    HocKy   bigint,
+    NamHoc   bigint,
     TenMonHoc text null,
     HeSoDiem float null,
-    SoDiem float null
+    SoDiem float null,
+    primary key (MaHocSinh, MaMon, HocKy, NamHoc)
 );
