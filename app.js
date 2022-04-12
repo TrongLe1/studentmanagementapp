@@ -18,7 +18,20 @@ app.use(express.urlencoded({
 
 app.engine('hbs', engine({
     helpers: {
-        section: express_section()
+        section: express_section(),
+        format_date(val) {
+            const date = val.getDate()
+            const month = val.getMonth() + 1
+            return [
+                date.toString().padStart(2, '0'),
+                month.toString().padStart(2, '0'),
+                val.getFullYear()
+            ].join('/')
+        },
+        format_gender(val) {
+            if (val === 0) return 'Nam'
+            else return 'Nữ'
+        }
     }
 }))
 
