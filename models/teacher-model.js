@@ -22,5 +22,17 @@ export default {
     },
     createAccount(accountId, id) {
         return db('giaovien').where('MaGV', '=', id).update({TaiKhoan: accountId})
+    },
+    getNotHomeroomTeacher() {
+        return db.select('*').from('giaovien').whereNull('ChuNhiemLop')
+    },
+    assignHomeroomTeacher(teacherId, classId) {
+        return db('giaovien').where('MaGV', '=', teacherId).update({ChuNhiemLop: classId})
+    },
+    findHomeroomTeacher(classId) {
+        return db.select('*').from('giaovien').where('ChuNhiemLop', '=', classId)
+    },
+    removeHomeroomTeacherFromClass(classId) {
+        return db('giaovien').where('ChuNhiemLop', classId).update({ChuNhiemLop: null})
     }
 }

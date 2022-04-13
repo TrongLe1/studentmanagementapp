@@ -1,0 +1,73 @@
+{{#section 'js'}}
+    <script>
+        $("#yearPicker").datepicker({
+            format: "yyyy",
+            viewMode: "years",
+            minViewMode: "years",
+            autoclose: true
+        });
+        $("#yearPicker2").datepicker({
+            format: "yyyy",
+            viewMode: "years",
+            minViewMode: "years",
+            autoclose: true
+        });
+    </script>
+{{/section}}
+
+<div class="u-content">
+    <div class="u-body">
+        <header class="section-header mb-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2 class="h3 card-header-title">Chỉnh sửa lớp học</h2>
+                </div>
+            </div>
+        </header>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="category-add-form-wrap">
+                    <form action="/admin/class/edit" method="post" class="category-add-form">
+                        <div class="form-group">
+                            <label for="name">Tên lớp</label>
+                            <input type="text" class="form-control" id="name" name="name" value="{{clss.TenLop}}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Phòng học</label>
+                            <input type="text" class="form-control" id="room" name="room" value="{{clss.PhongHoc}}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="teacher">Giáo viên chủ nhiệm lớp</label>
+                            <select id="teacher" name="teacher">
+                                {{#if teachers.check}}
+                                    <option data-display="{{teachers.MaGV}}. {{teachers.HoTen}}" value="">Giáo viên</option>
+                                {{else}}
+                                    <option data-display="Chọn giáo viên" value="">Giáo viên</option>
+                                {{/if}}
+                                {{#each result}}
+                                    <option value="{{MaGV}}">{{MaGV}}. {{HoTen}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group">&nbsp;</div>
+                        <div class="form-group">
+                            <label for="dob">Năm bắt đầu</label>
+                            <input class="form-control" id="yearPicker" name="start" type="text" value="{{clss.BatDau}}" onkeydown="return false;" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="dob">Năm kết thúc</label>
+                            <input class="form-control" id="yearPicker2" name="end" type="text" value="{{clss.KetThuc}}" onkeydown="return false;" required/>
+                        </div>
+                        {{#if added}}
+                            <p class="text-success">Chỉnh sửa thành công</p>
+                        {{/if}}
+                        <input name="id" value="{{clss.MaLop}}" hidden>
+                        <div class="form-group">
+                            <button class="box-btn" type="submit">Lưu</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

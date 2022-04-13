@@ -1,0 +1,80 @@
+<div class="u-content">
+    <div class="u-body">
+        <header class="section-header mb-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2 class="h3 card-header-title">Danh sách lớp học</h2>
+                </div>
+                {{!--
+                <div class="col-md-6 text-right">
+                    <a href="category-add.html" class="box-btn">Add New Category</a>
+                </div>
+                --}}
+            </div>
+        </header>
+        <div class="row">
+            {{#each result}}
+                <div class="col-lg-4 col-md-6">
+                    <div class="card single-category text-center">
+                        <div class="card-body">
+                            <div class="">
+                                <div class="category-image">
+                                    <img src="/public/admin-assets/img/categories/cat-2.jpg" alt="">
+                                </div>
+                                <div class="category-content">
+                                    <h2>{{TenLop}}</h2>
+                                    <ul>
+                                        <li>Mã lớp: {{MaLop}}</li>
+                                        <li>Phòng học: {{PhongHoc}}</li>
+                                        <li>Năm học: {{NamHoc}}</li>
+                                    </ul>
+                                    <div class="">
+                                        <form method="get" id="formGet">
+                                            <input name="id" value="{{MaLop}}" hidden>
+                                        </form>
+                                        <form method="post" id="formPost">
+                                            <input name="id" value="{{MaLop}}" hidden>
+                                        </form>
+                                        <button type="submit" class="btn btn-outline-primary" form="formGet" formaction="/admin/class/edit">Chỉnh sửa</button>
+                                        <button type="submit" class="btn btn-outline-secondary">Danh sách học sinh</button>
+                                        <button type="submit" class="btn btn-outline-secondary">Danh sách giáo viên</button>
+                                        <button type="submit" class="btn btn-outline-info">Lịch biểu</button>
+                                        <button type="submit" class="btn btn-outline-info">Học phí</button>
+                                        <button type="submit" class="btn btn-outline-danger" form="formPost" formaction="/admin/class/delete">Xóa</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+        {{#if curPage.check}}
+            <div class="pagination-wrap mt-3 text-center">
+                <nav aria-label="Bootstrap Pagination Example">
+                    <ul class="pagination mb-0">
+                        {{#if prevPage.check}}
+                            <li class="page-item">
+                                <a class="page-link" href="/admin/class?page={{prevPage.value}}">&larr; <span class="ml-1 d-none d-xl-inline-block">Previous</span></a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="/admin/class?page={{prevPage.value}}">{{prevPage.value}}</a>
+                            </li>
+                        {{/if}}
+                        <li class="page-item active">
+                            <a class="page-link">{{curPage.value}}</a>
+                        </li>
+                        {{#if nexPage.check}}
+                            <li class="page-item">
+                                <a class="page-link" href="/admin/class?page={{nexPage.value}}">{{nexPage.value}}</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="/admin/class?page={{nexPage.value}}"><span class="mr-1 d-none d-xl-inline-block">Next</span> &rarr;</a>
+                            </li>
+                        {{/if}}
+                    </ul>
+                </nav>
+            </div>
+        {{/if}}
+    </div>
+</div>

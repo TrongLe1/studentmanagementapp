@@ -96,7 +96,11 @@
                     </li>
 
                     <li class="u-sidebar-nav-menu__item clearfix">
-                        <a class="u-sidebar-nav-menu__link" href="" data-target="#classes">
+                        {{#if class}}
+                            <a class="u-sidebar-nav-menu__link active" href="" data-target="#classes">
+                        {{else}}
+                            <a class="u-sidebar-nav-menu__link" href="" data-target="#classes">
+                        {{/if}}
                             <i class="fas fa-school u-sidebar-nav-menu__item-icon"></i>
                             <span class="u-sidebar-nav-menu__item-title">Lớp học</span>
                             <i class="fa fa-angle-right u-sidebar-nav-menu__item-arrow"></i>
@@ -105,16 +109,27 @@
 
                         <ul id="classes" class="u-sidebar-nav-menu u-sidebar-nav-menu--second-level text-center" style="display: none;">
                             <li class="u-sidebar-nav-menu__item">
-                                <a class="u-sidebar-nav-menu__link" href="">
+                                <a class="u-sidebar-nav-menu__link" href="/admin/class">
                                     <span class="u-sidebar-nav-menu__item-title">Danh sách lớp học</span>
                                 </a>
                             </li>
                             <li class="u-sidebar-nav-menu__item">
-                                <a class="u-sidebar-nav-menu__link" href="">
+                                <a class="u-sidebar-nav-menu__link" href="/admin/class/add">
                                     <span class="u-sidebar-nav-menu__item-title">Thêm lớp học</span>
                                 </a>
                             </li>
                         </ul>
+                    </li>
+
+                    <li class="u-sidebar-nav-menu__item">
+                        {{#if subject}}
+                        <a class="u-sidebar-nav-menu__link active" href="/admin/subject">
+                        {{else}}
+                        <a class="u-sidebar-nav-menu__link" href="/admin/subject">
+                        {{/if}}
+                            <i class="fas fa-book-open u-sidebar-nav-menu__item-icon"></i>
+                            <span class="u-sidebar-nav-menu__item-title">Môn học</span>
+                        </a>
                     </li>
 
                     <li class="u-sidebar-nav-menu__item clearfix">

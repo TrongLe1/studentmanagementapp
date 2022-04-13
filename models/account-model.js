@@ -6,5 +6,8 @@ export default {
     },
     findAccountByUsername(user) {
         return db('taikhoan').where({TenDangNhap: user}).select('*')
+    },
+    updateAccountById(id, account) {
+        return db('taikhoan').where('MaTaiKhoan', '=', id).update(account)
     }
 }
