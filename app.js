@@ -8,6 +8,7 @@ import express_section from 'express-handlebars-sections'
 import session from 'express-session'
 import admin from './routes/admin-route.js'
 import router from "./routes/admin-route.js";
+import studentRoute from "./routes/student-route.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const app = express()
@@ -47,6 +48,7 @@ app.use(session({
 }))
 
 app.use('/admin', admin)
+app.use('/', studentRoute)
 
 app.get('/login', function (req, res) {
     res.render('login', {
@@ -54,10 +56,20 @@ app.get('/login', function (req, res) {
     })
 })
 
+app.post('/login', function (req, res) {
+    console.log("Start Login")
+    res.redirect('/login')
+})
+
+
 app.get('/forgot-password', function (req, res) {
     res.render('forgetpw', {
         layout: "index.hbs"
     })
+})
+
+app.post('/forgot-password', function (req, res) {
+    res.redirect('/forgot-password')
 })
 
 const port = 3000
