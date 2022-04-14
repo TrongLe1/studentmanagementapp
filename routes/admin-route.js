@@ -7,7 +7,6 @@ import subjectModel from '../models/subject-model.js'
 
 const router = express.Router();
 
-
 //Giao Vien
 router.get('/', function (req, res) {
     res.render('admin/dashboard', {

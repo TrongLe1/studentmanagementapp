@@ -7,7 +7,7 @@ import { fileURLToPath } from 'url'
 import express_section from 'express-handlebars-sections'
 import session from 'express-session'
 import admin from './routes/admin-route.js'
-import router from "./routes/admin-route.js";
+import teacher from './routes/teacher-route.js'
 import studentRoute from "./routes/student-route.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -49,6 +49,7 @@ app.use(session({
 
 app.use('/admin', admin)
 app.use('/', studentRoute)
+app.use('/teacher', teacher)
 
 app.get('/login', function (req, res) {
     res.render('login', {
@@ -74,5 +75,5 @@ app.post('/forgot-password', function (req, res) {
 
 const port = 3000
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+    console.log(`Example app listening at http://localhost:${port}` + `/teacher`)
 })
