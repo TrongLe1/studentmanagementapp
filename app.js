@@ -8,7 +8,10 @@ import express_section from 'express-handlebars-sections'
 import session from 'express-session'
 import admin from './routes/admin-route.js'
 import teacher from './routes/teacher-route.js'
-import studentRoute from "./routes/student-route.js";
+import studentRoute from "./routes/student-route.js"
+import accountModel from "./models/account-model.js"
+import bcrypt from 'bcryptjs'
+
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const app = express()
@@ -32,6 +35,22 @@ app.engine('hbs', engine({
         format_gender(val) {
             if (val === 0) return 'Nam'
             else return 'Nữ'
+        },
+        formatDate(val){
+            return val.toLocaleString('vi').split(" ")[1]
+        },
+        checkGender(val){
+            if(val === 1){
+                return "Nam"
+            }else
+                return "Nữ"
+        },
+        formatMoney(val) {
+            return val.toLocaleString({style: 'currency', currency: 'VND'}) + " VND";
+        },
+        checkTimeSession(val){
+            let s = val.split(':')[0]
+            return s < 13 ? "Sáng": "Chiều"
         }
     }
 }))
@@ -41,15 +60,21 @@ app.set('views', './views')
 app.use('/public', express.static('public'))
 app.set('trust proxy', 1)
 app.use(session({
-    secret: 'secret_key',
+    secret: 'secret_key',       
     resave: false,
     saveUninitialized: true,
-    cookie: {}
+    cookie: {
+
+    }
 }))
 
 app.use('/admin', admin)
 app.use('/', studentRoute)
 app.use('/teacher', teacher)
+
+app.get('/logout', function (req, res) {
+    res.redirect('login')
+})
 
 app.get('/login', function (req, res) {
     res.render('login', {
@@ -57,8 +82,17 @@ app.get('/login', function (req, res) {
     })
 })
 
-app.post('/login', function (req, res) {
-    console.log("Start Login")
+app.post('/login', async function (req, res) {
+    // console.log("Start Login")
+    let account = req.body
+    if (account.TenDangNhap === ''){
+        res.redirect('/login')
+        return;
+    }
+    let checkAccount = await accountModel.findAccountByUsername(account.TenDangNhap)
+    if (checkAccount[0].LoaiTaiKhoan === 2){
+        res.redirect('/student')
+    }else
     res.redirect('/login')
 })
 
@@ -75,5 +109,6 @@ app.post('/forgot-password', function (req, res) {
 
 const port = 3000
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}` + `/teacher`)
+    // console.log(`Example app listening at http://localhost:${port}` + `/teacher`)
+    console.log(`Example app listening at http://localhost:${port}/login`)
 })

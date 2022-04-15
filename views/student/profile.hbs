@@ -10,11 +10,12 @@
                 <div class="main-navigation">
                     <button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
                     <ul class="menu">
-                        <li class="menu-item mr-1 current-menu-item"><a href="/">Trang chủ</a></li>
+                        <li class="menu-item mr-1 current-menu-item"><a href="/student">Trang chủ</a></li>
                         <li class="menu-item mr-1"><a href="/exam-schedule">Lịch Thi</a></li>
                         <li class="menu-item mr-1"><a href="/time-table">Thời khóa biểu</a></li>
                         <li class="menu-item mr-1"><a href="/tuition">Học Phí</a></li>
                         <li class="menu-item mr-1"><a href="/profile">Thông tin cá nhân</a></li>
+                        <li class="menu-item mr-1"><a href="/logout">Đăng xuất</a></li>
                     </ul> <!-- .menu -->
                 </div> <!-- .main-navigation -->
 
@@ -28,9 +29,9 @@
 <main class="main-content mb-4">
         <div class="container col d-flex justify-content-center">
             <div class="col-md-9">
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <div class="card mb-3">
-                        <div class="card-header p-1" style="background-color: #a8d2ea;">
+                        <div class="card-header p-1" style="background-color: #fffcbd;">
                             <h5 class="d-flex justify-content-center">
                                 Thông tin học sinh
                             </h5>
@@ -41,7 +42,7 @@
                                     <h6 class="mb-0">Họ và tên:</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    Nguyễn Văn A
+                                    {{this.student.HoTen}}
                                 </div>
                             </div>
                             <hr class="mt-3 mb-3">
@@ -50,7 +51,7 @@
                                     <h6 class="mb-0">Lớp:</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    12A1
+                                    {{this.studentClass}}
                                 </div>
                             </div>
                             <hr class="mt-3 mb-3">
@@ -59,7 +60,7 @@
                                     <h6 class="mb-0">Giới tính:</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    Nam
+                                    {{checkGender student.GioiTinh}}
                                 </div>
                             </div>
                             <hr class="mt-3 mb-3">
@@ -68,7 +69,7 @@
                                     <h6 class="mb-0">Ngày sinh:</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    01-01-2001
+                                    {{formatDate student.NgaySinh}}
                                 </div>
                             </div>
                             <hr class="mt-3 mb-3">
@@ -77,7 +78,7 @@
                                     <h6 class="mb-0">Địa chỉ:</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    1 Hai Bà Trưng, P5, Q3, TPHCM
+                                    {{student.DiaChi}}
                                 </div>
                             </div>
                             <hr class="mt-3 mb-3">
@@ -86,7 +87,7 @@
                                     <h6 class="mb-0">Số điện thoại:</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    (320) 380-4539
+                                    {{student.SDT}}
                                 </div>
                             </div>
                             <hr class="mt-3 mb-3">
@@ -95,7 +96,7 @@
                                     <h6 class="mb-0">Dân tộc:</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    Kinh
+                                    {{student.DanToc}}
                                 </div>
                             </div>
                             <hr class="mt-3 mb-3">
@@ -104,7 +105,7 @@
                                     <h6 class="mb-0">Tôn giáo:</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    Không
+                                    {{student.TonGiao}}
                                 </div>
                             </div>
                         </div>
@@ -120,17 +121,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-7">
                     <div class="card mb-3">
-                        <div class="card-header p-1" style="background-color: #a8d2ea;">
+                        <div class="card-header p-1" style="background-color: #fffcbd;">
                             <h5 class="d-flex justify-content-center">
                                 Thông tin phụ huynh
                             </h5>
                         </div>
                         <div class="card-body p-0">
-                            <table class="table">
-                                <thead>
-                                <tr>
+                            <table class="table p-1">
+                                <thead >
+                                <tr style="font-weight: normal;">
                                     <th scope="col">Họ và tên</th>
                                     <th scope="col">Ngày sinh</th>
                                     <th scope="col">Nghề nghiệp</th>
@@ -139,20 +140,15 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                {{#each relatives}}
                                 <tr>
-                                    <td>Nguyễn Văn C</td>
-                                    <td>10/12/2000</td>
-                                    <td>Phụ hồ</td>
-                                    <td>0993223232</td>
-                                    <td>Không</td>
+                                    <td>{{this.info.HoTen}}</td>
+                                    <td>{{formatDate this.info.NgaySinh}}</td>
+                                    <td>{{this.info.NgheNghiep}}</td>
+                                    <td>{{this.info.SDT}}</td>
+                                    <td>{{this.info.ChucVu}}</td>
                                 </tr>
-                                <tr>
-                                    <td>Nguyễn Văn D</td>
-                                    <td>10/12/2000</td>
-                                    <td>Phụ hồ</td>
-                                    <td>0993223232</td>
-                                    <td>Không</td>
-                                </tr>
+                                {{/each}}
                                 </tbody>
                             </table>
                         </div>

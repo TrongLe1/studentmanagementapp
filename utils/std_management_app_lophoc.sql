@@ -1,0 +1,18 @@
+INSERT INTO std_management_app.lophoc (MaLop, TenLop, PhongHoc, SoDoLop, NamHoc) VALUES (1, '12A1', 'A1', null, '2022');
+INSERT INTO std_management_app.lophoc (MaLop, TenLop, PhongHoc, SoDoLop, NamHoc) VALUES (2, '12A2', 'A2', null, '2022');
+INSERT INTO std_management_app.lophoc (MaLop, TenLop, PhongHoc, SoDoLop, NamHoc) VALUES (3, '12A3', 'A3', null, '2022');
+INSERT INTO std_management_app.lophoc (MaLop, TenLop, PhongHoc, SoDoLop, NamHoc) VALUES (4, '12A4', 'A4', null, '2022');
+INSERT INTO std_management_app.lophoc (MaLop, TenLop, PhongHoc, SoDoLop, NamHoc) VALUES (5, '12A5', 'A5', null, '2022 - 2022');
+INSERT INTO std_management_app.lophoc (MaLop, TenLop, PhongHoc, SoDoLop, NamHoc) VALUES (6, '12A6', 'A6', null, '2022');
+INSERT INTO std_management_app.lophoc (MaLop, TenLop, PhongHoc, SoDoLop, NamHoc) VALUES (7, '12A7', 'A7', null, '2022');
+INSERT INTO std_management_app.lophoc (MaLop, TenLop, PhongHoc, SoDoLop, NamHoc) VALUES (8, '12A8', 'A8', null, '2022');
+INSERT INTO std_management_app.lophoc (MaLop, TenLop, PhongHoc, SoDoLop, NamHoc) VALUES (9, '11A1', 'B1', null, '2022');
+INSERT INTO std_management_app.lophoc (MaLop, TenLop, PhongHoc, SoDoLop, NamHoc) VALUES (10, '11A2', 'B2', null, '2022');
+INSERT INTO std_management_app.lophoc (MaLop, TenLop, PhongHoc, SoDoLop, NamHoc) VALUES (11, '11A3', 'B3', null, '2022');
+INSERT INTO std_management_app.lophoc (MaLop, TenLop, PhongHoc, SoDoLop, NamHoc) VALUES (12, '11A4', 'B4', null, '2022');
+INSERT INTO std_management_app.lophoc (MaLop, TenLop, PhongHoc, SoDoLop, NamHoc) VALUES (13, '11A5', 'B5', null, '2022');
+INSERT INTO std_management_app.lophoc (MaLop, TenLop, PhongHoc, SoDoLop, NamHoc) VALUES (14, '11A6', 'B6', null, '2022');
+INSERT INTO std_management_app.lophoc (MaLop, TenLop, PhongHoc, SoDoLop, NamHoc) VALUES (15, '11A7', 'B7', null, '2022');
+INSERT INTO std_management_app.lophoc (MaLop, TenLop, PhongHoc, SoDoLop, NamHoc) VALUES (16, '11A8', 'B8', null, '2022');
+INSERT INTO std_management_app.lophoc (MaLop, TenLop, PhongHoc, SoDoLop, NamHoc) VALUES (17, '11A9', 'B9', null, '2022');
+INSERT INTO std_management_app.lophoc (MaLop, TenLop, PhongHoc, SoDoLop, NamHoc) VALUES (18, '10A1', 'C1', null, '2022 - 2025');

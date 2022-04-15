@@ -6,7 +6,7 @@ use std_management_app;
 drop table if exists TaiKhoan;
 create table TaiKhoan
 (
-    MaTaiKhoan   bigint primary key,
+    MaTaiKhoan   bigint primary key auto_increment,
     TenDangNhap  text,
     Matkhau      text not null,
     TrangThai    boolean default 1,
@@ -28,7 +28,7 @@ create table PhuHuynh
 drop table if exists ThanhTich;
 create table ThanhTich
 (
-    MaThanhTich bigint primary key,
+    MaThanhTich bigint primary key auto_increment,
     TenHoatDong text,
     NgayDienRa  datetime
 );
@@ -46,7 +46,7 @@ create table LopHoc
 drop table if exists LichThi;
 create table LichThi
 (
-    MaLichThi bigint auto_increment primary key ,
+    MaLichThi bigint auto_increment primary key,
     HocKy  text null,
     NamHoc text null
 );

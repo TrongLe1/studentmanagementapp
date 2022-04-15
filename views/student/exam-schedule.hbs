@@ -11,11 +11,12 @@
                 <div class="main-navigation">
                     <button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
                     <ul class="menu">
-                        <li class="menu-item mr-1 "><a href="/">Trang chủ</a></li>
+                        <li class="menu-item mr-1 "><a href="/student">Trang chủ</a></li>
                         <li class="menu-item mr-1 current-menu-item"><a href="/exam-schedule">Lịch Thi</a></li>
                         <li class="menu-item mr-1"><a href="/time-table">Thời khóa biểu</a></li>
                         <li class="menu-item mr-1"><a href="/tuition">Học Phí</a></li>
                         <li class="menu-item mr-1"><a href="/profile">Thông tin cá nhân</a></li>
+                        <li class="menu-item mr-1"><a href="/logout">Đăng xuất</a></li>
                     </ul> <!-- .menu -->
                 </div> <!-- .main-navigation -->
 
@@ -37,7 +38,7 @@
             <div class="col-md-4 d-flex justify-content-end">
                 <div class="alert alert-info">
                     <span class="font-weight-bold">Lớp: </span>
-                    <span class="text-uppercase">12a1</span>
+                    <span class="text-uppercase">{{this.studentClass}}</span>
                 </div>
             </div>
             <div class="table-responsive">
@@ -53,99 +54,35 @@
                     </tr>
                     </thead>
                     <tbody style="font-size: 14px">
-                    <tr>
-                        <td class="align-middle" style="background-color: #f6caca">
-                            <span class="font-weight-bold" style="font-size: 20px">13/04/2022</span>
-                        </td>
-                        <td style="background-color: #dbeff8">Sáng</td>
-                        <td style="background-color: #dbeff8">
-                            <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom    font-size16 xs-font-size13">Dance</span>
-                        </td>
-                        <td style="background-color: #dbeff8">
-                            <span class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom    font-size16  xs-font-size13">8:00</span>
-                        </td>
+                    {{#each schedule}}
+                        <tr>
+                            <td class="align-middle" style="background-color: #f6caca">
+                                <span class="font-weight-bold" style="font-size: 20px">{{formatDate this.NgayThi}}</span>
+                            </td>
+                            <td style="background-color: #dbeff8">
+                                {{checkTimeSession ThoiGianBD}}
+                            </td>
+                            <td style="background-color: #dbeff8">
+                            <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13">
+                                {{this.TenMon}}
+                            </span>
+                            </td>
+                            <td style="background-color: #dbeff8">
+                            <span class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16  xs-font-size13">
+                                {{this.ThoiGianBD}}
+                            </span>
+                            </td>
 
-                        <td style="background-color: #dbeff8">
-                            <span class="bg-yellow padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom    font-size16  xs-font-size13">9:30</span>
-                        </td>
-                        <td style="background-color: #dbeff8">
-                            Phòng 3 - Dãy A
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="align-middle" style="background-color: #f6caca">
-                            <span class="font-weight-bold" style="font-size: 20px">13/04/2022</span>
-                        </td><td style="background-color: #dbeff8">Sáng</td>
-                        <td style="background-color: #dbeff8">
-                            <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom    font-size16 xs-font-size13">Dance</span>
-                        </td>
-                        <td style="background-color: #dbeff8">
-                            <span class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom    font-size16  xs-font-size13">8:00</span>
-                        </td>
-
-                        <td style="background-color: #dbeff8">
-                            <span class="bg-yellow padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom    font-size16  xs-font-size13">9:30</span>
-                        </td>
-                        <td style="background-color: #dbeff8">
-                            Phòng 3 - Dãy A
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="align-middle" style="background-color: #f6caca">
-                            <span class="font-weight-bold" style="font-size: 20px">13/04/2022</span>
-                        </td><td style="background-color: #dbeff8">Sáng</td>
-                        <td style="background-color: #dbeff8">
-                            <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom    font-size16 xs-font-size13">Dance</span>
-                        </td>
-                        <td style="background-color: #dbeff8">
-                            <span class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom    font-size16  xs-font-size13">8:00</span>
-                        </td>
-
-                        <td style="background-color: #dbeff8">
-                            <span class="bg-yellow padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom    font-size16  xs-font-size13">9:30</span>
-                        </td>
-                        <td style="background-color: #dbeff8">
-                            Phòng 3 - Dãy A
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="align-middle" style="background-color: #f6caca">
-                            <span class="font-weight-bold" style="font-size: 20px">13/04/2022</span>
-                        </td><td style="background-color: #dbeff8">Sáng</td>
-                        <td style="background-color: #dbeff8">
-                            <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom    font-size16 xs-font-size13">Dance</span>
-                        </td>
-                        <td style="background-color: #dbeff8">
-                            <span class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom    font-size16  xs-font-size13">8:00</span>
-                        </td>
-
-                        <td style="background-color: #dbeff8">
-                            <span class="bg-yellow padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom    font-size16  xs-font-size13">9:30</span>
-                        </td>
-                        <td style="background-color: #dbeff8">
-                            Phòng 3 - Dãy A
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="align-middle" style="background-color: #f6caca">
-                            <span class="font-weight-bold" style="font-size: 20px">13/04/2022</span>
-                        </td><td style="background-color: #dbeff8">Sáng</td>
-                        <td style="background-color: #dbeff8">
-                            <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom    font-size16 xs-font-size13">Dance</span>
-                        </td>
-                        <td style="background-color: #dbeff8">
-                            <span class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom    font-size16  xs-font-size13">8:00</span>
-                        </td>
-
-                        <td style="background-color: #dbeff8">
-                            <span class="bg-yellow padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom    font-size16  xs-font-size13">9:30</span>
-                        </td>
-                        <td style="background-color: #dbeff8">
-                            Phòng 3 - Dãy A
-                        </td>
-                    </tr>
-
+                            <td style="background-color: #dbeff8">
+                            <span class="bg-yellow padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom    font-size16  xs-font-size13">
+                                {{this.ThoiGianKt}}
+                            </span>
+                            </td>
+                            <td style="background-color: #dbeff8">
+                                {{this.PhongThi}}
+                            </td>
+                        </tr>
+                    {{/each}}
                     </tbody>
                 </table>
             </div>

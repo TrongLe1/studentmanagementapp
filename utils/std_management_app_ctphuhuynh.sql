@@ -1,0 +1,15 @@
+INSERT INTO std_management_app.ctphuhuynh (MaPHHS, MaHocSinh, QuanHe) VALUES (1, 3, 'Cha');
+INSERT INTO std_management_app.ctphuhuynh (MaPHHS, MaHocSinh, QuanHe) VALUES (2, 3, 'Mẹ');
+INSERT INTO std_management_app.ctphuhuynh (MaPHHS, MaHocSinh, QuanHe) VALUES (3, 4, 'Cha');
+INSERT INTO std_management_app.ctphuhuynh (MaPHHS, MaHocSinh, QuanHe) VALUES (4, 5, 'Cha');
+INSERT INTO std_management_app.ctphuhuynh (MaPHHS, MaHocSinh, QuanHe) VALUES (5, 6, 'Cha');
+INSERT INTO std_management_app.ctphuhuynh (MaPHHS, MaHocSinh, QuanHe) VALUES (6, 7, 'Cha');
+INSERT INTO std_management_app.ctphuhuynh (MaPHHS, MaHocSinh, QuanHe) VALUES (7, 8, 'Cha');
+INSERT INTO std_management_app.ctphuhuynh (MaPHHS, MaHocSinh, QuanHe) VALUES (8, 9, 'Cha');
+INSERT INTO std_management_app.ctphuhuynh (MaPHHS, MaHocSinh, QuanHe) VALUES (9, 10, 'Cha');
+INSERT INTO std_management_app.ctphuhuynh (MaPHHS, MaHocSinh, QuanHe) VALUES (10, 11, 'Cha');
+INSERT INTO std_management_app.ctphuhuynh (MaPHHS, MaHocSinh, QuanHe) VALUES (11, 12, 'Mẹ');
+INSERT INTO std_management_app.ctphuhuynh (MaPHHS, MaHocSinh, QuanHe) VALUES (12, 13, 'Mẹ');
+INSERT INTO std_management_app.ctphuhuynh (MaPHHS, MaHocSinh, QuanHe) VALUES (13, 14, 'Mẹ');
+INSERT INTO std_management_app.ctphuhuynh (MaPHHS, MaHocSinh, QuanHe) VALUES (14, 15, 'Mẹ');
+INSERT INTO std_management_app.ctphuhuynh (MaPHHS, MaHocSinh, QuanHe) VALUES (15, 16, 'Mẹ');

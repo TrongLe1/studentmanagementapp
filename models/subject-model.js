@@ -14,4 +14,7 @@ export default {
     deleteSubject(id) {
         return db('monhoc').where('MaMon', '=', id).del()
     },
+    findSubject(id){
+        return db('monhoc').where('MaMon', '=', id)
+    }
 }

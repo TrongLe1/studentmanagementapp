@@ -4,18 +4,18 @@
             <div class="container">
                 <a href="/" id="branding">
                     <img src="/public/home-assets/images/logo.png" alt="Lincoln high School">
-                        <h1 class="site-title">Lincoln High School</h1>
-                    </a> <!-- #branding -->
-
-
-                    <div class="main-navigation">
+                    <h1 class="site-title">Lincoln High School</h1>
+                </a> <!-- #branding -->
+                <div class="main-navigation">
                     <button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
                     <ul class="menu">
-                        <li class="menu-item mr-1 "><a href="/">Trang chủ</a></li>
+                        <li class="menu-item mr-1 "><a href="/student">Trang chủ</a></li>
                         <li class="menu-item mr-1"><a href="/exam-schedule">Lịch Thi</a></li>
                         <li class="menu-item mr-1"><a href="/time-table">Thời khóa biểu</a></li>
                         <li class="menu-item mr-1 current-menu-item"><a href="/tuition">Học Phí</a></li>
                         <li class="menu-item mr-1"><a href="/profile">Thông tin cá nhân</a></li>
+                        <li class="menu-item mr-1"><a href="/logout">
+                            Đăng xuất</a></li>
                     </ul> <!-- .menu -->
                 </div> <!-- .main-navigation -->
 
@@ -26,96 +26,68 @@
     </header>
 </div>
 
-<main class="main-content mb-4">
-        <div class="container col d-flex justify-content-center">
-            <div class="col-md-9" >
+<main class="main-content mb-4"  style="height: 100%">
+    <div class="container col d-flex justify-content-center">
+        <div class="col-md-9">
+            {{#if flag}}
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text" for="inputGroupSelect01">Chọn học kỳ - năm học</label>
-                            </div>
-                            <select class="custom-select" id="inputGroupSelect01">
-                                <option selected>Choose...</option>
-                                <option value="1">2 / 2021-2022</option>
-                                <option value="2">1 / 2021-2022</option>
-                                <option value="3">2 / 2020-2021</option>
-                                <option value="3">1 / 2020-2021</option>
+                        <form class="form-inline" method="post" action="/tuition">
+                            <label class="my-1 mr-2" for="value">Chọn học kì - năm học</label>
+                            <select onchange="this.form.submit()" class="custom-select my-1 mr-sm-2" id="value" name="value">
+                                {{#each chooseList}}
+                                    <option {{#if isSelected}}selected{{/if}} value="{{HocKy}}/{{NamHoc}}">
+                                        {{HocKy}} / {{NamHoc}}
+                                    </option>
+                                {{/each}}
                             </select>
-                        </div>
+                        </form>
                     </div>
                     <div class="col-md-6 d-flex justify-content-end">
                         <div class="alert alert-info">
                             <span class="font-weight-bold">Lớp: </span>
-                            <span class="text-uppercase">12a1</span>
+                            <span class="text-uppercase">{{this.studentClass}}</span>
                         </div>
                     </div>
                 </div>
                 <table class="table table-bordered table-hover table-striped">
-                    <thead style="background: #f6f6f6;font-size: 14px">
+                    <thead style="background: #fcfb83;font-size: 14px">
                     <tr>
                         <th>#</th>
-                        <th>Mã</th>
                         <th>Tên khoản nộp</th>
                         <th>Lớp</th>
+                        <th>Học kì</th>
+                        <th>Năm học</th>
                         <th>Đơn giá</th>
-                        <th>Học phí</th>
                     </tr>
                     </thead>
-                    <tbody data-bind="foreach: dsHocPhi" style="font-size: 13px">
-                    <tr>
-                        <td class="text-center" data-bind="text: $index() + 1">4</td>
-                        <td class="text-center" data-bind="text: mamh">CSC13102</td>
-                        <td class="no-wrap" data-bind="text: tenmh">Lập trình ứng dụng Java</td>
-                        <td class="text-center" data-bind="text: dongia">12A1</td>
-                        <td class="text-center" data-bind="text: dongia">682.000&nbsp;₫</td>
-                        <td class="text-center" data-bind="text: hocphi">0&nbsp;₫</td>
-                        <td class="text-center" data-bind="text: hotrohp, visible: $parent.tongHTHP() != '0&nbsp;₫'" style="display: none;">0&nbsp;₫</td>
-                    </tr>
+                    <tbody style="font-size: 13px">
+                    {{#each tuitions}}
+                        <tr>
+                            <td class="text-center">{{@index}}</td>
+                            <td class="no-wrap" >{{TenHocPhi}}</td>
+                            <td class="text-center">{{MaLop}}</td>
+                            <td class="text-center" >{{HocKy}}</td>
+                            <td class="text-center" >{{NamHoc}}</td>
+                            <td class="text-center">{{formatMoney TongTien}}</td>
 
-                    <tr>
-                        <td class="text-center" data-bind="text: $index() + 1">4</td>
-                        <td class="text-center" data-bind="text: mamh">CSC13102</td>
-                        <td class="no-wrap" data-bind="text: tenmh">Lập trình ứng dụng Java</td>
-                        <td class="text-center" data-bind="text: dongia">12A1</td>
-                        <td class="text-center" data-bind="text: dongia">682.000&nbsp;₫</td>
-                        <td class="text-center" data-bind="text: hocphi">0&nbsp;₫</td>
-                        <td class="text-center" data-bind="text: hotrohp, visible: $parent.tongHTHP() != '0&nbsp;₫'" style="display: none;">0&nbsp;₫</td>
-                    </tr>
-
-                    <tr>
-                        <td class="text-center" data-bind="text: $index() + 1">4</td>
-                        <td class="text-center" data-bind="text: mamh">CSC13102</td>
-                        <td class="no-wrap" data-bind="text: tenmh">Lập trình ứng dụng Java</td>
-                        <td class="text-center" data-bind="text: dongia">12A1</td>
-                        <td class="text-center" data-bind="text: dongia">682.000&nbsp;₫</td>
-                        <td class="text-center" data-bind="text: hocphi">0&nbsp;₫</td>
-                        <td class="text-center" data-bind="text: hotrohp, visible: $parent.tongHTHP() != '0&nbsp;₫'" style="display: none;">0&nbsp;₫</td>
-                    </tr>
-
-                    <tr>
-                        <td class="text-center" data-bind="text: $index() + 1">4</td>
-                        <td class="text-center" data-bind="text: mamh">CSC13102</td>
-                        <td class="no-wrap" data-bind="text: tenmh">Lập trình ứng dụng Java</td>
-                        <td class="text-center" data-bind="text: dongia">12A1</td>
-                        <td class="text-center" data-bind="text: dongia">682.000&nbsp;₫</td>
-                        <td class="text-center" data-bind="text: hocphi">0&nbsp;₫</td>
-                        <td class="text-center" data-bind="text: hotrohp, visible: $parent.tongHTHP() != '0&nbsp;₫'" style="display: none;">0&nbsp;₫</td>
                         </tr>
-                        </tbody>
+                    {{/each}}
+                    </tbody>
                     <tfoot style="font-size: 14px">
-                        <tr>
-                            <td class="text-right" colspan="5">Tổng:</td>
-                            <td class="text-center"> 9.000.000 đ</td>
-                        </tr>
-                        <tr>
-                            <td class="text-right" colspan="5">Tình trạng</td>
-                            <td class="text-center"> <span class="text-danger font-weight-bold">Chưa đóng</span></td>
-                        </tr>
+                    <tr>
+                        <td class="text-right" colspan="5">Tổng:</td>
+                        <td class="text-center text-danger font-weight-bold">{{formatMoney this.tong}}</td>
+                    </tr>
                     </tfoot>
                 </table>
+            {{else}}
+                <div class="alert alert-info" role="alert">
+                    {{this.msg}}
+                </div>
+            {{/if}}
 
             </div>
-        </div>
+    </div>
 </main>
 
