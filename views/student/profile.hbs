@@ -28,7 +28,7 @@
 
 <main class="main-content mb-4">
         <div class="container col d-flex justify-content-center">
-            <div class="col-md-9">
+            <div class="col-md-11">
                 <div class="col-md-5">
                     <div class="card mb-3">
                         <div class="card-header p-1" style="background-color: #fffcbd;">
@@ -137,6 +137,7 @@
                                     <th scope="col">Nghề nghiệp</th>
                                     <th scope="col">Số điện thoại</th>
                                     <th scope="col">Chức vụ</th>
+                                    <th scope="col">&nbsp;</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -147,17 +148,20 @@
                                     <td>{{this.info.NgheNghiep}}</td>
                                     <td>{{this.info.SDT}}</td>
                                     <td>{{this.info.ChucVu}}</td>
+                                    <td>
+                                        <a class="btn btn-primary btn-sm" href="">Sửa</a>
+                                    </td>
                                 </tr>
                                 {{/each}}
                                 </tbody>
                             </table>
                         </div>
-                        <div class="card-footer d-flex justify-content-end p-1" >
-                            <button class="btn btn-primary">
-                                <i class="fa fa-pencil" aria-hidden="true"></i>
-                                Sửa thông tin
-                            </button>
-                        </div>
+<!--                        <div class="card-footer d-flex justify-content-end p-1" >-->
+<!--                            <button class="btn btn-primary">-->
+<!--                                <i class="fa fa-pencil" aria-hidden="true"></i>-->
+<!--                                Sửa thông tin-->
+<!--                            </button>-->
+<!--                        </div>-->
                     </div>
                 </div>
             </div>

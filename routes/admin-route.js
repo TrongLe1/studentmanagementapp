@@ -138,6 +138,7 @@ router.post('/teacher/createaccount', async function (req, res) {
         month.toString().padStart(2, '0'),
         result[0].NgaySinh.getFullYear()
     ].join('')
+    console.log(password)
     for (const item of result) {
         item.HoTen = item.HoTen.toLowerCase()
         item.HoTen = item.HoTen.replace(/ /g,'')

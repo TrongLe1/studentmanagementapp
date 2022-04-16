@@ -4,6 +4,8 @@ import classModel from "../models/class-model.js";
 import relativeModel from "../models/relative-model.js";
 import tuitionModel from "../models/tuition-model.js";
 import examModel from "../models/exam-model.js";
+import timetableModel from "../models/timetable-model.js";
+import {add} from "cheerio/lib/api/traversing.js";
 
 const router = express.Router();
 
@@ -15,33 +17,70 @@ router.get('/student', function (req, res) {
 })
 
 router.get('/profile', async function (req, res) {
-    // get local var -> stud
-    let stud = await studentModel.findStudentById(5)
-    let studClass = await classModel.findClassById(stud[0].ThuocLop)
-    let relatives = await relativeModel.findInfoRelative(3)
+
+    let stud = req.session.student
+    let studClass = req.session.class
+    let relatives = await relativeModel.findInfoRelative(stud.MaHocSinh)
+
     res.render('student/profile', {
         layout: "student.hbs",
-        student: stud[0], studentClass: studClass[0].TenLop, relatives
+        student: stud, studentClass: studClass.TenLop, relatives
     })
 })
 
-router.get('/time-table', function (req, res) {
+router.get('/profile/edit' , async function (req, res) {
+
+    let stud = req.session.student
+    let studClass = req.session.class
+    let relatives = await relativeModel.findInfoRelative(stud.MaHocSinh)
+
+    res.render('student/edit-profile', {
+        layout: "student.hbs",
+        student: stud, studentClass: studClass.TenLop, relatives
+    })
+})
+
+router.post('/profile/edit' , async function (req, res) {
+
+    let student = req.body
+    let val = await studentModel.updateStudent(student, res.session.student.MaHocSinh)
+
+    res.redirect("/profile");
+})
+
+
+router.get('/time-table',async function (req, res) {
+
+    let studClass = req.session.class
+    let lastestTimeTable = await timetableModel.findLatestTimeTableScheduleOfClass(studClass.MaLop)
+
+    let time715 = await timetableModel.findTimeTableOfClassByTimetableIDAndTime(lastestTimeTable.MaTKB, '7:15:00')
+    let time805 = await timetableModel.findTimeTableOfClassByTimetableIDAndTime(lastestTimeTable.MaTKB, '8:05:00')
+    let time910 = await timetableModel.findTimeTableOfClassByTimetableIDAndTime(lastestTimeTable.MaTKB, '09:10:00')
+    let time1000 = await timetableModel.findTimeTableOfClassByTimetableIDAndTime(lastestTimeTable.MaTKB, '10:00:00')
+    let time1050 = await timetableModel.findTimeTableOfClassByTimetableIDAndTime(lastestTimeTable.MaTKB, '10:50:00')
+    let time1300 = await timetableModel.findTimeTableOfClassByTimetableIDAndTime(lastestTimeTable.MaTKB, '13:00:00')
+    let time1350 = await timetableModel.findTimeTableOfClassByTimetableIDAndTime(lastestTimeTable.MaTKB, '13:50:00')
+    let time1440 = await timetableModel.findTimeTableOfClassByTimetableIDAndTime(lastestTimeTable.MaTKB, '14:40:00')
+    let time1540 = await timetableModel.findTimeTableOfClassByTimetableIDAndTime(lastestTimeTable.MaTKB, '15:40:00')
+    let time1630 = await timetableModel.findTimeTableOfClassByTimetableIDAndTime(lastestTimeTable.MaTKB, '16:30:00')
 
     res.render('student/time-table', {
-        layout: "student.hbs"
+        layout: "student.hbs", lastestTimeTable, studClass, time715,
+        time805,time910,time1000,time1050,time1300,time1350,time1440,time1540,time1630
     })
 })
 
 router.get('/exam-schedule', async function (req, res) {
-    let stud = await studentModel.findStudentById(5)
-    let studClass = await classModel.findClassById(stud[0].ThuocLop)
-    let examScheduleList = await examModel.findExamByClassID(stud[0].ThuocLop)
+    let studClass = req.session.class
 
-    let schedule = await examModel.findSubjectScheduleByExamID(examScheduleList[0])
+    // let examScheduleList = await examModel.findExamByClassID(studClass.MaLop)
+    let lastestExamSchedule = await examModel.findLatestExamSchedule()
+    let schedule = await examModel.findSubjectScheduleByExamID(lastestExamSchedule.MaLichThi)
 
-    console.log(schedule)
     res.render('student/exam-schedule', {
-        layout: "student.hbs", studentClass: studClass[0].TenLop,schedule
+        layout: "student.hbs", studentClass: studClass.TenLop,schedule,
+        exam: lastestExamSchedule
     })
 })
 
@@ -52,9 +91,9 @@ router.post('/tuition', function (req, res) {
 })
 
 router.get('/tuition',async function (req, res) {
-    let stud = await studentModel.findStudentById(5)
-    let studClass = await classModel.findClassById(stud[0].ThuocLop)
-    let chooseList = await tuitionModel.findListHocKyAndNamHoc(studClass[0].MaLop)
+    let stud = req.session.student
+    let studClass = req.session.class
+    let chooseList = await tuitionModel.findListHocKyAndNamHoc(studClass.MaLop)
     let flag = true
 
     if(chooseList.length < 1){
@@ -79,7 +118,7 @@ router.get('/tuition',async function (req, res) {
     }
 
     res.render('student/tuition', {
-        layout: "student.hbs", student: stud[0],studentClass: studClass[0].TenLop,
+        layout: "student.hbs", student: stud,studentClass: studClass.TenLop,
         tuitions, chooseList, flag, tong
     })
 })

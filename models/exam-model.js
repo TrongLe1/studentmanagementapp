@@ -16,13 +16,18 @@ export default {
             .orderBy('NgayThi', 'asc')
         for (let item in results){
             let subject = await subjectModel.findSubject(results[item].MaMon)
-            console.log(subject)
+            // console.log(subject)
             results[item].TenMon = subject[0].TenMonHoc
         }
         return results
     },
-    async findListHocKyAndNamHoc(cID){
-
-    },
+    async findLatestExamSchedule(){
+        let list = await db("lichthi").orderBy('NamHoc', "desc")
+            .orderBy('HocKy', "desc")
+        if (list.length === 0){
+            return null
+        }
+        return list[0]
+    }
 
 }

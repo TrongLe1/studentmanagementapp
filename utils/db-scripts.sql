@@ -191,17 +191,17 @@ create table CTLTLH
 );
 
 
-drop table if exists CTLTKB;
-create table CTLTKB
+drop table if exists CTTKB;
+create table CTTKB
 (
     MaTKB      bigint,
     MaMon      bigint,
     ThoiGianBD time,
-    NgayHoc    date,
-    primary key (MaTKB, MaMon),
-    CONSTRAINT FK_CTLTKB_ThoiKhoaBieu FOREIGN KEY (MaTKB)
+    NgayHoc    varchar,
+    primary key (MaTKB, MaMon, ThoiGianBD,NgayHoc),
+    CONSTRAINT FK_CTTKB_ThoiKhoaBieu FOREIGN KEY (MaTKB)
         REFERENCES ThoiKhoaBieu (MaTKB),
-    CONSTRAINT FK_CTLTKB_MonHoc FOREIGN KEY (MaMon)
+    CONSTRAINT FK_CTTKB_MonHoc FOREIGN KEY (MaMon)
         REFERENCES MonHoc (MaMon)
 );
 

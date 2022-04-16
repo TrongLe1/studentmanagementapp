@@ -11,6 +11,9 @@ import teacher from './routes/teacher-route.js'
 import studentRoute from "./routes/student-route.js"
 import accountModel from "./models/account-model.js"
 import bcrypt from 'bcryptjs'
+import cheerio from "cheerio";
+import studentModel from "./models/student-model.js";
+import classModel from "./models/class-model.js";
 
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -37,7 +40,7 @@ app.engine('hbs', engine({
             else return 'Nữ'
         },
         formatDate(val){
-            return val.toLocaleString('vi').split(" ")[1]
+            return new Intl.DateTimeFormat('vi-VN').format(new Date(val))
         },
         checkGender(val){
             if(val === 1){
@@ -51,6 +54,31 @@ app.engine('hbs', engine({
         checkTimeSession(val){
             let s = val.split(':')[0]
             return s < 13 ? "Sáng": "Chiều"
+        },
+        timeTableCheck(val){
+            // console.log(val)
+            let result = ""
+            let ngay = 2;
+            let idx = 0;
+            while (ngay <= 8){
+                if(val[idx] != null && ngay === val[idx].NgayHoc){
+                    result += '<td>\n'
+                    result+= '<span className="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom    font-size16 xs-font-size13">'
+                    result+= val[idx].TenMonHoc
+                    result+='</span>\n'
+                    result+='<div className="font-size13 text-light-gray">'
+                    result+= 'Ivana Wong'
+                    result+='</div>\n'
+                    result+='</td>\n'
+                    idx++
+                }
+                else {
+                    result += '<td></td>'
+                }
+                ngay += 1
+
+            }
+            return result
         }
     }
 }))
@@ -73,6 +101,10 @@ app.use('/', studentRoute)
 app.use('/teacher', teacher)
 
 app.get('/logout', function (req, res) {
+
+    req.session.login = false;
+    req.session.account = null;
+
     res.redirect('login')
 })
 
@@ -86,14 +118,34 @@ app.post('/login', async function (req, res) {
     // console.log("Start Login")
     let account = req.body
     if (account.TenDangNhap === ''){
+
         res.redirect('/login')
         return;
     }
-    let checkAccount = await accountModel.findAccountByUsername(account.TenDangNhap)
-    if (checkAccount[0].LoaiTaiKhoan === 2){
-        res.redirect('/student')
-    }else
-    res.redirect('/login')
+
+    let checkAccount = (await accountModel.findAccountByUsername(account.TenDangNhap))[0]
+    if(bcrypt.compareSync(account.MatKhau, checkAccount.Matkhau)){
+
+        delete checkAccount.Matkhau
+        req.session.login = true
+        req.session.accountAuth = checkAccount
+        if (checkAccount.LoaiTaiKhoan === 2){
+            req.session.student = (await studentModel.findStudentById(req.session.accountAuth.MaTaiKhoan))[0]
+            req.session.class = (await classModel.findClassById(req.session.student.ThuocLop))[0]
+
+            res.redirect('/student')
+        }else if(checkAccount.LoaiTaiKhoan === 4){
+            res.redirect('/admin')
+        }else if(checkAccount.LoaiTaiKhoan === 1){
+            res.redirect('/teacher')
+        }else{
+            res.redirect('/teacher')
+        }
+    }
+    else{
+        res.redirect('/login')
+    }
+
 })
 
 
