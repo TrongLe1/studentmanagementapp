@@ -5,7 +5,7 @@
                 <header class="section-header mb-4">
                     <div class="row align-items-center">
                         <div class="col-md-6">
-                            <h2 class="h3 card-header-title">Danh sách giáo viên</h2>
+                            <h2 class="h3 card-header-title">Danh sách học sinh</h2>
                         </div>
                     </div>
                 </header>
@@ -25,30 +25,37 @@
                                         <th scope="col">Số điện thoại</th>
                                         <th scope="col" >Giới tính</th>
                                         <th scope="col">Địa chỉ</th>
-                                        <th scope="col" class="text-center">Hành động</th>
+                                        <th scope="col">Quê quán</th>
+                                        <th scope="col" >Dân tộc</th>
+                                        <th scope="col">Tôn giáo</th>
+                                        <th scope="col" class="text-center" width="250">Hành động</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 {{#each result}}
-                                    <form method="get" id="formGet{{MaGV}}">
-                                        <input name="id" value="{{MaGV}}" hidden>
+                                    <form method="get" id="formGet{{MaHocSinh}}">
+                                        <input name="id" value="{{MaHocSinh}}" hidden>
                                     </form>
-                                    <form method="post" id="formPost{{MaGV}}">
-                                        <input name="id" value="{{MaGV}}" hidden>
+                                    <form method="post" id="formPost{{MaHocSinh}}">
+                                        <input name="id" value="{{MaHocSinh}}" hidden>
                                     </form>
                                     <tr>
-                                        <td class="text-center">{{MaGV}}</td>
+                                        <td class="text-center">{{MaHocSinh}}</td>
                                         <td>{{HoTen}}</td>
                                         <td>{{format_date NgaySinh}}</td>
                                         <td>{{SDT}}</td>
                                         <td>{{format_gender GioiTinh}}</td>
                                         <td>{{DiaChi}}</td>
+                                        <td>{{QueQuan}}</td>
+                                        <td>{{DanToc}}</td>
+                                        <td>{{TonGiao}}</td>
                                         <td class="text-center">
                                             {{!--
                                             <button type="submit" class="btn btn-outline-primary" form="formGet{{MaGV}}" formaction="/admin/teacher/edit">Chỉnh sửa</button>
                                             <button type="submit" class="btn btn-outline-success" form="formPost{{MaGV}}" formaction="/admin/teacher/createaccount">Tạo tài khoản</button>
                                             --}}
-                                            <button type="submit" class="btn btn-outline-danger" form="formPost{{MaGV}}" formaction="/admin/teacher/delete">Xóa</button>
+                                            <button type="submit" class="btn btn-outline-success" form="formGet{{MaHocSinh}}" formaction="/admin/student/editclass">Chỉnh sửa lớp</button>
+                                            <button type="submit" class="btn btn-outline-danger" form="formPost{{MaHocSinh}}" formaction="/admin/student/delete">Xóa</button>
                                         </td>
                                     </tr>
                                 {{/each}}
@@ -61,10 +68,10 @@
                                     <ul class="pagination mb-0">
                                         {{#if prevPage.check}}
                                             <li class="page-item">
-                                                <a class="page-link" href="/admin/teacher?page={{prevPage.value}}">&larr; <span class="ml-1 d-none d-xl-inline-block">Previous</span></a>
+                                                <a class="page-link" href="/admin/student?page={{prevPage.value}}">&larr; <span class="ml-1 d-none d-xl-inline-block">Previous</span></a>
                                             </li>
                                             <li class="page-item">
-                                                <a class="page-link" href="/admin/teacher?page={{prevPage.value}}">{{prevPage.value}}</a>
+                                                <a class="page-link" href="/admin/student?page={{prevPage.value}}">{{prevPage.value}}</a>
                                             </li>
                                         {{/if}}
                                         <li class="page-item active">
@@ -72,10 +79,10 @@
                                         </li>
                                         {{#if nexPage.check}}
                                             <li class="page-item">
-                                                <a class="page-link" href="/admin/teacher?page={{nexPage.value}}">{{nexPage.value}}</a>
+                                                <a class="page-link" href="/admin/student?page={{nexPage.value}}">{{nexPage.value}}</a>
                                             </li>
                                             <li class="page-item">
-                                                <a class="page-link" href="/admin/teacher?page={{nexPage.value}}"><span class="mr-1 d-none d-xl-inline-block">Next</span> &rarr;</a>
+                                                <a class="page-link" href="/admin/student?page={{nexPage.value}}"><span class="mr-1 d-none d-xl-inline-block">Next</span> &rarr;</a>
                                             </li>
                                         {{/if}}
                                     </ul>

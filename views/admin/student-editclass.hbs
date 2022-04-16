@@ -1,0 +1,41 @@
+<div class="u-content">
+    <div class="u-body">
+        <header class="section-header mb-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2 class="h3 card-header-title">Thêm học sinh vào lớp</h2>
+                </div>
+            </div>
+
+        </header>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="category-add-form-wrap">
+                    <form action="/admin/student/editclass" method="post" class="category-add-form">
+                        <div class="form-group">
+                            <label for="class">Lớp</label>
+                            <select id="class" name="class">
+                                {{#if students.ThuocLop}}
+                                    <option data-display="{{result.MaLop}}. {{result.TenLop}}" value="">Lớp học</option>
+                                {{else}}
+                                    <option data-display="Chọn lớp học" value="">Lớp học</option>
+                                {{/if}}
+                                {{#each clss}}
+                                    <option value="{{MaLop}}">{{MaLop}}. {{TenLop}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group">&nbsp;</div>
+                        {{#if added}}
+                            <p class="text-success">Thêm vào lớp thành công</p>
+                        {{/if}}
+                        <input name="id" value="{{students.MaHocSinh}}" hidden>
+                        <div class="form-group">
+                            <button class="box-btn" type="submit">Lưu</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -79,6 +79,15 @@ app.engine('hbs', engine({
 
             }
             return result
+
+        format_status(val) {
+            if (val === 1) return "Hoạt động"
+            else return "Đã khóa"
+        },
+        format_type(val) {
+            if (val === 1) return "Giáo viên"
+            else if (val === 2) return "Học sinh"
+
         }
     }
 }))

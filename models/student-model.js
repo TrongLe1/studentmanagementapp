@@ -12,9 +12,12 @@ export default {
         return result[0]['count(*)']
     },
     findStudentById(matk) {
-        return db('hocsinh').where('TaiKhoan', '=', matk)
+        return db('hocsinh').where('MaHocSinh', '=', matk)
     },
     updateStudent(entity, id) {
         return db('hocsinh').where('MaHocSinh', '=', id).update(entity)
-    }
+    },
+    createAccount(accountId, id) {
+        return db('hocsinh').where('MaHocSinh', '=', id).update({TaiKhoan: accountId})
+    },
 }
