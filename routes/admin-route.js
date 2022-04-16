@@ -4,6 +4,7 @@ import teacherModel from '../models/teacher-model.js'
 import accountModel from '../models/account-model.js'
 import classModel from '../models/class-model.js'
 import subjectModel from '../models/subject-model.js'
+import studentModel from '../models/student-model.js'
 
 const router = express.Router();
 
@@ -54,7 +55,39 @@ router.post('/teacher/add', async function (req, res) {
         NgaySinh: date,
         GioiTinh: req.body.gender,
     }
-    await teacherModel.addTeacher(teacher)
+    const id = await teacherModel.addTeacher(teacher)
+    const result = await teacherModel.findTeacherById(id[0])
+    const datePass = result[0].NgaySinh.getDate()
+    const month = result[0].NgaySinh.getMonth() + 1
+    const password = [
+        datePass.toString().padStart(2, '0'),
+        month.toString().padStart(2, '0'),
+        result[0].NgaySinh.getFullYear()
+    ].join('')
+    for (const item of result) {
+        item.HoTen = item.HoTen.toLowerCase()
+        item.HoTen = item.HoTen.replace(/ /g,'')
+        item.HoTen = item.HoTen.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a")
+        item.HoTen = item.HoTen.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e")
+        item.HoTen = item.HoTen.replace(/ì|í|ị|ỉ|ĩ/g, "i")
+        item.HoTen = item.HoTen.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o")
+        item.HoTen = item.HoTen.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u")
+        item.HoTen = item.HoTen.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y")
+        item.HoTen = item.HoTen.replace(/đ/g, "d")
+        item.HoTen = item.HoTen.replace(/\u0300|\u0301|\u0303|\u0309|\u0323/g, "")
+        item.HoTen = item.HoTen.replace(/\u02C6|\u0306|\u031B/g, "")
+    }
+    //const check = await accountModel.findAccountByUsername(result[0].HoTen)
+    //if (check.length === 0) {
+        const salt = bcrypt.genSaltSync(10)
+        const account = {
+            TenDangNhap: result[0].HoTen,
+            Matkhau: bcrypt.hashSync(password, salt),
+            LoaiTaiKhoan: 1
+        }
+        const accId = await accountModel.createTeacherAccount(account)
+        await teacherModel.createAccount(accId[0], result[0].MaGV)
+    //}
     res.render('admin/teacher-add', {
         layout: "admin.hbs",
         teacher: true,
@@ -62,6 +95,7 @@ router.post('/teacher/add', async function (req, res) {
     })
 })
 
+/*
 router.get('/teacher/edit', async function (req, res) {
     const result = await teacherModel.findTeacherById(req.query.id)
     for (const item of result) {
@@ -124,11 +158,6 @@ router.post('/teacher/edit', async function (req, res) {
     })
 })
 
-router.post('/teacher/delete', async function (req, res) {
-    await teacherModel.deleteTeacher(req.body.id)
-    res.redirect(req.headers.referer || '/admin/teacher')
-})
-
 router.post('/teacher/createaccount', async function (req, res) {
     const result = await teacherModel.findTeacherById(req.body.id)
     const date = result[0].NgaySinh.getDate()
@@ -162,6 +191,14 @@ router.post('/teacher/createaccount', async function (req, res) {
         const id = await accountModel.createTeacherAccount(account)
         await teacherModel.createAccount(id[0], result[0].MaGV)
     }
+    res.redirect(req.headers.referer || '/admin/teacher')
+})
+*/
+router.post('/teacher/delete', async function (req, res) {
+    const result = await teacherModel.findTeacherById(req.body.id)
+    console.log(result)
+    await teacherModel.deleteTeacher(req.body.id)
+    await accountModel.deleteAccount(result[0].TaiKhoan)
     res.redirect(req.headers.referer || '/admin/teacher')
 })
 
@@ -317,11 +354,181 @@ router.post('/subject/add', async function (req, res) {
     })
 })
 
-router.post('/subject/delete', async function (req, res) {
-    //
+router.get('/subject/edit', async function (req, res) {
+    const result = await subjectModel.findSubject(req.query.id)
+    res.render('admin/subject-edit', {
+        layout: "admin.hbs",
+        subject: true,
+        result: result[0]
+    })
+})
 
+router.post('/subject/edit', async function (req, res) {
+    const subject = {
+        MaMon: req.body.id,
+        TenMonHoc: req.body.name
+    }
+    await subjectModel.editSubject(req.body.id, req.body.name)
+    res.render('admin/subject-edit', {
+        layout: "admin.hbs",
+        subject: true,
+        added: true,
+        result: subject
+    })})
+
+router.post('/subject/delete', async function (req, res) {
     await subjectModel.deleteSubject(req.body.id)
     res.redirect(req.headers.referer || '/admin/subject')
+})
+
+//Tai Khoan
+router.get('/account', async function (req, res) {
+    const limit = 6
+    const page = req.query.page || 1
+    const offset = (page - 1) * limit
+    const result = await accountModel.getAccount(limit, offset)
+    const total = await accountModel.countAccount()
+    let nPage = Math.floor(total / limit)
+    if (total % limit > 0) nPage++
+    let nexPage = {check: true, value: (+page + 1)}
+    let curPage = {check: (+page > 0 && +page <= nPage && result.length !== 0 ), value: +page}
+    let prevPage = {check: true, value: (+page - 1)}
+    if (nexPage.value === nPage + 1) nexPage.check = false
+    if (prevPage.value === 0) prevPage.check = false
+    if (total === 0) curPage.check = false
+    for (const item of result)
+        if (item.TrangThai === 1)
+            item.active = true
+    res.render('admin/account-list', {
+        layout: "admin.hbs",
+        account: true,
+        result,
+        nexPage,
+        curPage,
+        prevPage
+    })
+})
+
+router.post('/account/lock', async function (req, res) {
+    await accountModel.lockAccount(req.body.id)
+    res.redirect(req.headers.referer || '/admin/account')
+})
+
+router.post('/account/unlock', async function (req, res) {
+    await accountModel.unlockAccount(req.body.id)
+    res.redirect(req.headers.referer || '/admin/account')
+})
+
+//Hoc Sinh
+router.get('/student', async function (req, res) {
+    const limit = 6
+    const page = req.query.page || 1
+    const offset = (page - 1) * limit
+    const result = await studentModel.getStudent(limit, offset)
+    const total = await studentModel.countStudent()
+    let nPage = Math.floor(total / limit)
+    if (total % limit > 0) nPage++
+    let nexPage = {check: true, value: (+page + 1)}
+    let curPage = {check: (+page > 0 && +page <= nPage && result.length !== 0 ), value: +page}
+    let prevPage = {check: true, value: (+page - 1)}
+    if (nexPage.value === nPage + 1) nexPage.check = false
+    if (prevPage.value === 0) prevPage.check = false
+    if (total === 0) curPage.check = false
+    for (const item of result)
+        if (item.ThuocLop === null)
+            item.add = true
+    res.render('admin/student-list', {
+        layout: "admin.hbs",
+        student: true,
+        result,
+        nexPage,
+        curPage,
+        prevPage
+    })
+})
+
+router.get('/student/add', async function (req, res) {
+    const clss = await classModel.getAllClass()
+    res.render('admin/student-add', {
+        layout: "admin.hbs",
+        student: true,
+        clss
+    })
+})
+
+router.post('/student/add', async function (req, res) {
+    const clss = await classModel.getAllClass()
+    const dateParts = req.body.date.split('/')
+    const date = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0])
+    const student = {
+        HoTen: req.body.name,
+        NgaySinh: date,
+        GioiTinh: req.body.gender,
+    }
+    const id = await studentModel.addStudent(student)
+    const result = await studentModel.findStudentById(id[0])
+    const datePass = result[0].NgaySinh.getDate()
+    const month = result[0].NgaySinh.getMonth() + 1
+    const password = [
+        datePass.toString().padStart(2, '0'),
+        month.toString().padStart(2, '0'),
+        result[0].NgaySinh.getFullYear()
+    ].join('')
+    for (const item of result) {
+        item.HoTen = item.HoTen.toLowerCase()
+        item.HoTen = item.HoTen.replace(/ /g,'')
+        item.HoTen = item.HoTen.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a")
+        item.HoTen = item.HoTen.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e")
+        item.HoTen = item.HoTen.replace(/ì|í|ị|ỉ|ĩ/g, "i")
+        item.HoTen = item.HoTen.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o")
+        item.HoTen = item.HoTen.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u")
+        item.HoTen = item.HoTen.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y")
+        item.HoTen = item.HoTen.replace(/đ/g, "d")
+        item.HoTen = item.HoTen.replace(/\u0300|\u0301|\u0303|\u0309|\u0323/g, "")
+        item.HoTen = item.HoTen.replace(/\u02C6|\u0306|\u031B/g, "")
+    }
+    const salt = bcrypt.genSaltSync(10)
+    const account = {
+        TenDangNhap: result[0].HoTen,
+        Matkhau: bcrypt.hashSync(password, salt),
+        LoaiTaiKhoan: 2
+    }
+    const accId = await accountModel.createTeacherAccount(account)
+    await studentModel.createAccount(accId[0], result[0].MaHocSinh)
+    res.render('admin/student-add', {
+        layout: "admin.hbs",
+        student: true,
+        clss,
+        added: true
+    })
+})
+
+router.get('/student/editclass', async function (req, res) {
+    const clss = await classModel.getAllClass()
+    const student = await studentModel.findStudentById(req.query.id)
+    const result = await classModel.findClassById(student[0].ThuocLop)
+    res.render('admin/student-editclass', {
+        layout: "admin.hbs",
+        student: true,
+        clss,
+        result: result[0],
+        students: student[0]
+    })
+})
+
+router.post('/student/editclass', async function (req, res) {
+    await studentModel.updateStudent({ThuocLop: req.body.class}, req.body.id)
+    const clss = await classModel.getAllClass()
+    const student = await studentModel.findStudentById(req.body.id)
+    const result = await classModel.findClassById(student[0].ThuocLop)
+    res.render('admin/student-editclass', {
+        layout: "admin.hbs",
+        student: true,
+        clss,
+        added: true,
+        result: result[0],
+        students: student[0]
+    })
 })
 
 

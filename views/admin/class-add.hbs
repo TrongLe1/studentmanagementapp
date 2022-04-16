@@ -13,6 +13,17 @@
             autoclose: true
         });
     </script>
+    <script>
+        $('#frmAddClass').on('submit', function (e) {
+            e.preventDefault()
+            const dateStart = parseInt($('#yearPicker').val())
+            const dateEnd = parseInt($('#yearPicker2').val())
+            if (dateEnd === dateStart + 1) {
+                $('#frmAddClass').off('submit').submit()
+            }
+            return
+        })
+    </script>
 {{/section}}
 
 <div class="u-content">
@@ -27,7 +38,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="category-add-form-wrap">
-                    <form action="/admin/class/add" method="post" class="category-add-form">
+                    <form action="/admin/class/add" method="post" id="frmAddClass" class="category-add-form">
                         <div class="form-group">
                             <label for="name">Tên lớp</label>
                             <input type="text" class="form-control" id="name" name="name" placeholder="Nhập tên lớp" required>
@@ -48,11 +59,11 @@
                         <div class="form-group">&nbsp;</div>
                         <div class="form-group">
                             <label for="dob">Năm bắt đầu</label>
-                            <input class="form-control" id="yearPicker" name="start" placeholder="Chọn năm học bắt đầu" type="text" onkeydown="return false;" required/>
+                            <input class="form-control" id="yearPicker" name="start" placeholder="Chọn năm học bắt đầu" type="number" onkeydown="return false;" required/>
                         </div>
                         <div class="form-group">
                             <label for="dob">Năm kết thúc</label>
-                            <input class="form-control" id="yearPicker2" name="end" placeholder="Chọn năm học kết thúc" type="text" onkeydown="return false;" required/>
+                            <input class="form-control" id="yearPicker2" name="end" placeholder="Chọn năm học kết thúc" type="number" onkeydown="return false;" required/>
                         </div>
                         {{#if added}}
                             <p class="text-success">Thêm thành công</p>

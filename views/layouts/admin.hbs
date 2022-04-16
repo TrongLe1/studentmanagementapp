@@ -131,7 +131,11 @@
                     </li>
 
                     <li class="u-sidebar-nav-menu__item clearfix">
-                        <a class="u-sidebar-nav-menu__link" href="" data-target="#students">
+                        {{#if student}}
+                            <a class="u-sidebar-nav-menu__link active" href="" data-target="#students">
+                        {{else}}
+                            <a class="u-sidebar-nav-menu__link" href="" data-target="#students">
+                        {{/if}}
                             <i class="fas fa-graduation-cap u-sidebar-nav-menu__item-icon"></i>
                             <span class="u-sidebar-nav-menu__item-title">Học sinh</span>
                             <i class="fa fa-angle-right u-sidebar-nav-menu__item-arrow"></i>
@@ -140,12 +144,12 @@
 
                         <ul id="students" class="u-sidebar-nav-menu u-sidebar-nav-menu--second-level text-center" style="display: none;">
                             <li class="u-sidebar-nav-menu__item">
-                                <a class="u-sidebar-nav-menu__link" href="">
+                                <a class="u-sidebar-nav-menu__link" href="/admin/student">
                                     <span class="u-sidebar-nav-menu__item-title">Danh sách học sinh</span>
                                 </a>
                             </li>
                             <li class="u-sidebar-nav-menu__item">
-                                <a class="u-sidebar-nav-menu__link" href="">
+                                <a class="u-sidebar-nav-menu__link" href="/admin/student/add">
                                     <span class="u-sidebar-nav-menu__item-title">Thêm học sinh</span>
                                 </a>
                             </li>
@@ -177,7 +181,11 @@
                         </ul>
                     </li>
                     <li class="u-sidebar-nav-menu__item">
-                        <a class="u-sidebar-nav-menu__link" href="">
+                        {{#if account}}
+                            <a class="u-sidebar-nav-menu__link active" href="/admin/account">
+                        {{else}}
+                            <a class="u-sidebar-nav-menu__link" href="/admin/account">
+                        {{/if}}
                             <i class="fas fa-users u-sidebar-nav-menu__item-icon"></i>
                             <span class="u-sidebar-nav-menu__item-title">Tài khoản</span>
                         </a>

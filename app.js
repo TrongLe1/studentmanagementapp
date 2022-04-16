@@ -51,6 +51,15 @@ app.engine('hbs', engine({
         checkTimeSession(val){
             let s = val.split(':')[0]
             return s < 13 ? "Sáng": "Chiều"
+        },
+        format_status(val) {
+            if (val === 1) return "Hoạt động"
+            else return "Đã khóa"
+        },
+        format_type(val) {
+            if (val === 1) return "Giáo viên"
+            else if (val === 2) return "Học sinh"
+            else if (val === 3) return "Giáo vụ"
         }
     }
 }))

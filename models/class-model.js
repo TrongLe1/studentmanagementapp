@@ -7,6 +7,9 @@ export default {
     getClass(limit, offset) {
         return db.select('*').from('lophoc').limit(limit).offset(offset)
     },
+    getAllClass() {
+        return db.select('*').from('lophoc')
+    },
     async countClass() {
         const result = await db('lophoc').count('*')
         return result[0]['count(*)']
