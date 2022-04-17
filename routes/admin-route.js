@@ -8,14 +8,23 @@ import studentModel from '../models/student-model.js'
 
 const router = express.Router();
 
-//Giao Vien
-router.get('/', function (req, res) {
+router.get('/', async function (req, res) {
+
+    const classNum = await classModel.countClass()
+    const subjectNum = await subjectModel.countSubject()
+    const stuNum = await studentModel.countStudent()
+    const teacNum = await teacherModel.countTeacher()
     res.render('admin/dashboard', {
         layout: "admin.hbs",
-        dashboard: true
+        dashboard: true,
+        classNum,
+        subjectNum,
+        stuNum,
+        teacNum
     })
 })
 
+//Giao Vien
 router.get('/teacher', async function (req, res) {
     const limit = 6
     const page = req.query.page || 1
@@ -306,8 +315,139 @@ router.post('/class/edit', async function (req, res) {
 
 router.post('/class/delete', async function (req, res) {
     //
+    await studentModel.removeAllStudentFromClass(req.body.id)
+    await classModel.removeAllTeacherFromClass(req.body.id)
     await teacherModel.removeHomeroomTeacherFromClass(req.body.id)
     await classModel.deleteClass(req.body.id)
+    res.redirect(req.headers.referer || '/admin/class')
+})
+
+router.get('/class/student', async function (req, res) {
+    const limit = 6
+    const page = req.query.page || 1
+    const offset = (page - 1) * limit
+    const clss = await classModel.findClassById(req.query.id)
+    const result = await studentModel.getStudentInClass(req.query.id, limit, offset)
+    const total = await studentModel.countStudentInClass(req.query.id)
+    const students = await studentModel.getStudentNotInClass()
+    let nPage = Math.floor(total / limit)
+    if (total % limit > 0) nPage++
+    let nexPage = {check: true, value: (+page + 1)}
+    let curPage = {check: (+page > 0 && +page <= nPage && result.length !== 0 ), value: +page}
+    let prevPage = {check: true, value: (+page - 1)}
+    if (nexPage.value === nPage + 1) nexPage.check = false
+    if (prevPage.value === 0) prevPage.check = false
+    if (total === 0) curPage.check = false
+    res.render('admin/class-student-list', {
+        layout: "admin.hbs",
+        class: true,
+        result,
+        clss: clss[0],
+        nexPage,
+        curPage,
+        prevPage,
+        students
+    })
+})
+
+router.post('/class/student/add', async function (req, res) {
+    await studentModel.updateStudent({ThuocLop: req.body.id}, req.body.student)
+    res.redirect(req.headers.referer || '/admin/class')
+})
+
+router.post('/class/student/delete', async function (req, res) {
+    await studentModel.removeFromClass(req.body.id)
+    res.redirect(req.headers.referer || '/admin/class')
+})
+
+router.get('/class/teacher', async function (req, res) {
+    const limit = 6
+    const page = req.query.page || 1
+    const offset = (page - 1) * limit
+    const clss = await classModel.findClassById(req.query.id)
+    const result = await classModel.getTeacherInClass(req.query.id, limit, offset)
+    const total = await classModel.countTeacherInClass(req.query.id)
+    console.log(result)
+    let nPage = Math.floor(total / limit)
+    if (total % limit > 0) nPage++
+    let nexPage = {check: true, value: (+page + 1)}
+    let curPage = {check: (+page > 0 && +page <= nPage && result.length !== 0 ), value: +page}
+    let prevPage = {check: true, value: (+page - 1)}
+    if (nexPage.value === nPage + 1) nexPage.check = false
+    if (prevPage.value === 0) prevPage.check = false
+    if (total === 0) curPage.check = false
+    res.render('admin/class-teacher-list', {
+        layout: "admin.hbs",
+        class: true,
+        result,
+        clss: clss[0],
+        nexPage,
+        curPage,
+        prevPage
+    })
+})
+
+router.get('/class/teacher/add', async function (req, res) {
+    const clss = await classModel.findClassById(req.query.id)
+    const temp = await classModel.getTeacherIDInClass(req.query.id)
+    const teachers = await teacherModel.getAllTeacherWithout(temp)
+    const subjects = await subjectModel.getAllSubject()
+    res.render('admin/class-teacher-add', {
+        layout: "admin.hbs",
+        class: true,
+        clss: clss[0],
+        teachers,
+        subjects
+    })
+})
+
+router.post('/class/teacher/add', async function (req, res) {
+    const detail = {
+        MaLop: req.body.id,
+        MaGV: req.body.teacher,
+        MonHoc: req.body.subject
+    }
+    await classModel.addDetailTeaching(detail)
+    const clss = await classModel.findClassById(req.body.id)
+    const temp = await classModel.getTeacherIDInClass(req.body.id)
+    const teachers = await teacherModel.getAllTeacherWithout(temp)
+    const subjects = await subjectModel.getAllSubject()
+    res.render('admin/class-teacher-add', {
+        layout: "admin.hbs",
+        class: true,
+        clss: clss[0],
+        teachers,
+        subjects,
+        added: true
+    })
+})
+
+router.get('/class/teacher/edit', async function (req, res) {
+    const teachers = await classModel.getSpecificTeacherInClass(req.query.id, req.query.uid)
+    const subjects = await subjectModel.getAllSubject()
+    res.render('admin/class-teacher-edit', {
+        layout: "admin.hbs",
+        class: true,
+        subjects,
+        teachers: teachers[0]
+    })
+})
+
+router.post('/class/teacher/edit', async function (req, res) {
+    await classModel.editDetailTeaching(req.body.id, req.body.uid, req.body.subject)
+    const teachers = await classModel.getSpecificTeacherInClass(req.body.id, req.body.uid)
+    const subjects = await subjectModel.getAllSubject()
+    res.render('admin/class-teacher-edit', {
+        layout: "admin.hbs",
+        class: true,
+        added: true,
+        subjects,
+        teachers: teachers[0]
+    })
+})
+
+router.post('/class/teacher/delete', async function (req, res) {
+    await classModel.removeTeachingInClass(req.body.id, req.body.uid)
     res.redirect(req.headers.referer || '/admin/class')
 })
 
@@ -466,6 +606,8 @@ router.post('/student/add', async function (req, res) {
         NgaySinh: date,
         GioiTinh: req.body.gender,
     }
+    if (req.body.class !== '')
+        student.ThuocLop = req.body.class
     const id = await studentModel.addStudent(student)
     const result = await studentModel.findStudentById(id[0])
     const datePass = result[0].NgaySinh.getDate()

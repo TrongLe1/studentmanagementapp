@@ -5,7 +5,10 @@
                 <header class="section-header mb-4">
                     <div class="row align-items-center">
                         <div class="col-md-6">
-                            <h2 class="h3 card-header-title">Danh sách tài khoản</h2>
+                            <h2 class="h3 card-header-title">Danh sách giáo viên {{clss.TenLop}}</h2>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <a href="/admin/class/teacher/add?id={{clss.MaLop}}" class="box-btn">Thêm giáo viên</a>
                         </div>
                     </div>
                 </header>
@@ -20,32 +23,36 @@
                                 <thead>
                                     <tr>
                                         <th scope="col" class="text-center">ID</th>
-                                        <th scope="col" width="150">Tên đăng nhập</th>
-                                        <th scope="col">Trạng thái</th>
-                                        <th scope="col">Loại tài khoản</th>
-                                        <th scope="col" class="text-center" width="250">Hành động</th>
+                                        <th scope="col" width="150">Họ tên</th>
+                                        <th scope="col">Ngày sinh</th>
+                                        <th scope="col" >Giới tính</th>
+                                        <th scope="col">Môn dạy</th>
+                                        <th scope="col" class="text-center">Hành động</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 {{#each result}}
-                                    <form method="post" id="formPost{{MaTaiKhoan}}">
-                                        <input name="id" value="{{MaTaiKhoan}}" hidden>
+                                    <form method="get" id="formGet{{MaGV}}">
+                                        <input name="uid" value="{{MaGV}}" hidden>
+                                        <input name="id" value="{{../clss.MaLop}}" hidden>
+                                    </form>
+                                    <form method="post" id="formPost{{MaGV}}">
+                                        <input name="uid" value="{{MaGV}}" hidden>
+                                        <input name="id" value="{{../clss.MaLop}}" hidden>
                                     </form>
                                     <tr>
-                                        <td class="text-center">{{MaTaiKhoan}}</td>
-                                        <td>{{TenDangNhap}}</td>
-                                        <td>{{format_status TrangThai}}</td>
-                                        <td>{{format_type LoaiTaiKhoan}}</td>
+                                        <td class="text-center">{{MaGV}}</td>
+                                        <td>{{HoTen}}</td>
+                                        <td>{{format_date NgaySinh}}</td>
+                                        <td>{{format_gender GioiTinh}}</td>
+                                        <td>{{TenMonHoc}}</td>
                                         <td class="text-center">
                                             {{!--
                                             <button type="submit" class="btn btn-outline-primary" form="formGet{{MaGV}}" formaction="/admin/teacher/edit">Chỉnh sửa</button>
                                             <button type="submit" class="btn btn-outline-success" form="formPost{{MaGV}}" formaction="/admin/teacher/createaccount">Tạo tài khoản</button>
                                             --}}
-                                            {{#if active}}
-                                                <button type="submit" class="btn btn-outline-danger" form="formPost{{MaTaiKhoan}}" formaction="/admin/account/lock">Khóa</button>
-                                            {{else}}
-                                                <button type="submit" class="btn btn-outline-primary" form="formPost{{MaTaiKhoan}}" formaction="/admin/account/unlock">Mở khóa</button>
-                                            {{/if}}
+                                            <button type="submit" class="btn btn-outline-secondary" form="formGet{{MaGV}}" formaction="/admin/class/teacher/edit">Chỉnh sửa</button>
+                                            <button type="submit" class="btn btn-outline-danger" form="formPost{{MaGV}}" formaction="/admin/class/teacher/delete">Xóa</button>
                                         </td>
                                     </tr>
                                 {{/each}}
@@ -58,10 +65,10 @@
                                     <ul class="pagination mb-0">
                                         {{#if prevPage.check}}
                                             <li class="page-item">
-                                                <a class="page-link" href="/admin/account?page={{prevPage.value}}">&larr; <span class="ml-1 d-none d-xl-inline-block">Previous</span></a>
+                                                <a class="page-link" href="/admin/teacher?page={{prevPage.value}}">&larr; <span class="ml-1 d-none d-xl-inline-block">Previous</span></a>
                                             </li>
                                             <li class="page-item">
-                                                <a class="page-link" href="/admin/account?page={{prevPage.value}}">{{prevPage.value}}</a>
+                                                <a class="page-link" href="/admin/teacher?page={{prevPage.value}}">{{prevPage.value}}</a>
                                             </li>
                                         {{/if}}
                                         <li class="page-item active">
@@ -69,10 +76,10 @@
                                         </li>
                                         {{#if nexPage.check}}
                                             <li class="page-item">
-                                                <a class="page-link" href="/admin/account?page={{nexPage.value}}">{{nexPage.value}}</a>
+                                                <a class="page-link" href="/admin/teacher?page={{nexPage.value}}">{{nexPage.value}}</a>
                                             </li>
                                             <li class="page-item">
-                                                <a class="page-link" href="/admin/account?page={{nexPage.value}}"><span class="mr-1 d-none d-xl-inline-block">Next</span> &rarr;</a>
+                                                <a class="page-link" href="/admin/teacher?page={{nexPage.value}}"><span class="mr-1 d-none d-xl-inline-block">Next</span> &rarr;</a>
                                             </li>
                                         {{/if}}
                                     </ul>

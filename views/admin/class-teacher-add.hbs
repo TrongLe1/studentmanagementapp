@@ -1,0 +1,47 @@
+<div class="u-content">
+    <div class="u-body">
+        <header class="section-header mb-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2 class="h3 card-header-title">Thêm giáo viên {{clss.TenLop}}</h2>
+                </div>
+            </div>
+
+        </header>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="category-add-form-wrap">
+                    <form action="/admin/class/teacher/add" method="post" class="category-add-form">
+                        <div class="form-group">
+                            <label for="teacher">Giáo viên</label>
+                            <select id="teacher" name="teacher" required>
+                                <option data-display="Chọn giáo viên" value="">Giáo viên</option>
+                                {{#each teachers}}
+                                <option value="{{MaGV}}">{{MaGV}}. {{HoTen}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group">&nbsp;</div>
+                        <div class="form-group">
+                            <label for="subject">Môn học</label>
+                            <select id="subject" name="subject" required>
+                                <option data-display="Chọn môn dạy" value="">Môn học</option>
+                                {{#each subjects}}
+                                <option value="{{MaMon}}">{{MaMon}}. {{TenMonHoc}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group">&nbsp;</div>
+                        {{#if added}}
+                            <p class="text-success">Thêm thành công</p>
+                        {{/if}}
+                        <input name="id" value="{{clss.MaLop}}" hidden>
+                        <div class="form-group">
+                            <button class="box-btn" type="submit">Thêm</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -30,4 +30,29 @@ export default {
     deleteClass(id) {
         return db('lophoc').where('MaLop', '=', id).del()
     },
+    getTeacherInClass(id) {
+        return db('ctgiangday').join('giaovien', 'ctgiangday.MaGV', '=', 'giaovien.MaGV').join('monhoc', 'ctgiangday.MonHoc', '=', 'monhoc.MaMon').where('MaLop', '=', id).select('*')
+    },
+    async countTeacherInClass(id) {
+        const result = await db('ctgiangday').where('MaLop', '=', id).count('*')
+        return result[0]['count(*)']
+    },
+    addDetailTeaching(entity) {
+        return db('ctgiangday').insert(entity)
+    },
+    getTeacherIDInClass(id) {
+        return db.select('MaGV').from('ctgiangday').where('MaLop', '=', id).pluck('MaGV')
+    },
+    getSpecificTeacherInClass(id, userId) {
+        return db('ctgiangday').join('giaovien', 'ctgiangday.MaGV', '=', 'giaovien.MaGV').join('monhoc', 'ctgiangday.MonHoc', '=', 'monhoc.MaMon').where('MaLop', '=', id).where('ctgiangday.MaGV', '=', userId).select('*')
+    },
+    editDetailTeaching(classId, userId, subjectId) {
+        return db('ctgiangday').where('MaLop', '=', classId).where('MaGV', '=', userId).update({MonHoc: subjectId})
+    },
+    removeTeachingInClass(classId, userId) {
+        return db('ctgiangday').where('MaLop', '=', classId).where('MaGV', '=', userId).del()
+    },
+    removeAllTeacherFromClass(id) {
+        return db('ctgiangday').where('MaLop', '=', id).del()
+    }
 }
