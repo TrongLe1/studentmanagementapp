@@ -20,4 +20,20 @@ export default {
     createAccount(accountId, id) {
         return db('hocsinh').where('MaHocSinh', '=', id).update({TaiKhoan: accountId})
     },
+    getStudentInClass(classId, limit, offset) {
+        return db.select('*').from('hocsinh').where('ThuocLop', '=', classId).limit(limit).offset(offset)
+    },
+    async countStudentInClass(classId) {
+        const result = await db('hocsinh').where('ThuocLop', '=', classId).count('*')
+        return result[0]['count(*)']
+    },
+    removeFromClass(id) {
+        return db('hocsinh').where('MaHocSinh', '=', id).update({ThuocLop: null})
+    },
+    getStudentNotInClass() {
+        return db('hocsinh').whereNull('ThuocLop')
+    },
+    removeAllStudentFromClass(id) {
+        return db('hocsinh').where('ThuocLop', '=', id).update({ThuocLop: null})
+    }
 }

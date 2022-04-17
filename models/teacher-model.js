@@ -34,5 +34,11 @@ export default {
     },
     removeHomeroomTeacherFromClass(classId) {
         return db('giaovien').where('ChuNhiemLop', classId).update({ChuNhiemLop: null})
-    }
+    },
+    getAllTeacher() {
+        return db.select('*').from('giaovien')
+    },
+    getAllTeacherWithout(teachers) {
+        return db('giaovien').whereNotIn('MaGV', teachers)
+    },
 }

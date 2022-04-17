@@ -55,31 +55,30 @@ app.engine('hbs', engine({
             let s = val.split(':')[0]
             return s < 13 ? "Sáng": "Chiều"
         },
-        timeTableCheck(val){
+        timeTableCheck(val) {
             // console.log(val)
             let result = ""
             let ngay = 2;
             let idx = 0;
-            while (ngay <= 8){
-                if(val[idx] != null && ngay === val[idx].NgayHoc){
+            while (ngay <= 8) {
+                if (val[idx] != null && ngay === val[idx].NgayHoc) {
                     result += '<td>\n'
-                    result+= '<span className="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom    font-size16 xs-font-size13">'
-                    result+= val[idx].TenMonHoc
-                    result+='</span>\n'
-                    result+='<div className="font-size13 text-light-gray">'
-                    result+= 'Ivana Wong'
-                    result+='</div>\n'
-                    result+='</td>\n'
+                    result += '<span className="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom    font-size16 xs-font-size13">'
+                    result += val[idx].TenMonHoc
+                    result += '</span>\n'
+                    result += '<div className="font-size13 text-light-gray">'
+                    result += 'Ivana Wong'
+                    result += '</div>\n'
+                    result += '</td>\n'
                     idx++
-                }
-                else {
+                } else {
                     result += '<td></td>'
                 }
                 ngay += 1
 
             }
             return result
-
+        },
         format_status(val) {
             if (val === 1) return "Hoạt động"
             else return "Đã khóa"

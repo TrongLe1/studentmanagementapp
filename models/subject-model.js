@@ -19,5 +19,8 @@ export default {
     },
     editSubject(id, name) {
         return db('monhoc').where('MaMon', '=', id).update({TenMonHoc: name})
-    }
+    },
+    getAllSubject() {
+        return db.select('*').from('monhoc')
+    },
 }
