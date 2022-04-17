@@ -34,5 +34,14 @@ export default {
     },
     removeHomeroomTeacherFromClass(classId) {
         return db('giaovien').where('ChuNhiemLop', classId).update({ChuNhiemLop: null})
-    }
+    },
+    getTeachingClass(teacherID, limit, offset) {
+        return db('ctgiangday').where('MaGV', teacherID).join('lophoc', 'lophoc.MaLop', 'ctgiangday.MaLop')
+            .join('monhoc', 'MonHoc', 'MaMon').limit(limit).offset(offset)
+    },
+    async countTeachingClass(teacherID) {
+        const result = await db('ctgiangday').where('MaGV', teacherID).count('*')
+        return result[0]['count(*)']
+    },
+
 }

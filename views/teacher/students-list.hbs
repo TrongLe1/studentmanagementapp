@@ -5,7 +5,7 @@
                 <header class="section-header mb-4">
                     <div class="row align-items-center">
                         <div class="col-md-6">
-                            <h2 class="h3 card-header-title">Danh sách học sinh lớp 11A1</h2>
+                            <h2 class="h3 card-header-title">Danh sách học sinh lớp {{className}}</h2>
                         </div>
                     </div>
                 </header>
@@ -23,145 +23,75 @@
                                     <th scope="col" width="200">Họ tên</th>
                                     <th scope="col">Giới tính</th>
                                     <th scope="col">Ngày sinh</th>
-                                    <th scope="col">SĐT</th>
-                                    <th scope="col">SĐT phụ huynh</th>
+                                    <th scope="col">Số điện thoại</th>
                                     <th scope="col">Địa chỉ</th>
-                                    {{#if teaching_class}}
-                                    {{else}}
-                                        <th scope="col" class="text-center" width="200">Hành động</th>
+                                    <th scope="col">Quê quán</th>
+                                    <th scope="col">Dân tộc</th>
+                                    <th scope="col">Tôn giáo</th>
+                                    {{#if homeroom_class}}
+                                        <th scope="col" class="text-center" width="250">Hành động</th>
                                     {{/if}}
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Nguyễn Thị Minh Thu </td>
-                                    <td>Nữ</td>
-                                    <td>15/01/2001</td>
-                                    <td>0912345678</td>
-                                    <td>0912345678</td>
-                                    <td>123 Nguyễn Thị Minh Khai, Bến Nghé, Quận 1, Hồ Chí Minh</td>
-                                    <td class="text-center">
-                                        {{#if teaching_class}}
-                                        {{else}}
-                                            <button class="btn btn-outline-warning">Đánh vắng</button>
-                                            <button class="btn btn-outline-danger">Xoá</button>
+                                {{#each result}}
+                                    <form method="get" id="formGet{{MaHocSinh}}">
+                                        <input name="id" value="{{MaHocSinh}}" hidden>
+                                    </form>
+                                    <form method="post" id="formPost{{MaHocSinh}}">
+                                        <input name="id" value="{{MaHocSinh}}" hidden>
+                                    </form>
+                                    <tr>
+                                        <td class="text-center">{{MaHocSinh}}</td>
+                                        <td>{{HoTen}}</td>
+                                        <td>{{format_gender GioiTinh}}</td>
+                                        <td>{{format_date NgaySinh}}</td>
+                                        <td>{{SDT}}</td>
+                                        <td>{{DiaChi}}</td>
+                                        <td>{{QueQuan}}</td>
+                                        <td>{{DanToc}}</td>
+                                        <td>{{TonGiao}}</td>
+                                        {{#if homeroom_class}}
+                                            <td class="text-center">
+                                                <button type="submit" class="btn btn-outline-success" form="formGet{{MaHocSinh}}" formaction="/admin/student/editclass">Chỉnh sửa lớp</button>
+                                                <button type="submit" class="btn btn-outline-danger" form="formPost{{MaHocSinh}}" formaction="/admin/student/delete">Xóa</button>
+                                            </td>
                                         {{/if}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Nguyễn Thị Minh Thu </td>
-                                    <td>Nữ</td>
-                                    <td>15/01/2001</td>
-                                    <td>0912345678</td>
-                                    <td>0912345678</td>
-                                    <td>123 Nguyễn Thị Minh Khai, Bến Nghé, Quận 1, Hồ Chí Minh</td>
-                                    <td class="text-center">
-                                        {{#if teaching_class}}
-                                        {{else}}
-                                            <button class="btn btn-outline-warning">Đánh vắng</button>
-                                            <button class="btn btn-outline-danger">Xoá</button>
-                                        {{/if}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Nguyễn Thị Minh Thu </td>
-                                    <td>Nữ</td>
-                                    <td>15/01/2001</td>
-                                    <td>0912345678</td>
-                                    <td>0912345678</td>
-                                    <td>123 Nguyễn Thị Minh Khai, Bến Nghé, Quận 1, Hồ Chí Minh</td>
-                                    <td class="text-center">
-                                        {{#if teaching_class}}
-                                        {{else}}
-                                            <button class="btn btn-outline-warning">Đánh vắng</button>
-                                            <button class="btn btn-outline-danger">Xoá</button>
-                                        {{/if}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Nguyễn Thị Minh Thu </td>
-                                    <td>Nữ</td>
-                                    <td>15/01/2001</td>
-                                    <td>0912345678</td>
-                                    <td>0912345678</td>
-                                    <td>123 Nguyễn Thị Minh Khai, Bến Nghé, Quận 1, Hồ Chí Minh</td>
-                                    <td class="text-center">
-                                        {{#if teaching_class}}
-                                        {{else}}
-                                            <button class="btn btn-outline-warning">Đánh vắng</button>
-                                            <button class="btn btn-outline-danger">Xoá</button>
-                                        {{/if}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Nguyễn Thị Minh Thu </td>
-                                    <td>Nữ</td>
-                                    <td>15/01/2001</td>
-                                    <td>0912345678</td>
-                                    <td>0912345678</td>
-                                    <td>123 Nguyễn Thị Minh Khai, Bến Nghé, Quận 1, Hồ Chí Minh</td>
-                                    <td class="text-center">
-                                        {{#if teaching_class}}
-                                        {{else}}
-                                            <button class="btn btn-outline-warning">Đánh vắng</button>
-                                            <button class="btn btn-outline-danger">Xoá</button>
-                                        {{/if}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Nguyễn Thị Minh Thu </td>
-                                    <td>Nữ</td>
-                                    <td>15/01/2001</td>
-                                    <td>0912345678</td>
-                                    <td>0912345678</td>
-                                    <td>123 Nguyễn Thị Minh Khai, Bến Nghé, Quận 1, Hồ Chí Minh</td>
-                                    <td class="text-center">
-                                        {{#if teaching_class}}
-                                        {{else}}
-                                            <button class="btn btn-outline-warning">Đánh vắng</button>
-                                            <button class="btn btn-outline-danger">Xoá</button>
-                                        {{/if}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Nguyễn Thị Minh Thu </td>
-                                    <td>Nữ</td>
-                                    <td>15/01/2001</td>
-                                    <td>0912345678</td>
-                                    <td>0912345678</td>
-                                    <td>123 Nguyễn Thị Minh Khai, Bến Nghé, Quận 1, Hồ Chí Minh</td>
-                                    <td class="text-center">
-                                        {{#if teaching_class}}
-                                        {{else}}
-                                            <button class="btn btn-outline-warning">Đánh vắng</button>
-                                            <button class="btn btn-outline-danger">Xoá</button>
-                                        {{/if}}
-                                    </td>
-                                </tr>
+                                    </tr>
+                                {{/each}}
                                 </tbody>
                             </table>
                         </div>
-                        <div class="pagination-wrap mt-3 text-center">
-                            <nav aria-label="Bootstrap Pagination Example">
-                                <ul class="pagination mb-0">
-                                    <li class="page-item active">
-                                        <a class="page-link">1</a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
+                        {{#if curPage.check}}
+                            <div class="pagination-wrap mt-3 text-center">
+                                <nav aria-label="Bootstrap Pagination Example">
+                                    <ul class="pagination mb-0">
+                                        {{#if prevPage.check}}
+                                            <li class="page-item">
+                                                <a class="page-link" href="/teacher/teaching-class/students/{{classID}}?page={{prevPage.value}}">&larr; <span class="ml-1 d-none d-xl-inline-block">Previous</span></a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="/teacher/teaching-class/students/{{classID}}?page={{prevPage.value}}">{{prevPage.value}}</a>
+                                            </li>
+                                        {{/if}}
+                                        <li class="page-item active">
+                                            <a class="page-link">{{curPage.value}}</a>
+                                        </li>
+                                        {{#if nexPage.check}}
+                                            <li class="page-item">
+                                                <a class="page-link" href="/teacher/teaching-class/students/{{classID}}?page={{nexPage.value}}">{{nexPage.value}}</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="/teacher/teaching-class/students/{{classID}}?page={{nexPage.value}}"><span class="mr-1 d-none d-xl-inline-block">Next</span> &rarr;</a>
+                                            </li>
+                                        {{/if}}
+                                    </ul>
+                                </nav>
+                            </div>
+                        {{/if}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-</div>
 </div>

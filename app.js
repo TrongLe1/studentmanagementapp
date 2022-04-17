@@ -55,31 +55,29 @@ app.engine('hbs', engine({
             let s = val.split(':')[0]
             return s < 13 ? "Sáng": "Chiều"
         },
-        timeTableCheck(val){
+        timeTableCheck(val) {
             // console.log(val)
             let result = ""
             let ngay = 2;
             let idx = 0;
-            while (ngay <= 8){
-                if(val[idx] != null && ngay === val[idx].NgayHoc){
+            while (ngay <= 8) {
+                if (val[idx] != null && ngay === val[idx].NgayHoc) {
                     result += '<td>\n'
-                    result+= '<span className="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom    font-size16 xs-font-size13">'
-                    result+= val[idx].TenMonHoc
-                    result+='</span>\n'
-                    result+='<div className="font-size13 text-light-gray">'
-                    result+= 'Ivana Wong'
-                    result+='</div>\n'
-                    result+='</td>\n'
+                    result += '<span className="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom    font-size16 xs-font-size13">'
+                    result += val[idx].TenMonHoc
+                    result += '</span>\n'
+                    result += '<div className="font-size13 text-light-gray">'
+                    result += 'Ivana Wong'
+                    result += '</div>\n'
+                    result += '</td>\n'
                     idx++
-                }
-                else {
+                } else {
                     result += '<td></td>'
                 }
                 ngay += 1
-
             }
             return result
-
+        },
         format_status(val) {
             if (val === 1) return "Hoạt động"
             else return "Đã khóa"
@@ -87,7 +85,6 @@ app.engine('hbs', engine({
         format_type(val) {
             if (val === 1) return "Giáo viên"
             else if (val === 2) return "Học sinh"
-
         }
     }
 }))
@@ -124,10 +121,8 @@ app.get('/login', function (req, res) {
 })
 
 app.post('/login', async function (req, res) {
-    // console.log("Start Login")
     let account = req.body
     if (account.TenDangNhap === ''){
-
         res.redirect('/login')
         return;
     }
@@ -141,7 +136,6 @@ app.post('/login', async function (req, res) {
         if (checkAccount.LoaiTaiKhoan === 2){
             req.session.student = (await studentModel.findStudentById(req.session.accountAuth.MaTaiKhoan))[0]
             req.session.class = (await classModel.findClassById(req.session.student.ThuocLop))[0]
-
             res.redirect('/student')
         }else if(checkAccount.LoaiTaiKhoan === 4){
             res.redirect('/admin')
@@ -154,7 +148,6 @@ app.post('/login', async function (req, res) {
     else{
         res.redirect('/login')
     }
-
 })
 
 
@@ -170,6 +163,5 @@ app.post('/forgot-password', function (req, res) {
 
 const port = 3000
 app.listen(port, () => {
-    // console.log(`Example app listening at http://localhost:${port}` + `/teacher`)
     console.log(`Example app listening at http://localhost:${port}/login`)
 })

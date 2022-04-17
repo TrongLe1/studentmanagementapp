@@ -8,7 +8,8 @@
             </div>
         </header>
         <div class="row">
-            <div class="col-lg-4 col-md-6">
+            {{#each result}}
+                <div class="col-lg-4 col-md-6">
                     <div class="card single-category text-center">
                         <div class="card-body">
                             <div class="">
@@ -16,70 +17,54 @@
                                     <img src="/public/admin-assets/img/categories/cat-2.jpg" alt="">
                                 </div>
                                 <div class="category-content">
-                                    <h2>11A1</h2>
+                                    <h2>{{TenLop}}</h2>
                                     <ul>
-                                        <li>Môn giảng dạy: Toán</li>
-                                        <li>Phòng học: I50</li>
-                                        <li>Năm học: 2020-2021</li>
+                                        <li>Môn giảng dạy: {{TenMonHoc}}</li>
+                                        <li>Phòng học: {{PhongHoc}}</li>
+                                        <li>Năm học: {{NamHoc}}</li>
                                     </ul>
                                     <div class="">
-                                        <button class="btn btn-outline-secondary"><a href="/teacher/teaching-class/students">Danh sách học sinh</a></button>
-                                        <button class="btn btn-outline-success"><a href="/teacher/teaching-class/scores">Xem bảng điểm</a></button>
-                                        <button class="btn btn-outline-info">Xuất bảng điểm</button>
+<!--                                        <form method="get" id="formGet{{MaLop}}">-->
+<!--                                            <input name="id" value="{{MaLop}}" hidden>-->
+<!--                                        </form>-->
+<!--                                        <button type="submit" class="btn btn-outline-primary" form="formGet{{MaLop}}" formaction="/teacher/teaching-class/students">Danh sách học sinh</button>-->
+                                        <a href="/teacher/teaching-class/students/{{MaLop}}"><button type="submit" class="btn btn-outline-primary">Danh sách học sinh</button></a>
+                                        <button type="submit" class="btn btn-outline-primary" form="formGet{{MaLop}}" formaction="/teacher/teaching-class/scores">Xem bảng điểm</button>
+                                        <button type="submit" class="btn btn-outline-primary" form="formGet{{MaLop}}" formaction="">Xuất bảng điểm</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="card single-category text-center">
-                    <div class="card-body">
-                        <div class="">
-                            <div class="category-image">
-                                <img src="/public/admin-assets/img/categories/cat-2.jpg" alt="">
-                            </div>
-                            <div class="category-content">
-                                <h2>11A1</h2>
-                                <ul>
-                                    <li>Môn giảng dạy: Toán</li>
-                                    <li>Phòng học: I50</li>
-                                    <li>Năm học: 2020-2021</li>
-                                </ul>
-                                <div class="">
-                                    <button class="btn btn-outline-secondary"><a href="/teacher/teaching-class/students">Danh sách học sinh</a></button>
-                                    <button class="btn btn-outline-success"><a href="/teacher/teaching-class/scores">Xem bảng điểm</a></button>
-                                    <button class="btn btn-outline-info">Xuất bảng điểm</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="card single-category text-center">
-                    <div class="card-body">
-                        <div class="">
-                            <div class="category-image">
-                                <img src="/public/admin-assets/img/categories/cat-2.jpg" alt="">
-                            </div>
-                            <div class="category-content">
-                                <h2>11A1</h2>
-                                <ul>
-                                    <li>Môn giảng dạy: Toán</li>
-                                    <li>Phòng học: I50</li>
-                                    <li>Năm học: 2020-2021</li>
-                                </ul>
-                                <div class="">
-                                    <button class="btn btn-outline-secondary"><a href="/teacher/teaching-class/students">Danh sách học sinh</a></button>
-                                    <button class="btn btn-outline-success"><a href="/teacher/teaching-class/scores">Xem bảng điểm</a></button>
-                                    <button class="btn btn-outline-info">Xuất bảng điểm</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {{/each}}
         </div>
+        {{#if curPage.check}}
+            <div class="pagination-wrap mt-3 text-center">
+                <nav aria-label="Bootstrap Pagination Example">
+                    <ul class="pagination mb-0">
+                        {{#if prevPage.check}}
+                            <li class="page-item">
+                                <a class="page-link" href="/teacher/teaching-class?page={{prevPage.value}}">&larr; <span class="ml-1 d-none d-xl-inline-block">Previous</span></a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="/teacher/teaching-class?page={{prevPage.value}}">{{prevPage.value}}</a>
+                            </li>
+                        {{/if}}
+                        <li class="page-item active">
+                            <a class="page-link">{{curPage.value}}</a>
+                        </li>
+                        {{#if nexPage.check}}
+                            <li class="page-item">
+                                <a class="page-link" href="/teacher/teaching-class?page={{nexPage.value}}">{{nexPage.value}}</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="/teacher/teaching-class?page={{nexPage.value}}"><span class="mr-1 d-none d-xl-inline-block">Next</span> &rarr;</a>
+                            </li>
+                        {{/if}}
+                    </ul>
+                </nav>
+            </div>
+        {{/if}}
     </div>
 </div>

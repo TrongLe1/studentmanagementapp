@@ -1,0 +1,10 @@
+INSERT INTO std_management_app.ctgiangday (MaLop, MaGV, MonHoc) VALUES (1, 1, 1);
+INSERT INTO std_management_app.ctgiangday (MaLop, MaGV, MonHoc) VALUES (2, 1, 1);
+INSERT INTO std_management_app.ctgiangday (MaLop, MaGV, MonHoc) VALUES (3, 1, 1);
+INSERT INTO std_management_app.ctgiangday (MaLop, MaGV, MonHoc) VALUES (4, 1, 1);
+INSERT INTO std_management_app.ctgiangday (MaLop, MaGV, MonHoc) VALUES (5, 1, 1);
+INSERT INTO std_management_app.ctgiangday (MaLop, MaGV, MonHoc) VALUES (6, 2, 7);
+INSERT INTO std_management_app.ctgiangday (MaLop, MaGV, MonHoc) VALUES (7, 2, 7);
+INSERT INTO std_management_app.ctgiangday (MaLop, MaGV, MonHoc) VALUES (8, 2, 7);
+INSERT INTO std_management_app.ctgiangday (MaLop, MaGV, MonHoc) VALUES (9, 2, 7);
+INSERT INTO std_management_app.ctgiangday (MaLop, MaGV, MonHoc) VALUES (10, 2, 7);
