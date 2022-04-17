@@ -1,9 +1,7 @@
 import express from 'express'
-import bcrypt from 'bcryptjs'
 import teacherModel from '../models/teacher-model.js'
-import accountModel from '../models/account-model.js'
 import classModel from '../models/class-model.js'
-import subjectModel from '../models/subject-model.js'
+import studentModel from '../models/student-model.js'
 
 const router = express.Router();
 
@@ -41,8 +39,8 @@ router.get('/teaching-class/students/:id', async function (req, res) {
     const className = (await classModel.findClassById(classID))[0].TenLop
     const page = req.query.page || 1
     const offset = (page - 1) * limit
-    const result = await classModel.getClassStudent(classID, limit, offset)
-    const total = await classModel.countClassStudent(classID)
+    const result = await studentModel.getStudentInClass(classID, limit, offset)
+    const total = await studentModel.countStudentInClass(classID)
     let nPage = Math.floor(total / limit)
     if (total % limit > 0) nPage++
     let nexPage = {check: true, value: (+page + 1)}
