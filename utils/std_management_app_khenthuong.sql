@@ -1,0 +1,10 @@
+INSERT INTO std_management_app.khenthuong (MaThanhTich, DiemCong) VALUES (11, 20);
+INSERT INTO std_management_app.khenthuong (MaThanhTich, DiemCong) VALUES (12, 25);
+INSERT INTO std_management_app.khenthuong (MaThanhTich, DiemCong) VALUES (13, 30);
+INSERT INTO std_management_app.khenthuong (MaThanhTich, DiemCong) VALUES (14, 35);
+INSERT INTO std_management_app.khenthuong (MaThanhTich, DiemCong) VALUES (15, 40);
+INSERT INTO std_management_app.khenthuong (MaThanhTich, DiemCong) VALUES (16, 45);
+INSERT INTO std_management_app.khenthuong (MaThanhTich, DiemCong) VALUES (17, 50);
+INSERT INTO std_management_app.khenthuong (MaThanhTich, DiemCong) VALUES (18, 55);
+INSERT INTO std_management_app.khenthuong (MaThanhTich, DiemCong) VALUES (19, 60);
+INSERT INTO std_management_app.khenthuong (MaThanhTich, DiemCong) VALUES (20, 65);

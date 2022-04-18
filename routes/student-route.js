@@ -1,14 +1,18 @@
 import express from 'express';
 import studentModel from "../models/student-model.js";
-import classModel from "../models/class-model.js";
 import relativeModel from "../models/relative-model.js";
 import tuitionModel from "../models/tuition-model.js";
 import examModel from "../models/exam-model.js";
 import timetableModel from "../models/timetable-model.js";
-import {add} from "cheerio/lib/api/traversing.js";
 
 const router = express.Router();
 
+
+router.get('/score', function (req, res) {
+    res.render('student/score', {
+        layout: "student.hbs", flag: true
+    })
+})
 
 router.get('/student', function (req, res) {
     res.render('student/home', {
@@ -43,11 +47,40 @@ router.get('/profile/edit' , async function (req, res) {
 router.post('/profile/edit' , async function (req, res) {
 
     let student = req.body
-    let val = await studentModel.updateStudent(student, res.session.student.MaHocSinh)
-
+    if( student.NgaySinh === ''){
+        delete student.NgaySinh
+    }
+    console.log(student, req.session.student)
+    let val = await studentModel.updateStudent(student, req.session.student.MaHocSinh)
+    console.log(val)
+    req.session.student = await studentModel.findStudentById(req.session.student.MaHocSinh)
     res.redirect("/profile");
 })
 
+router.get('/relative/edit/:MaPHHS' , async function (req, res) {
+
+    let stud = req.session.student
+    let studClass = req.session.class
+    let relatives = await relativeModel.findInfoRelative(stud.MaHocSinh)
+
+    let MaPHHS = req.params.MaPHHS
+    let detailParent = await relativeModel.findInfoRelativeDetailt(MaPHHS)
+
+    // console.log(detailParent)
+    res.render('student/edit-relative', {
+        layout: "student.hbs", relatives, detail: detailParent[0]
+    })
+})
+
+router.post('/relative/edit/:MaPHHS' , async function (req, res) {
+
+    let MaPHHS = req.params.MaPHHS
+    let detail = req.body
+    if(detail.NgaySinh === '')
+        delete detail.NgaySinh
+    let val = await relativeModel.updateRelativeDetail(detail, MaPHHS)
+    res.redirect('/profile')
+})
 
 router.get('/time-table',async function (req, res) {
 
@@ -91,6 +124,7 @@ router.post('/tuition', function (req, res) {
 })
 
 router.get('/tuition',async function (req, res) {
+
     let stud = req.session.student
     let studClass = req.session.class
     let chooseList = await tuitionModel.findListHocKyAndNamHoc(studClass.MaLop)
@@ -111,7 +145,7 @@ router.get('/tuition',async function (req, res) {
         chooseList[i].isSelected = chooseList[i].HocKy === hky && chooseList[i].NamHoc === nhoc;
     }
 
-    let tuitions = await tuitionModel.findTuiTionBySpecificHKNHAndClassID(studClass[0].MaLop, hky,nhoc)
+    let tuitions = await tuitionModel.findTuiTionBySpecificHKNHAndClassID(studClass.MaLop, hky,nhoc)
     let tong = 0;
     for(let item in tuitions){
         tong+= tuitions[item].TongTien
@@ -120,6 +154,12 @@ router.get('/tuition',async function (req, res) {
     res.render('student/tuition', {
         layout: "student.hbs", student: stud,studentClass: studClass.TenLop,
         tuitions, chooseList, flag, tong
+    })
+})
+
+router.get('/student', function (req, res) {
+    res.render('student/home', {
+        layout: "student.hbs"
     })
 })
 

@@ -226,14 +226,14 @@ create table CTLTMH
 drop table if exists Diem;
 create table Diem
 (
+    MaDiem bigint auto_increment primary key ,
     MaHocSinh bigint,
     MaMon     bigint,
     HocKy     bigint,
     NamHoc    bigint,
-    TenMonHoc text  null,
     HeSoDiem  float null,
     SoDiem    float null,
-    primary key (MaHocSinh, MaMon, HocKy, NamHoc),
+#     primary key (MaHocSinh, MaMon, HocKy, NamHoc),
     CONSTRAINT FK_Diem_MaMon FOREIGN KEY (MaMon)
         REFERENCES MonHoc (MaMon),
     CONSTRAINT FK_MaMon_HocSinh FOREIGN KEY (MaHocSinh)

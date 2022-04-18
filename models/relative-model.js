@@ -14,5 +14,11 @@ export default {
             list[item].info = info[0]
         }
         return list
+    },
+    findInfoRelativeDetailt(parentID){
+        return db('phuhuynh').where('MaPHHS','=',parentID)
+    },
+    updateRelativeDetail(entity, id){
+        return db('phuhuynh').where('MaPHHS').update(entity)
     }
 }

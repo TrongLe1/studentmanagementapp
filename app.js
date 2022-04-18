@@ -66,9 +66,9 @@ app.engine('hbs', engine({
                     result += '<span className="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom    font-size16 xs-font-size13">'
                     result += val[idx].TenMonHoc
                     result += '</span>\n'
-                    result += '<div className="font-size13 text-light-gray">'
-                    result += 'Ivana Wong'
-                    result += '</div>\n'
+                    // result += '<div className="font-size13 text-light-gray">'
+                    // result += 'Ivana Wong'
+                    // result += '</div>\n'
                     result += '</td>\n'
                     idx++
                 } else {

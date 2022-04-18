@@ -33,3 +33,4 @@ INSERT INTO std_management_app.giaovien (MaGV, HoTen, NgaySinh, SDT, GioiTinh, D
 INSERT INTO std_management_app.giaovien (MaGV, HoTen, NgaySinh, SDT, GioiTinh, DiaChi, ChuNhiemLop, TaiKhoan) VALUES (33, 'Trần Nam Trung', '2004-06-10', '0923322613', 1, 'Q7, TPHCM', null, 274);
 INSERT INTO std_management_app.giaovien (MaGV, HoTen, NgaySinh, SDT, GioiTinh, DiaChi, ChuNhiemLop, TaiKhoan) VALUES (34, 'Kiên Thanh Tâm', '2005-10-28', '0923322614', 0, 'Q6, TPHCM', null, 275);
 INSERT INTO std_management_app.giaovien (MaGV, HoTen, NgaySinh, SDT, GioiTinh, DiaChi, ChuNhiemLop, TaiKhoan) VALUES (35, 'Trần Minh Thiện', '2004-01-01', '0923322615', 0, 'Q6, TPHCM', null, 276);
+INSERT INTO std_management_app.giaovien (MaGV, HoTen, NgaySinh, SDT, GioiTinh, DiaChi, ChuNhiemLop, TaiKhoan) VALUES (38, 'Huynh Tuan Kha', '2022-04-28', null, 0, null, null, 0);

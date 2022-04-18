@@ -9,3 +9,4 @@ INSERT INTO std_management_app.monhoc (MaMon, TenMonHoc) VALUES (8, 'Lịch Sử
 INSERT INTO std_management_app.monhoc (MaMon, TenMonHoc) VALUES (9, 'GDCD');
 INSERT INTO std_management_app.monhoc (MaMon, TenMonHoc) VALUES (10, 'GDQP');
 INSERT INTO std_management_app.monhoc (MaMon, TenMonHoc) VALUES (11, 'Thể Dục');
+INSERT INTO std_management_app.monhoc (MaMon, TenMonHoc) VALUES (13, 'Chào cờ');

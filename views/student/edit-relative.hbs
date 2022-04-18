@@ -33,7 +33,7 @@
                     <div class="card mb-3">
                         <div class="card-header p-1" style="background-color: #fffcbd;">
                             <h5 class="d-flex justify-content-center">
-                                Thông tin học sinh
+                                Thông tin chi tiết phụ huynh
                             </h5>
                         </div>
                         <form method="post">
@@ -43,25 +43,7 @@
                                         <h6 class="mb-0">Họ và tên:</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        {{this.student.HoTen}}
-                                    </div>
-                                </div>
-                                <hr class="mt-3 mb-3">
-                                <div class="row" style="display: flex; align-items: center">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Lớp:</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        {{this.studentClass}}
-                                    </div>
-                                </div>
-                                <hr class="mt-3 mb-3">
-                                <div class="row" style="display: flex; align-items: center">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Giới tính:</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        {{checkGender student.GioiTinh}}
+                                        {{this.detail.HoTen}}
                                     </div>
                                 </div>
                                 <hr class="mt-3 mb-3">
@@ -72,31 +54,31 @@
                                     <div class="col-sm-9 text-secondary">
                                         <div class="row input-group">
                                             <input type="date" aria-label="First name" class="form-control"
-                                                   id="NgaySinh" name="NgaySinh" value="{{formatDate this.student.NgaySinh}}">
+                                                   id="NgaySinh" name="NgaySinh" value="{{this.detail.NgaySinh}}">
                                         </div>
                                     </div>
                                 </div>
                                 <hr class="mt-3 mb-3">
                                 <div class="row" style="display: flex; align-items: center">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">Địa chỉ:</h6>
+                                        <h6 class="mb-0">Nghề nghiệp:</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
                                         <div class="row input-group">
                                             <input type="text" aria-label="First name" class="form-control"
-                                                   id="DiaChi" name="DiaChi" value="{{this.student.DiaChi}}">
+                                                   id="NgheNghiep" name="NgheNghiep" value="{{this.detail.NgheNghiep}}">
                                         </div>
                                     </div>
                                 </div>
                                 <hr class="mt-3 mb-3">
                                 <div class="row" style="display: flex; align-items: center">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">Quê quán</h6>
+                                        <h6 class="mb-0">Chức vụ:</h6>
                                     </div>
-                                    <div class="col-sm-9 text-secondary">
+                                    <div class="col-sm-9 text-secondary">   
                                         <div class="row input-group">
                                             <input type="text" aria-label="First name" class="form-control"
-                                                   id="QueQuan" name="QueQuan" value="{{this.student.QueQuan}}">
+                                                   id="ChucVu" name="ChucVu" value="{{this.detail.ChucVu}}">
                                         </div>
                                     </div>
                                 </div>
@@ -108,31 +90,7 @@
                                     <div class="col-sm-9 text-secondary">
                                         <div class="row input-group">
                                             <input type="text" aria-label="First name" class="form-control"
-                                                   id="SDT" name="SDT" value="{{this.student.SDT}}">
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr class="mt-3 mb-3">
-                                <div class="row" style="display: flex; align-items: center;">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Dân tộc:</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        <div class="row input-group">
-                                            <input type="text" aria-label="First name" class="form-control"
-                                                   id="DanToc" name="DanToc" value="{{this.student.DanToc}}">
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr class="mt-3 mb-3">
-                                <div class="row" style="display: flex; align-items: center;">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Tôn giáo:</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        <div class="row input-group">
-                                            <input type="text" aria-label="First name" class="form-control"
-                                                   id="TonGiao" name="TonGiao" value="{{this.student.TonGiao}}">
+                                                   id="SDT" name="SDT" value="{{this.detail.SDT}}">
                                         </div>
                                     </div>
                                 </div>
@@ -162,7 +120,7 @@
                                     <th scope="col">Nghề nghiệp</th>
                                     <th scope="col">Số điện thoại</th>
                                     <th scope="col">Chức vụ</th>
-                                    <th scope="col">&nbsp</th>
+                                    <th scope="col">&nbsp;</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -181,6 +139,12 @@
                                 </tbody>
                             </table>
                         </div>
+<!--                        <div class="card-footer d-flex justify-content-end p-1" >-->
+<!--                            <button class="btn btn-primary">-->
+<!--                                <i class="fa fa-pencil" aria-hidden="true"></i>-->
+<!--                                Sửa thông tin-->
+<!--                            </button>-->
+<!--                        </div>-->
                     </div>
                 </div>
             </div>

@@ -84,6 +84,15 @@
                             <hr class="mt-3 mb-3">
                             <div class="row" style="display: flex; align-items: center">
                                 <div class="col-sm-3">
+                                    <h6 class="mb-0">Quê quán:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{student.QueQuan}}
+                                </div>
+                            </div>
+                            <hr class="mt-3 mb-3">
+                            <div class="row" style="display: flex; align-items: center">
+                                <div class="col-sm-3">
                                     <h6 class="mb-0">Số điện thoại:</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
@@ -110,14 +119,14 @@
                             </div>
                         </div>
                         <div class="card-footer d-flex justify-content-center p-1" >
-                            <button class="btn btn-primary mr-3">
+                            <a href="/profile/edit" class="btn btn-primary mr-3">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                                 Sửa thông tin
-                            </button>
-                            <button class="btn btn-secondary">
+                            </a>
+                            <a href="/mark-table" class="btn btn-secondary">
                                 <i class="fa fa-eye" aria-hidden="true"></i>
                                 Xem điểm quá trình
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -149,19 +158,13 @@
                                     <td>{{this.info.SDT}}</td>
                                     <td>{{this.info.ChucVu}}</td>
                                     <td>
-                                        <a class="btn btn-primary btn-sm" href="">Sửa</a>
+                                        <a class="btn btn-primary btn-sm" href="/relative/edit/{{this.info.MaPHHS}}">Sửa</a>
                                     </td>
                                 </tr>
                                 {{/each}}
                                 </tbody>
                             </table>
                         </div>
-<!--                        <div class="card-footer d-flex justify-content-end p-1" >-->
-<!--                            <button class="btn btn-primary">-->
-<!--                                <i class="fa fa-pencil" aria-hidden="true"></i>-->
-<!--                                Sửa thông tin-->
-<!--                            </button>-->
-<!--                        </div>-->
                     </div>
                 </div>
             </div>
