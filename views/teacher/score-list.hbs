@@ -1,17 +1,24 @@
 <div class="u-content">
     <div class="u-body">
-        <div class="row">
+        <div class="d-flex flex-row mb-3">
             <div class="col-md-12">
-                <header class="section-header mb-4">
+                <header class="section-header mb-2">
                     <div class="row align-items-center">
                         <div class="col-md-6">
-                            <h2 class="h3 card-header-title">Bảng điểm lớp 11A1</h2>
+                            <h2 class="h3 card-header-title">Bảng điểm lớp {{className}} môn {{subjectName}}</h2>
                         </div>
                     </div>
                 </header>
+                <div class="form-inline">
+                    <label for="Semester"></label>
+                    <select id="Semester" name="Semester">
+                        <option>2/2022</option>
+                        <option>1/2022</option>
+                    </select>
+                </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row mt-2">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
@@ -22,134 +29,69 @@
                                     <th scope="col" class="text-center">ID</th>
                                     <th scope="col" width="200">Họ tên</th>
                                     <th scope="col" width="90">Giới tính</th>
-                                    <th scope="col">Miệng 1</th>
-                                    <th scope="col">Miệng 2</th>
-                                    <th scope="col">15 phút 1</th>
-                                    <th scope="col">15 phút 2</th>
-                                    <th scope="col">45 phút 1</th>
-                                    <th scope="col">45 phút 2</th>
+                                    <th scope="col">Hệ số 1</th>
+                                    <th scope="col">Hệ số 1</th>
+                                    <th scope="col">Hệ số 1</th>
+                                    <th scope="col">Hệ số 1</th>
+                                    <th scope="col">Hệ số 2</th>
+                                    <th scope="col">Hệ số 2</th>
                                     <th scope="col">Học kỳ</th>
                                     <th scope="col" class="text-center" width="200">Hành động</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Nguyễn Thị Minh Thu </td>
-                                    <td>Nữ</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td class="text-center">
-                                        <button class="btn btn-outline-primary">Chỉnh sửa điểm</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Nguyễn Thị Minh Thu </td>
-                                    <td>Nữ</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td class="text-center">
-                                        <button class="btn btn-outline-primary">Chỉnh sửa điểm</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Nguyễn Thị Minh Thu </td>
-                                    <td>Nữ</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td class="text-center">
-                                        <button class="btn btn-outline-primary">Chỉnh sửa điểm</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Nguyễn Thị Minh Thu </td>
-                                    <td>Nữ</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td class="text-center">
-                                        <button class="btn btn-outline-primary">Chỉnh sửa điểm</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Nguyễn Thị Minh Thu </td>
-                                    <td>Nữ</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td class="text-center">
-                                        <button class="btn btn-outline-primary">Chỉnh sửa điểm</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Nguyễn Thị Minh Thu </td>
-                                    <td>Nữ</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td class="text-center">
-                                        <button class="btn btn-outline-primary">Chỉnh sửa điểm</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Nguyễn Thị Minh Thu </td>
-                                    <td>Nữ</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td>9.0</td>
-                                    <td class="text-center">
-                                        <button class="btn btn-outline-primary">Chỉnh sửa điểm</button>
-                                    </td>
-                                </tr>
+                                {{#each students}}
+                                    <form method="get" id="formGet{{MaHocSinh}}">
+                                        <input name="id" value="{{MaHocSinh}}" hidden>
+                                    </form>
+                                    <tr>
+                                        <td class="text-center">{{MaHocSinh}}</td>
+                                        <td>{{HoTen}}</td>
+                                        <td>{{format_gender GioiTinh}}</td>
+                                        {{#each HeSo1}}
+                                            <td>{{this}}</td>
+                                        {{/each}}
+                                        {{#each HeSo2}}
+                                            <td>{{this}}</td>
+                                        {{/each}}
+                                        {{#each HeSo3}}
+                                            <td>{{this}}</td>
+                                        {{/each}}
+                                        <td class="text-center">
+                                            <button type="submit" class="btn btn-outline-primary" form="formGet{{MaHocSinh}}" formaction="/teaching-class/scores/{{../classID}}/{{../subjectID}}/edit">Chỉnh sửa điểm</button>
+                                        </td>
+                                    </tr>
+                                {{/each}}
                                 </tbody>
                             </table>
                         </div>
-                        <div class="pagination-wrap mt-3 text-center">
-                            <nav aria-label="Bootstrap Pagination Example">
-                                <ul class="pagination mb-0">
-                                    <li class="page-item active">
-                                        <a class="page-link">1</a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
+                        {{#if curPage.check}}
+                            <div class="pagination-wrap mt-3 text-center">
+                                <nav aria-label="Bootstrap Pagination Example">
+                                    <ul class="pagination mb-0">
+                                        {{#if prevPage.check}}
+                                            <li class="page-item">
+                                                <a class="page-link" href="/teacher/teaching-class/scores/{{classID}}/{{subjectID}}?page={{prevPage.value}}">&larr; <span class="ml-1 d-none d-xl-inline-block">Previous</span></a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="/teacher/teaching-class/scores/{{classID}}/{{subjectID}}?page={{prevPage.value}}">{{prevPage.value}}</a>
+                                            </li>
+                                        {{/if}}
+                                        <li class="page-item active">
+                                            <a class="page-link">{{curPage.value}}</a>
+                                        </li>
+                                        {{#if nexPage.check}}
+                                            <li class="page-item">
+                                                <a class="page-link" href="/teacher/teaching-class/scores/{{classID}}/{{subjectID}}?page={{nexPage.value}}">{{nexPage.value}}</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="/teacher/teaching-class/scores/{{classID}}/{{subjectID}}?page={{nexPage.value}}"><span class="mr-1 d-none d-xl-inline-block">Next</span> &rarr;</a>
+                                            </li>
+                                    {{/if}}
+                                    </ul>
+                                </nav>
+                            </div>
+                        {{/if}}
                     </div>
                 </div>
             </div>

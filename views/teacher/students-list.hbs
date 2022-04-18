@@ -51,10 +51,10 @@
                                         <td>{{QueQuan}}</td>
                                         <td>{{DanToc}}</td>
                                         <td>{{TonGiao}}</td>
-                                        {{#if homeroom_class}}
+                                        {{#if ../homeroom_class}}
                                             <td class="text-center">
-                                                <button type="submit" class="btn btn-outline-success" form="formGet{{MaHocSinh}}" formaction="/admin/student/editclass">Chỉnh sửa lớp</button>
-                                                <button type="submit" class="btn btn-outline-danger" form="formPost{{MaHocSinh}}" formaction="/admin/student/delete">Xóa</button>
+                                                <button type="submit" class="btn btn-outline-warning" form="formGet{{MaHocSinh}}" formaction="/teacher/homeroom-class/student/{{MaHocSinh}}/absent">Đánh vắng</button>
+                                                <button type="submit" class="btn btn-outline-danger" form="formPost{{MaHocSinh}}" formaction="/teacher/homeroom-class/student/delete">Xóa</button>
                                             </td>
                                         {{/if}}
                                     </tr>
@@ -67,23 +67,43 @@
                                 <nav aria-label="Bootstrap Pagination Example">
                                     <ul class="pagination mb-0">
                                         {{#if prevPage.check}}
-                                            <li class="page-item">
-                                                <a class="page-link" href="/teacher/teaching-class/students/{{classID}}?page={{prevPage.value}}">&larr; <span class="ml-1 d-none d-xl-inline-block">Previous</span></a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="/teacher/teaching-class/students/{{classID}}?page={{prevPage.value}}">{{prevPage.value}}</a>
-                                            </li>
+                                            {{#if teaching_class}}
+                                                <li class="page-item">
+                                                    <a class="page-link" href="/teacher/teaching-class/students/{{classID}}?page={{prevPage.value}}">&larr; <span class="ml-1 d-none d-xl-inline-block">Previous</span></a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="/teacher/teaching-class/students/{{classID}}?page={{prevPage.value}}">{{prevPage.value}}</a>
+                                                </li>
+                                            {{/if}}
+                                            {{#if homeroom_class}}
+                                                <li class="page-item">
+                                                    <a class="page-link" href="/teacher/homeroom-class/students?page={{prevPage.value}}">&larr; <span class="ml-1 d-none d-xl-inline-block">Previous</span></a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="/teacher/homeroom-class/students?page={{prevPage.value}}">{{prevPage.value}}</a>
+                                                </li>
+                                            {{/if}}
                                         {{/if}}
                                         <li class="page-item active">
                                             <a class="page-link">{{curPage.value}}</a>
                                         </li>
                                         {{#if nexPage.check}}
-                                            <li class="page-item">
-                                                <a class="page-link" href="/teacher/teaching-class/students/{{classID}}?page={{nexPage.value}}">{{nexPage.value}}</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="/teacher/teaching-class/students/{{classID}}?page={{nexPage.value}}"><span class="mr-1 d-none d-xl-inline-block">Next</span> &rarr;</a>
-                                            </li>
+                                            {{#if teaching_class}}
+                                                <li class="page-item">
+                                                    <a class="page-link" href="/teacher/teaching-class/students/{{classID}}?page={{nexPage.value}}">{{nexPage.value}}</a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="/teacher/teaching-class/students/{{classID}}?page={{nexPage.value}}"><span class="mr-1 d-none d-xl-inline-block">Next</span> &rarr;</a>
+                                                </li>
+                                            {{/if}}
+                                            {{#if homeroom_class}}
+                                                <li class="page-item">
+                                                    <a class="page-link" href="/teacher/homeroom-class/students?page={{nexPage.value}}">{{nexPage.value}}</a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="/teacher/homeroom-class/students?page={{nexPage.value}}"><span class="mr-1 d-none d-xl-inline-block">Next</span> &rarr;</a>
+                                                </li>
+                                            {{/if}}
                                         {{/if}}
                                     </ul>
                                 </nav>

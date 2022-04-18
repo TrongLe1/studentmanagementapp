@@ -81,5 +81,9 @@ export default {
     },
     updateTuition(id, entity) {
         return db('hocphi').where('MaHocPhi', '=', id).update(entity)
-    }
+    },
+    findHomeroomClass(teacherID) {
+        return db('giaovien').join('lophoc', 'lophoc.MaLop', 'giaovien.ChuNhiemLop')
+            .where('MaGV', '=', teacherID)
+    },
 }

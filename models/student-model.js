@@ -11,8 +11,8 @@ export default {
         const result = await db('hocsinh').count('*')
         return result[0]['count(*)']
     },
-    findStudentById(matk) {
-        return db('hocsinh').where('MaHocSinh', '=', matk)
+    findStudentById(accountId) {
+        return db('hocsinh').where('MaHocSinh', '=', accountId)
     },
     updateStudent(entity, id) {
         return db('hocsinh').where('MaHocSinh', '=', id).update(entity)
@@ -35,5 +35,8 @@ export default {
     },
     removeAllStudentFromClass(id) {
         return db('hocsinh').where('ThuocLop', '=', id).update({ThuocLop: null})
+    },
+    getStudentScoresInSubject(studentID, subjectID) {
+        return db('diem').where('MaHocSinh', studentID).where('MaMon', subjectID)
     }
 }

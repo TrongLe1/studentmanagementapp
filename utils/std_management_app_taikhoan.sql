@@ -1,4 +1,3 @@
-INSERT INTO std_management_app.taikhoan (MaTaiKhoan, TenDangNhap, Matkhau, TrangThai, LoaiTaiKhoan) VALUES (0, 'huynhtuankha', '$2a$10$70VQCFbcpTYC2D50vTINEOc5Ej4stVaFsmXdMuV93g0XsnQZ4HcMa', 1, 1);
 INSERT INTO std_management_app.taikhoan (MaTaiKhoan, TenDangNhap, Matkhau, TrangThai, LoaiTaiKhoan) VALUES (1, '19127166', '$2a$12$DGWFRd44iwFyBLgAXBFLluwj49KqtJk7nW.2uZsPsrZ7QJfl76FnK', 1, 1);
 INSERT INTO std_management_app.taikhoan (MaTaiKhoan, TenDangNhap, Matkhau, TrangThai, LoaiTaiKhoan) VALUES (2, 'plaknis', '$2a$12$DGWFRd44iwFyBLgAXBFLluwj49KqtJk7nW.2uZsPsrZ7QJfl76FnK', 1, 2);
 INSERT INTO std_management_app.taikhoan (MaTaiKhoan, TenDangNhap, Matkhau, TrangThai, LoaiTaiKhoan) VALUES (3, 'phamthienan', '21072003', 1, 2);
