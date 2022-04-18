@@ -1,0 +1,90 @@
+<div class="u-content">
+    <div class="u-body">
+        <div class="row">
+            <div class="col-md-12">
+                <header class="section-header mb-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <h2 class="h3 card-header-title">Chi tiết lịch thi</h2>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <a href="/admin/schedule/detail/add?id={{MaLichThi}}" class="box-btn">Thêm môn thi</a>
+                        </div>
+                    </div>
+                </header>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="text-center">Tên môn thi</th>
+                                        <th scope="col">Ngày thi</th>
+                                        <th scope="col">Thời gian bắt đầu</th>
+                                        <th scope="col">Thời gian kết thúc</th>
+                                        <th scope="col">Phòng thi</th>
+                                        <th scope="col" class="text-center" width="350">Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {{#each result}}
+                                    <form method="get" id="formGet{{MaLichThi}}{{MaMon}}">
+                                        <input name="id" value="{{MaLichThi}}" hidden>
+                                        <input name="sId" value="{{MaMon}}" hidden>
+                                    </form>
+                                    <form method="post" id="formPost{{MaLichThi}}{{MaMon}}">
+                                        <input name="id" value="{{MaLichThi}}" hidden>
+                                        <input name="sId" value="{{MaMon}}" hidden>
+                                    </form>
+                                    <tr>
+                                        <td class="text-center">{{TenMonHoc}}</td>
+                                        <td>{{format_date NgayThi}}</td>
+                                        <td>{{ThoiGianBD}}</td>
+                                        <td>{{ThoiGianKt}}</td>
+                                        <td>{{PhongThi}}</td>
+                                        <td class="text-center">
+                                            <button type="submit" class="btn btn-outline-secondary" form="formGet{{MaLichThi}}{{MaMon}}" formaction="/admin/schedule/detail/edit">Chỉnh sửa</button>
+                                            <button type="submit" class="btn btn-outline-danger" form="formPost{{MaLichThi}}{{MaMon}}" formaction="/admin/schedule/detail/delete">Xóa</button>
+                                        </td>
+                                    </tr>
+                                {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                        {{#if curPage.check}}
+                            <div class="pagination-wrap mt-3 text-center">
+                                <nav aria-label="Bootstrap Pagination Example">
+                                    <ul class="pagination mb-0">
+                                        {{#if prevPage.check}}
+                                            <li class="page-item">
+                                                <a class="page-link" href="/admin/schedule/detail?id={{MaLichThi}}&page={{prevPage.value}}">&larr; <span class="ml-1 d-none d-xl-inline-block">Previous</span></a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="/admin/schedule/detail?id={{MaLichThi}}&page={{prevPage.value}}">{{prevPage.value}}</a>
+                                            </li>
+                                        {{/if}}
+                                        <li class="page-item active">
+                                            <a class="page-link">{{curPage.value}}</a>
+                                        </li>
+                                        {{#if nexPage.check}}
+                                            <li class="page-item">
+                                                <a class="page-link" href="/admin/schedule/detail?id={{MaLichThi}}&page={{nexPage.value}}">{{nexPage.value}}</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="/admin/schedule/detail?id={{MaLichThi}}&page={{nexPage.value}}"><span class="mr-1 d-none d-xl-inline-block">Next</span> &rarr;</a>
+                                            </li>
+                                        {{/if}}
+                                    </ul>
+                                </nav>
+                            </div>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

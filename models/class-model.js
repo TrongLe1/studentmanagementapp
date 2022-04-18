@@ -23,8 +23,8 @@ export default {
     deleteClass(id) {
         return db('lophoc').where('MaLop', '=', id).del()
     },
-    getTeacherInClass(id) {
-        return db('ctgiangday').join('giaovien', 'ctgiangday.MaGV', '=', 'giaovien.MaGV').join('monhoc', 'ctgiangday.MonHoc', '=', 'monhoc.MaMon').where('MaLop', '=', id).select('*')
+    getTeacherInClass(id, limit, offset) {
+        return db('ctgiangday').join('giaovien', 'ctgiangday.MaGV', '=', 'giaovien.MaGV').join('monhoc', 'ctgiangday.MonHoc', '=', 'monhoc.MaMon').where('MaLop', '=', id).select('*').limit(limit).offset(offset)
     },
     async countTeacherInClass(id) {
         const result = await db('ctgiangday').where('MaLop', '=', id).count('*')
@@ -47,5 +47,39 @@ export default {
     },
     removeAllTeacherFromClass(id) {
         return db('ctgiangday').where('MaLop', '=', id).del()
+    },
+    addTuition(entity) {
+        return db('hocphi').insert(entity)
+    },
+    getTuitionInClass(id, limit, offset) {
+        return db.select('*').from('hocphi').where('MaLop', '=', id).limit(limit).offset(offset)
+    },
+    async countTuitionInClass(id) {
+        const result = await db('hocphi').where('MaLop', '=', id).count('*')
+        return result[0]['count(*)']
+    },
+    getTuitionInClassSemester(id, semester, limit, offset) {
+        return db.select('*').from('hocphi').where('MaLop', '=', id).where('HocKy', '=', semester).limit(limit).offset(offset)
+    },
+    async countTuitionInClassSemester(id, semester) {
+        const result = await db('hocphi').where('MaLop', '=', id).where('HocKy', '=', semester).count('*')
+        return result[0]['count(*)']
+    },
+    async sumTuitionInClass(id) {
+        const result = await db('hocphi').sum('TongTien').where('MaLop', '=', id)
+        return result[0]['sum(`TongTien`)']
+    },
+    async sumTuitionInClassSemester(id, semester) {
+        const result = await db('hocphi').sum('TongTien').where('MaLop', '=', id).where('HocKy', '=', semester)
+        return result[0]['sum(`TongTien`)']
+    },
+    deleteTuition(id) {
+        return db('hocphi').where('MaHocPhi', '=', id).del()
+    },
+    findTuitionByID(id) {
+        return db.select('*').from('hocphi').where('MaHocPhi', '=', id)
+    },
+    updateTuition(id, entity) {
+        return db('hocphi').where('MaHocPhi', '=', id).update(entity)
     }
 }

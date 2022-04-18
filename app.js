@@ -49,7 +49,7 @@ app.engine('hbs', engine({
                 return "Nữ"
         },
         formatMoney(val) {
-            return val.toLocaleString({style: 'currency', currency: 'VND'}) + " VND";
+            return val.toLocaleString({style: 'currency', currency: 'VNĐ'}) + " VNĐ";
         },
         checkTimeSession(val){
             let s = val.split(':')[0]

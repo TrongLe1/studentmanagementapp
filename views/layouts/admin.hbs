@@ -119,6 +119,31 @@
                         </ul>
                     </li>
 
+                    <li class="u-sidebar-nav-menu__item clearfix">
+                        {{#if schedule}}
+                            <a class="u-sidebar-nav-menu__link active" href="" data-target="#schedule">
+                        {{else}}
+                            <a class="u-sidebar-nav-menu__link" href="" data-target="#schedule">
+                        {{/if}}
+                        <i class="fas fa-table u-sidebar-nav-menu__item-icon"></i>
+                        <span class="u-sidebar-nav-menu__item-title">Lịch thi</span>
+                        <i class="fa fa-angle-right u-sidebar-nav-menu__item-arrow"></i>
+                        <span class="u-sidebar-nav-menu__indicator"></span>
+                    </a>
+                        <ul id="schedule" class="u-sidebar-nav-menu u-sidebar-nav-menu--second-level text-center" style="display: none;">
+                            <li class="u-sidebar-nav-menu__item">
+                                <a class="u-sidebar-nav-menu__link" href="/admin/schedule">
+                                    <span class="u-sidebar-nav-menu__item-title">Danh sách lịch thi</span>
+                                </a>
+                            </li>
+                            <li class="u-sidebar-nav-menu__item">
+                                <a class="u-sidebar-nav-menu__link" href="/admin/schedule/add">
+                                    <span class="u-sidebar-nav-menu__item-title">Tạo lịch thi</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
                     <li class="u-sidebar-nav-menu__item">
                         {{#if subject}}
                         <a class="u-sidebar-nav-menu__link active" href="/admin/subject">

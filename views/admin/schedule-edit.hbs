@@ -1,0 +1,71 @@
+{{#section 'js'}}
+    <script>
+        $("#yearPicker").datepicker({
+            format: "yyyy",
+            viewMode: "years",
+            minViewMode: "years",
+            autoclose: true
+        });
+        $("#yearPicker2").datepicker({
+            format: "yyyy",
+            viewMode: "years",
+            minViewMode: "years",
+            autoclose: true
+        });
+    </script>
+    <script>
+        $('#frmAddClass').on('submit', function (e) {
+            e.preventDefault()
+            const dateStart = parseInt($('#yearPicker').val())
+            const dateEnd = parseInt($('#yearPicker2').val())
+            if (dateEnd === dateStart + 1) {
+                $('#frmAddClass').off('submit').submit()
+            }
+            return
+        })
+    </script>
+{{/section}}
+
+<div class="u-content">
+    <div class="u-body">
+        <header class="section-header mb-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2 class="h3 card-header-title">Chỉnh sửa lịch thi</h2>
+                </div>
+            </div>
+        </header>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="category-add-form-wrap">
+                    <form action="/admin/schedule/edit" method="post" id="frmAddClass" class="category-add-form">
+                        <div class="form-group">
+                            <label for="semester">Học kỳ</label>
+                            <select id="semester" name="semester">
+                                <option data-display="Học kỳ {{result.HocKy}}" value="">Học kỳ</option>
+                                <option value="1">Học kỳ 1</option>
+                                <option value="2">Học kỳ 2</option>
+                            </select>
+                        </div>
+                        <div class="form-group">&nbsp;</div>
+                        <div class="form-group">
+                            <label for="dob">Năm học bắt đầu</label>
+                            <input class="form-control" id="yearPicker" name="start" value="{{result.BatDau}}" type="number" onkeydown="return false;" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="dob">Năm học kết thúc</label>
+                            <input class="form-control" id="yearPicker2" name="end" value="{{result.KetThuc}}" type="number" onkeydown="return false;" required/>
+                        </div>
+                        {{#if added}}
+                            <p class="text-success">Chỉnh sửa thành công</p>
+                        {{/if}}
+                        <input name="id" value="{{result.MaLichThi}}" hidden>
+                        <div class="form-group">
+                            <button class="box-btn" type="submit">Lưu</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
