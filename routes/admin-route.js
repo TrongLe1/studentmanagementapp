@@ -5,6 +5,7 @@ import accountModel from '../models/account-model.js'
 import classModel from '../models/class-model.js'
 import subjectModel from '../models/subject-model.js'
 import studentModel from '../models/student-model.js'
+import examModel from '../models/exam-model.js'
 
 const router = express.Router();
 
@@ -367,7 +368,6 @@ router.get('/class/teacher', async function (req, res) {
     const clss = await classModel.findClassById(req.query.id)
     const result = await classModel.getTeacherInClass(req.query.id, limit, offset)
     const total = await classModel.countTeacherInClass(req.query.id)
-    console.log(result)
     let nPage = Math.floor(total / limit)
     if (total % limit > 0) nPage++
     let nexPage = {check: true, value: (+page + 1)}
@@ -451,6 +451,108 @@ router.post('/class/teacher/delete', async function (req, res) {
     res.redirect(req.headers.referer || '/admin/class')
 })
 
+//Hoc Phi
+router.get('/class/tuition', async function (req, res) {
+    const clss = await classModel.findClassById(req.query.id)
+    const limit = 6
+    const page = req.query.page || 1
+    const offset = (page - 1) * limit
+    let result
+    let total
+    let check = false
+    let sum
+    let check1 = false
+    if (req.query.semester) {
+        result = await classModel.getTuitionInClassSemester(req.query.id, req.query.semester, limit, offset)
+        total = await classModel.countTuitionInClassSemester(req.query.id, req.query.semester)
+        sum = await classModel.sumTuitionInClassSemester(req.query.id, req.query.semester)
+        check = true
+    }
+    else {
+        result = await classModel.getTuitionInClass(req.query.id, limit, offset)
+        total = await classModel.countTuitionInClass(req.query.id)
+        sum = await classModel.sumTuitionInClass(req.query.id)
+    }
+    if (req.query.semester === '1') check1 = true
+    let nPage = Math.floor(total / limit)
+    if (total % limit > 0) nPage++
+    let nexPage = {check: true, value: (+page + 1)}
+    let curPage = {check: (+page > 0 && +page <= nPage && result.length !== 0 ), value: +page}
+    let prevPage = {check: true, value: (+page - 1)}
+    if (nexPage.value === nPage + 1) nexPage.check = false
+    if (prevPage.value === 0) prevPage.check = false
+    if (total === 0) curPage.check = false
+    res.render('admin/class-tuition-list', {
+        layout: "admin.hbs",
+        class: true,
+        clss: clss[0],
+        result,
+        nexPage,
+        curPage,
+        prevPage,
+        check,
+        check1,
+        sum,
+        semester: req.query.semester
+    })
+})
+
+router.get('/class/tuition/add', async function (req, res) {
+    const clss = await classModel.findClassById(req.query.id)
+    res.render('admin/class-tuition-add', {
+        layout: "admin.hbs",
+        class: true,
+        clss: clss[0],
+    })
+})
+
+router.post('/class/tuition/add', async function (req, res) {
+    const clss = await classModel.findClassById(req.body.id)
+    const tuition = {
+        TenHocPhi: req.body.name,
+        HocKy: req.body.semester,
+        NamHoc: clss[0].NamHoc,
+        TongTien: req.body.price,
+        MaLop: clss[0].MaLop
+    }
+    await classModel.addTuition(tuition)
+    res.render('admin/class-tuition-add', {
+        layout: "admin.hbs",
+        class: true,
+        clss: clss[0],
+        added: true
+    })
+})
+
+router.post('/class/tuition/delete', async function (req, res) {
+    await classModel.deleteTuition(req.body.id)
+    res.redirect(req.headers.referer || '/admin/class')
+})
+
+router.get('/class/tuition/edit', async function (req, res) {
+    const result = await classModel.findTuitionByID(req.query.id)
+    res.render('admin/class-tuition-edit', {
+        layout: "admin.hbs",
+        class: true,
+        result: result[0],
+    })
+})
+
+
+router.post('/class/tuition/edit', async function (req, res) {
+    const tuition = {
+        TenHocPhi: req.body.name,
+        TongTien: req.body.price
+    }
+    await classModel.updateTuition(req.body.id, tuition)
+    const result = await classModel.findTuitionByID(req.body.id)
+    res.render('admin/class-tuition-edit', {
+        layout: "admin.hbs",
+        class: true,
+        result: result[0],
+        added: true,
+    })
+})
 //Mon Hoc
 router.get('/subject', async function (req, res) {
     const limit = 6
@@ -674,5 +776,148 @@ router.post('/student/editclass', async function (req, res) {
     })
 })
 
+//Lich thi
+router.get('/schedule/add', async function (req, res) {
+    res.render('admin/schedule-add', {
+        layout: "admin.hbs",
+        schedule: true,
+    })
+})
+
+router.post('/schedule/add', async function (req, res) {
+    const schedule = {
+        HocKy: req.body.semester,
+        NamHoc: req.body.start + ' - ' + req.body.end
+    }
+    await examModel.addExamSchedule(schedule)
+    res.render('admin/schedule-add', {
+        layout: "admin.hbs",
+        schedule: true,
+        added: true
+    })
+})
+
+router.get('/schedule', async function (req, res) {
+    const limit = 6
+    const page = req.query.page || 1
+    const offset = (page - 1) * limit
+    const result = await examModel.getExamSchedule(limit, offset)
+    const total = await examModel.countExamSchedule()
+    let nPage = Math.floor(total / limit)
+    if (total % limit > 0) nPage++
+    let nexPage = {check: true, value: (+page + 1)}
+    let curPage = {check: (+page > 0 && +page <= nPage && result.length !== 0 ), value: +page}
+    let prevPage = {check: true, value: (+page - 1)}
+    if (nexPage.value === nPage + 1) nexPage.check = false
+    if (prevPage.value === 0) prevPage.check = false
+    if (total === 0) curPage.check = false
+    res.render('admin/schedule-list', {
+        layout: "admin.hbs",
+        schedule: true,
+        result
+    })
+})
+
+router.get('/schedule/edit', async function (req, res) {
+    const result = await examModel.findScheduleByID(req.query.id)
+    for (const item of result) {
+        const temp = item.NamHoc.split(' - ')
+        item.BatDau = temp[0]
+        item.KetThuc = temp[1]
+    }
+    res.render('admin/schedule-edit', {
+        layout: "admin.hbs",
+        schedule: true,
+        result: result[0]
+    })
+})
+
+router.post('/schedule/edit', async function (req, res) {
+    const schedule = {
+        NamHoc: req.body.start + ' - ' + req.body.end
+    }
+    if (req.body.semester)
+        schedule.HocKy = req.body.semester
+    await examModel.updateScheduleByID(req.body.id, schedule)
+    const result = await examModel.findScheduleByID(req.body.id)
+    for (const item of result) {
+        const temp = item.NamHoc.split(' - ')
+        item.BatDau = temp[0]
+        item.KetThuc = temp[1]
+    }
+    res.render('admin/schedule-edit', {
+        layout: "admin.hbs",
+        schedule: true,
+        added: true,
+        result: result[0]
+    })
+})
+
+router.post('/schedule/delete', async function (req, res) {
+    await examModel.deleteSchedule(req.body.id)
+    res.redirect(req.headers.referer || '/admin/schedule')
+})
+
+router.get('/schedule/detail', async function (req, res) {
+    const limit = 6
+    const page = req.query.page || 1
+    const offset = (page - 1) * limit
+    const result = await examModel.getDetailExamSchedule(req.query.id, limit, offset)
+    const total = await examModel.countDetailExamSchedule(req.query.id)
+    let nPage = Math.floor(total / limit)
+    if (total % limit > 0) nPage++
+    let nexPage = {check: true, value: (+page + 1)}
+    let curPage = {check: (+page > 0 && +page <= nPage && result.length !== 0 ), value: +page}
+    let prevPage = {check: true, value: (+page - 1)}
+    if (nexPage.value === nPage + 1) nexPage.check = false
+    if (prevPage.value === 0) prevPage.check = false
+    if (total === 0) curPage.check = false
+
+    res.render('admin/schedule-detail-list', {
+        layout: "admin.hbs",
+        schedule: true,
+        MaLichThi: req.query.id,
+        result
+    })
+})
+
+router.get('/schedule/detail/add', async function (req, res) {
+    const entity = await examModel.getAllSubjectIDInSchedule(req.query.id)
+    const subjects = await subjectModel.getSubjectWithout(entity)
+    res.render('admin/schedule-detail-add', {
+        layout: "admin.hbs",
+        schedule: true,
+        MaLichThi: req.query.id,
+        subjects
+    })
+})
+
+router.post('/schedule/detail/add', async function (req, res) {
+    const dateParts = req.body.date.split('/')
+    const date = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0])
+    const detail = {
+        MaMon: req.body.subject,
+        MaLichThi: req.body.id,
+        NgayThi: date,
+        ThoiGianBD: req.body.start,
+        ThoiGianKt: req.body.end,
+        PhongThi: req.body.room
+    }
+    await examModel.addDetailExamSchedule(detail)
+    const entity = await examModel.getAllSubjectIDInSchedule(req.query.id)
+    const subjects = await subjectModel.getSubjectWithout(entity)
+    res.render('admin/schedule-detail-add', {
+        layout: "admin.hbs",
+        schedule: true,
+        MaLichThi: req.query.id,
+        subjects,
+        added: true
+    })
+})
+
+router.post('/schedule/detail/delete', async function (req, res) {
+    await examModel.deleteDetailSchedule(req.body.id, req.body.sId)
+    res.redirect(req.headers.referer || '/admin/schedule')
+})
 
 export default router

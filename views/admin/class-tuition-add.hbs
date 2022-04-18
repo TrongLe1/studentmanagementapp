@@ -1,0 +1,48 @@
+<div class="u-content">
+    <div class="u-body">
+        <header class="section-header mb-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2 class="h3 card-header-title">Thêm học phí {{clss.TenLop}}</h2>
+                </div>
+            </div>
+
+        </header>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="category-add-form-wrap">
+                    <form action="/admin/class/tuition/add" method="post" class="category-add-form">
+                        <div class="form-group">
+                            <label for="name">Tên học phí</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Nhập tên học phí" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="semester">Học kỳ</label>
+                            <select id="semester" name="semester" required>
+                                <option data-display="Chọn học kỳ" value="">Học kỳ</option>
+                                <option value="1">Học kỳ 1</option>
+                                <option value="2">Học kỳ 2</option>
+                            </select>
+                        </div>
+                        <div class="form-group">&nbsp;</div>
+                        <div class="form-group">
+                            <label for="year">Năm học</label>
+                            <input type="text" class="form-control" id="year" name="year" value="{{clss.NamHoc}}" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Tổng tiền</label>
+                            <input type="number" class="form-control" id="price" name="price" placeholder="Nhập tổng tiền học phí" required>
+                        </div>
+                        {{#if added}}
+                            <p class="text-success">Thêm thành công</p>
+                        {{/if}}
+                        <input name="id" value="{{clss.MaLop}}" hidden>
+                        <div class="form-group">
+                            <button class="box-btn" type="submit">Thêm</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

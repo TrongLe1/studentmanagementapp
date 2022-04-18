@@ -23,4 +23,7 @@ export default {
     getAllSubject() {
         return db.select('*').from('monhoc')
     },
+    getSubjectWithout(entity) {
+        return db('monhoc').whereNotIn('MaMon', entity)
+    }
 }

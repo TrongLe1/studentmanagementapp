@@ -28,6 +28,40 @@ export default {
             return null
         }
         return list[0]
+    },
+    addExamSchedule(entity) {
+        return db('lichthi').insert(entity)
+    },
+    getExamSchedule(limit, offset) {
+        return db.select('*').from('lichthi').limit(limit).offset(offset)
+    },
+    async countExamSchedule() {
+        const result = await db('lichthi').count('*')
+        return result[0]['count(*)']
+    },
+    findScheduleByID(id) {
+        return db.select('*').from('lichthi').where('MaLichThi', '=', id)
+    },
+    updateScheduleByID(id, entity) {
+        return db('lichthi').where('MaLichThi', '=', id).update(entity)
+    },
+    deleteSchedule(id) {
+        return db('lichthi').where('MaLichThi', '=', id).del()
+    },
+    addDetailExamSchedule(entity) {
+        return db('ctltmh').insert(entity)
+    },
+    getDetailExamSchedule(id, limit, offset) {
+        return db('ctltmh').join('monhoc', 'ctltmh.MaMon', '=', 'monhoc.MaMon').where('MaLichThi', '=', id).select('*').limit(limit).offset(offset)
+    },
+    async countDetailExamSchedule(id) {
+        const result = await db('ctltmh').where('MaLichThi', '=', id).count('*')
+        return result[0]['count(*)']
+    },
+    deleteDetailSchedule(id, subjectId) {
+        return db('ctltmh').where('MaLichThi', '=', id).where('MaMon', '=', subjectId).del()
+    },
+    getAllSubjectIDInSchedule(id) {
+        return db.select('MaMon').from('ctltmh').where('MaLichThi', '=', id).pluck('MaMon')
     }
-
 }
