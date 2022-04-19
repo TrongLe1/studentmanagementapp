@@ -1,9 +1,9 @@
 import express from 'express'
 import asyncErrors from 'express-async-errors'
 import morgan from 'morgan'
-import { engine } from 'express-handlebars'
-import { dirname } from 'path'
-import { fileURLToPath } from 'url'
+import {engine} from 'express-handlebars'
+import {dirname} from 'path'
+import {fileURLToPath} from 'url'
 import express_section from 'express-handlebars-sections'
 import session from 'express-session'
 import admin from './routes/admin-route.js'
@@ -39,21 +39,21 @@ app.engine('hbs', engine({
             if (val === 0) return 'Nam'
             else return 'Nữ'
         },
-        formatDate(val){
+        formatDate(val) {
             return new Intl.DateTimeFormat('vi-VN').format(new Date(val))
         },
-        checkGender(val){
-            if(val === 1){
+        checkGender(val) {
+            if (val === 1) {
                 return "Nam"
-            }else
+            } else
                 return "Nữ"
         },
         formatMoney(val) {
             return val.toLocaleString({style: 'currency', currency: 'VNĐ'}) + " VNĐ";
         },
-        checkTimeSession(val){
+        checkTimeSession(val) {
             let s = val.split(':')[0]
-            return s < 13 ? "Sáng": "Chiều"
+            return s < 13 ? "Sáng" : "Chiều"
         },
         timeTableCheck(val) {
             // console.log(val)
@@ -63,10 +63,10 @@ app.engine('hbs', engine({
             while (ngay <= 8) {
                 if (val[idx] != null && ngay === val[idx].NgayHoc) {
                     result += '<td>\n'
-                    result += '<span className="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom    font-size16 xs-font-size13">'
+                    result += '<span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom    font-size16 xs-font-size13">'
                     result += val[idx].TenMonHoc
                     result += '</span>\n'
-                    // result += '<div className="font-size13 text-light-gray">'
+                    // result += '<div class="font-size13 text-light-gray">'
                     // result += 'Ivana Wong'
                     // result += '</div>\n'
                     result += '</td>\n'
@@ -85,6 +85,64 @@ app.engine('hbs', engine({
         format_type(val) {
             if (val === 1) return "Giáo viên"
             else if (val === 2) return "Học sinh"
+        },
+        formatScores: function (val) {
+            // console.log(val)
+            let result = ""
+            let hs1 = 0;
+            let hs2 = 0;
+            let hs3 = 0;
+            let idx = 0, times = 0, sum=0,tongheso=0;
+            while(times < 7){
+                if(hs1 < 4){
+                    if(val[idx].HeSoDiem === 1){
+                        result+= `<td class="text-center">${val[idx].SoDiem}</td>`
+                        sum+= val[idx].SoDiem
+
+                        idx++
+                        tongheso++
+                    }else{
+                        result+= `<td class="text-center"></td>`
+                    }
+                    hs1++
+                }else if(hs2 < 2){
+                    if(val[idx].HeSoDiem === 2){
+                        result+= `<td class="text-center">${val[idx].SoDiem}</td>`
+                        sum+= val[idx].SoDiem * 2
+                        idx++
+                        tongheso+=2
+                    }else{
+                        result+= `<td class="text-center"></td>`
+                    }
+                    hs2++
+                }else{
+                    if(val[idx].HeSoDiem === 3){
+                        result+= `<td class="text-center">${val[idx].SoDiem}</td>`
+                        sum+= val[idx].SoDiem * 3
+                        idx++
+                        tongheso+=3
+                    }else{
+                        result+= `<td class="text-center"></td>`
+                    }
+                    hs3++
+                }
+                // console.log(sum)
+                times++;
+            }
+
+
+            let value = (sum/tongheso).toFixed(2)
+            if (hs1 !== 0 && hs2 !==0  && hs3 !== 0) {
+                result += `<td class="text-center">${value}</td>`
+                // Tinh Diem
+            } else {
+                result += '<td class="text-center"></td>'
+            }
+            // console.log(val)
+            return result
+        },
+        plusIdx(val) {
+            return val++
         }
     }
 }))
@@ -94,12 +152,10 @@ app.set('views', './views')
 app.use('/public', express.static('public'))
 app.set('trust proxy', 1)
 app.use(session({
-    secret: 'secret_key',       
+    secret: 'secret_key',
     resave: false,
     saveUninitialized: true,
-    cookie: {
-
-    }
+    cookie: {}
 }))
 
 app.use('/admin', admin)
@@ -122,30 +178,29 @@ app.get('/login', function (req, res) {
 
 app.post('/login', async function (req, res) {
     let account = req.body
-    if (account.TenDangNhap === ''){
+    if (account.TenDangNhap === '') {
         res.redirect('/login')
         return;
     }
 
     let checkAccount = (await accountModel.findAccountByUsername(account.TenDangNhap))[0]
-    if(bcrypt.compareSync(account.MatKhau, checkAccount.Matkhau)){
+    if (bcrypt.compareSync(account.MatKhau, checkAccount.Matkhau)) {
 
         delete checkAccount.Matkhau
         req.session.login = true
         req.session.accountAuth = checkAccount
-        if (checkAccount.LoaiTaiKhoan === 2){
+        if (checkAccount.LoaiTaiKhoan === 2) {
             req.session.student = (await studentModel.findStudentById(req.session.accountAuth.MaTaiKhoan))[0]
             req.session.class = (await classModel.findClassById(req.session.student.ThuocLop))[0]
             res.redirect('/student')
-        }else if(checkAccount.LoaiTaiKhoan === 4){
+        } else if (checkAccount.LoaiTaiKhoan === 4) {
             res.redirect('/admin')
-        }else if(checkAccount.LoaiTaiKhoan === 1){
+        } else if (checkAccount.LoaiTaiKhoan === 1) {
             res.redirect('/teacher')
-        }else{
+        } else {
             res.redirect('/teacher')
         }
-    }
-    else{
+    } else {
         res.redirect('/login')
     }
 })

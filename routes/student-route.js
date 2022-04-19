@@ -8,10 +8,42 @@ import timetableModel from "../models/timetable-model.js";
 const router = express.Router();
 
 
-router.get('/score', function (req, res) {
+router.get('/score', async function (req, res) {
+
+    let stud = req.session.student
+    let studClass = req.session.class
+
+    let chooseSemesterList = await studentModel.getChooseSemesterAndYearList(stud.MaHocSinh)
+    if(chooseSemesterList.length === 0){
+        res.render('student/score', {
+            layout: "student.hbs", flag: false,
+            msg: "Hiện bạn không có điểm thi của học kì nào! Vui lòng quay lại sau, cảm ơn!"
+        })
+        return
+    }
+
+    let hocky = req.query.HocKy || chooseSemesterList[0].HocKy
+    let namhoc = req.query.NamHoc || chooseSemesterList[0].NamHoc
+
+    for (let i in chooseSemesterList){
+        chooseSemesterList[i].isSelected = chooseSemesterList[i].HocKy == hocky
+            && chooseSemesterList[i].NamHoc == namhoc;
+    }
+    // console.log(chooseSemesterList)
+
+    let scoreListBySemesterAndYear = await studentModel.getListSubjectScoresByHKNH(5, hocky, namhoc)
+    // console.log(scoreListBySemesterAndYear)
     res.render('student/score', {
-        layout: "student.hbs", flag: true
+        layout: "student.hbs", flag: true,
+        chooseList: chooseSemesterList,
+        scoresList: scoreListBySemesterAndYear, studentClass: studClass.TenLop
     })
+})
+
+router.post('/score', function (req, res) {
+    // console.log(req.body.value)
+    let result = req.body.value.split('/')
+    res.redirect(`/score?HocKy=${result[0]}&NamHoc=${result[1]}`)
 })
 
 router.get('/student', function (req, res) {
@@ -50,10 +82,10 @@ router.post('/profile/edit' , async function (req, res) {
     if( student.NgaySinh === ''){
         delete student.NgaySinh
     }
-    console.log(student, req.session.student)
+    // console.log(student, req.session.student)
     let val = await studentModel.updateStudent(student, req.session.student.MaHocSinh)
-    console.log(val)
-    req.session.student = await studentModel.findStudentById(req.session.student.MaHocSinh)
+    // console.log(val)
+    req.session.student = (await studentModel.findStudentById(req.session.student.MaHocSinh))[0]
     res.redirect("/profile");
 })
 
@@ -76,6 +108,9 @@ router.post('/relative/edit/:MaPHHS' , async function (req, res) {
 
     let MaPHHS = req.params.MaPHHS
     let detail = req.body
+
+    console.log(MaPHHS, detail)
+
     if(detail.NgaySinh === '')
         delete detail.NgaySinh
     let val = await relativeModel.updateRelativeDetail(detail, MaPHHS)
@@ -131,9 +166,8 @@ router.get('/tuition',async function (req, res) {
     let flag = true
 
     if(chooseList.length < 1){
-        flag = false
         res.render('student/tuition', {
-            layout: "student.hbs", flag, msg: "Hiện tại năm học này chưa có học phí!"
+            layout: "student.hbs", flag: false, msg: "Hiện tại năm học này chưa có học phí!"
         })
         return
     }

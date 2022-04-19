@@ -19,6 +19,6 @@ export default {
         return db('phuhuynh').where('MaPHHS','=',parentID)
     },
     updateRelativeDetail(entity, id){
-        return db('phuhuynh').where('MaPHHS').update(entity)
+        return db('phuhuynh').where('MaPHHS', id).update(entity)
     }
 }
