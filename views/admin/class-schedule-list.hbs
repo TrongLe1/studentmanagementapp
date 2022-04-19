@@ -1,0 +1,65 @@
+<div class="u-content">
+    <div class="u-body">
+        <div class="row">
+            <div class="col-md-12">
+                <header class="section-header mb-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <h2 class="h3 card-header-title">Lịch thi {{clss.TenLop}}</h2>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <a href="/admin/class/timetable?id={{clss.MaLop}}" class="box-btn">Thời khóa biểu</a>
+                        </div>
+                    </div>
+                </header>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        {{!--<th scope="col" class="text-center">ID</th>--}}
+                                        <th scope="col" width="150">Mã lịch thi</th>
+                                        <th scope="col">Học kỳ</th>
+                                        <th scope="col" class="text-center" width="250">Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {{#each result}}
+                                    <form method="post" id="formPost{{MaLichThi}}">
+                                        <input name="id" value="{{MaLichThi}}" hidden>
+                                        <input name="cId" value="{{MaLop}}" hidden>
+                                    </form>
+                                    <form method="get" id="formGet{{MaLichThi}}">
+                                        <input name="id" value="{{MaLichThi}}" hidden>
+                                    </form>
+                                    <tr>
+                                        {{!--<td class="text-center">{{MaHocPhi}}</td>--}}
+                                        <td>{{MaLichThi}}</td>
+                                        <td>Học kỳ {{HocKy}}</td>
+                                        <td class="text-center">
+                                            {{!--
+                                            <button type="submit" class="btn btn-outline-primary" form="formGet{{MaGV}}" formaction="/admin/teacher/edit">Chỉnh sửa</button>
+                                            <button type="submit" class="btn btn-outline-success" form="formPost{{MaGV}}" formaction="/admin/teacher/createaccount">Tạo tài khoản</button>
+                                            --}}
+                                            <button type="submit" class="btn btn-outline-info" form="formGet{{MaLichThi}}" formaction="/admin/schedule/detail">Chi tiết</button>
+                                            <button type="submit" class="btn btn-outline-danger" form="formPost{{MaLichThi}}" formaction="/admin/class/schedule/delete">Xóa</button>
+                                        </td>
+                                    </tr>
+                                {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right mt-3">
+                    <a href="/admin/class/schedule/add?id={{clss.MaLop}}" class="box-btn">Thêm lịch thi</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

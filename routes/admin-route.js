@@ -915,8 +915,101 @@ router.post('/schedule/detail/add', async function (req, res) {
     })
 })
 
+router.get('/schedule/detail/edit', async function (req, res) {
+    const entity = await examModel.getAllSubjectIDInSchedule(req.query.id)
+    const subjects = await subjectModel.getSubjectWithout(entity)
+    const result = await examModel.findDetailScheduleByID(req.query.id, req.query.sId)
+    res.render('admin/schedule-detail-edit', {
+        layout: "admin.hbs",
+        schedule: true,
+        MaLichThi: req.query.id,
+        subjects,
+        result: result[0]
+    })
+})
+
+router.post('/schedule/detail/edit', async function (req, res) {
+    const dateParts = req.body.date.split('/')
+    const date = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0])
+    const schedule = {
+        MaMon: req.body.subject,
+        NgayThi: date,
+        ThoiGianBD: req.body.start,
+        ThoiGianKt: req.body.end,
+        PhongThi: req.body.room
+    }
+    await examModel.updateDetailScheduleByID(req.body.id, req.body.sId, schedule)
+    const entity = await examModel.getAllSubjectIDInSchedule(req.body.id)
+    const subjects = await subjectModel.getSubjectWithout(entity)
+    const result = await examModel.findDetailScheduleByID(req.body.id, req.body.subject)
+    res.render('admin/schedule-detail-edit', {
+        layout: "admin.hbs",
+        schedule: true,
+        MaLichThi: req.query.id,
+        subjects,
+        result: result[0],
+        added: true
+    })
+})
+
 router.post('/schedule/detail/delete', async function (req, res) {
     await examModel.deleteDetailSchedule(req.body.id, req.body.sId)
+    res.redirect(req.headers.referer || '/admin/schedule')
+})
+
+//Lop Hoc Lich Thi
+
+router.get('/class/schedule', async function (req, res) {
+    const clss = await classModel.findClassById(req.query.id)
+    const result = await examModel.getScheduleInClass(req.query.id)
+    res.render('admin/class-schedule-list', {
+        layout: "admin.hbs",
+        class: true,
+        clss: clss[0],
+        result
+    })
+})
+
+router.get('/class/schedule/add', async function (req, res) {
+    const clss = await classModel.findClassById(req.query.id)
+    const temp = await examModel.getScheduleInClass(req.query.id)
+    const semester = []
+    for (const item of temp)
+        semester.push(item.HocKy)
+    const schedules = await examModel.getAllExamScheduleForClass(clss[0].NamHoc, semester)
+    res.render('admin/class-schedule-add', {
+        layout: "admin.hbs",
+        class: true,
+        clss: clss[0],
+        schedules
+    })
+})
+
+router.post('/class/schedule/add', async function (req, res) {
+    const detail = {
+        MaLop: req.body.id,
+        MaLichThi: req.body.schedule
+    }
+    await examModel.addExamScheduleInClass(detail)
+
+
+    const clss = await classModel.findClassById(req.body.id)
+    const temp = await examModel.getScheduleInClass(req.body.id)
+    const semester = []
+    for (const item of temp)
+        semester.push(item.HocKy)
+    const schedules = await examModel.getAllExamScheduleForClass(clss[0].NamHoc, semester)
+    res.render('admin/class-schedule-add', {
+        layout: "admin.hbs",
+        class: true,
+        clss: clss[0],
+        schedules,
+        added: true
+    })
+})
+
+router.post('/class/schedule/delete', async function (req, res) {
+    await examModel.deleteScheduleInClass(req.body.id, req.body.cId)
     res.redirect(req.headers.referer || '/admin/schedule')
 })
 

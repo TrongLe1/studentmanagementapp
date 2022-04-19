@@ -63,5 +63,23 @@ export default {
     },
     getAllSubjectIDInSchedule(id) {
         return db.select('MaMon').from('ctltmh').where('MaLichThi', '=', id).pluck('MaMon')
+    },
+    findDetailScheduleByID(id, sId) {
+        return db('ctltmh').join('monhoc', 'ctltmh.MaMon', '=', 'monhoc.MaMon').where('MaLichThi', '=', id).where('ctltmh.MaMon', '=', sId).select('*')
+    },
+    updateDetailScheduleByID(id, sId, entity) {
+        return db('ctltmh').where('MaLichThi', '=', id).where('MaMon', '=', sId).update(entity)
+    },
+    getScheduleInClass(id) {
+        return db('ctltlh').join('lichthi', 'lichthi.MaLichThi', '=', 'ctltlh.MaLichThi').where('MaLop', '=', id).select('*')
+    },
+    getAllExamScheduleForClass(year, array) {
+        return db.select('*').from('lichthi').where('NamHoc', '=', year).whereNotIn('HocKy', array)
+    },
+    addExamScheduleInClass(entity) {
+        return db('ctltlh').insert(entity)
+    },
+    deleteScheduleInClass(id, cId) {
+        return db('ctltlh').where('MaLichThi', '=', id).where('MaLop', '=', cId).del()
     }
 }
