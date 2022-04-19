@@ -37,9 +37,6 @@ export default {
     removeAllStudentFromClass(id) {
         return db('hocsinh').where('ThuocLop', '=', id).update({ThuocLop: null})
     },
-    getStudentScoresInSubject(studentID, subjectID) {
-        return db('diem').where('MaHocSinh', studentID).where('MaMon', subjectID)
-    },
     getStudentScoresInSubjectByHKNH(studentID, subjectID, HocKy, NamHoc) {
         return db('diem').where('MaHocSinh', studentID)
             .where('MaMon', subjectID)
@@ -77,5 +74,8 @@ export default {
             .select('HocKy','NamHoc')
             .orderBy('NamHoc',"desc")
             .orderBy('HocKy',"desc")
-    }
+    },
+    addStudentScore(entity) {
+        return db('diem').insert(entity)
+    },
 }
