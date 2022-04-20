@@ -1,8 +1,10 @@
 import express from 'express'
+import bcrypt from 'bcryptjs'
 import teacherModel from '../models/teacher-model.js'
 import classModel from '../models/class-model.js'
 import studentModel from '../models/student-model.js'
 import subjectModel from '../models/subject-model.js'
+import accountModel from '../models/account-model.js'
 
 const router = express.Router();
 
@@ -146,7 +148,7 @@ router.post('/teaching-class/scores/:cid/:sid', function (req, res) {
     let result = req.body.value.split('/')
     const classID = req.params.cid
     const subjectID = req.params.sid
-    res.redirect('/teacher/teaching-class/scores/'+classID+'/'+subjectID+'/?HocKy='+result[0]+'&NamHoc='+result[1]+'')
+    res.redirect(req.headers.referer ||'/teacher/teaching-class/scores/'+classID+'/'+subjectID+'/?HocKy='+result[0]+'&NamHoc='+result[1]+'')
 })
 
 router.post('/teaching-class/scores/:cid/:sid/edit', async function (req, res) {
@@ -238,17 +240,17 @@ router.post('/teaching-class/scores/:cid/:sid/edit', async function (req, res) {
         await studentModel.addStudentScore(scoreEntity);
     }
     console.log(scores)
-    res.redirect('/teacher/teaching-class/scores/' + classID + '/' + subjectID + '?HocKy=' + hocky + '&NamHoc=' + namhoc)
+    res.redirect(req.headers.referer || '/teacher/teaching-class/scores/' + classID + '/' + subjectID + '?HocKy=' + hocky + '&NamHoc=' + namhoc)
 })
 
 router.get('/homeroom-class/students', async function (req, res) {
     const limit = 8
-    const homeroomClass = (await classModel.findHomeroomClass(1))[0];
-    const className = (await classModel.findClassById(homeroomClass.ChuNhiemLop))[0].TenLop
+    const homeroomClass = (await classModel.findHomeroomClass(1))[0]
+    const className = (await classModel.findClassById(homeroomClass.MaLop))[0].TenLop
     const page = req.query.page || 1
     const offset = (page - 1) * limit
-    const result = await studentModel.getStudentInClass(homeroomClass.ChuNhiemLop, limit, offset)
-    const total = await studentModel.countStudentInClass(homeroomClass.ChuNhiemLop)
+    const result = await studentModel.getStudentInClass(homeroomClass.MaLop, limit, offset)
+    const total = await studentModel.countStudentInClass(homeroomClass.MaLop)
     let nPage = Math.floor(total / limit)
     if (total % limit > 0) nPage++
     let nexPage = {check: true, value: (+page + 1)}
@@ -260,6 +262,7 @@ router.get('/homeroom-class/students', async function (req, res) {
     res.render('teacher/students-list', {
         layout: "teacher.hbs",
         homeroom_class: true,
+        classID: homeroomClass,
         className,
         result,
         nexPage,
@@ -270,14 +273,59 @@ router.get('/homeroom-class/students', async function (req, res) {
 
 router.get('/homeroom-class/student/add', function (req, res) {
     res.render('teacher/add-student', {
-        layout: "teacher.hbs",
-        homeroom_class: true
+        layout: "teacher.hbs"
     })
 })
 
-router.post('/teacher/homeroom-class/student/delete', function (req, res) {
-    const studentID = req.body.id
+router.post('/homeroom-class/student/add', async function (req, res) {
+    const dateParts = req.body.date.split('/')
+    const date = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0])
+    const student = {
+        HoTen: req.body.name,
+        NgaySinh: date,
+        GioiTinh: req.body.gender,
+        ThuocLop: (await classModel.findHomeroomClass(1))[0].MaLop
+    }
+    const id = await studentModel.addStudent(student)
+    const result = await studentModel.findStudentById(id[0])
+    const datePass = result[0].NgaySinh.getDate()
+    const month = result[0].NgaySinh.getMonth() + 1
+    const password = [
+        datePass.toString().padStart(2, '0'),
+        month.toString().padStart(2, '0'),
+        result[0].NgaySinh.getFullYear()
+    ].join('')
+    for (const item of result) {
+        item.HoTen = item.HoTen.toLowerCase()
+        item.HoTen = item.HoTen.replace(/ /g, '')
+        item.HoTen = item.HoTen.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a")
+        item.HoTen = item.HoTen.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e")
+        item.HoTen = item.HoTen.replace(/ì|í|ị|ỉ|ĩ/g, "i")
+        item.HoTen = item.HoTen.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o")
+        item.HoTen = item.HoTen.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u")
+        item.HoTen = item.HoTen.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y")
+        item.HoTen = item.HoTen.replace(/đ/g, "d")
+        item.HoTen = item.HoTen.replace(/\u0300|\u0301|\u0303|\u0309|\u0323/g, "")
+        item.HoTen = item.HoTen.replace(/\u02C6|\u0306|\u031B/g, "")
+    }
+    const salt = bcrypt.genSaltSync(10)
+    const account = {
+        TenDangNhap: result[0].HoTen,
+        Matkhau: bcrypt.hashSync(password, salt),
+        LoaiTaiKhoan: 2
+    }
+    const accId = await accountModel.createAccount(account)
+    await studentModel.createAccount(accId[0], result[0].MaHocSinh)
+    res.render('teacher/add-student', {
+        layout: "teacher.hbs",
+        homeroom_class: true,
+        added: true
+    })
+})
 
+router.post('/homeroom-class/student/delete', async function (req, res) {
+    await studentModel.removeFromClass(req.body.id)
+    res.redirect(req.headers.referer || '/teacher/homeroom-class/students')
 })
 
 router.get('/info', function (req, res) {

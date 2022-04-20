@@ -1,7 +1,7 @@
 import db from '../utils/db-connection.js'
 
 export default {
-    createTeacherAccount(entity) {
+    createAccount(entity) {
         return db('taikhoan').insert(entity)
     },
     findAccountByUsername(user) {

@@ -7,6 +7,11 @@
                         <div class="col-md-6">
                             <h2 class="h3 card-header-title">Danh sách học sinh lớp {{className}}</h2>
                         </div>
+                        {{#if homeroom_class}}
+                            <div class="col-md-6 text-right">
+                                <a href="/teacher/homeroom-class/student/add" class="box-btn">Thêm học sinh</a>
+                            </div>
+                        {{/if}}
                     </div>
                 </header>
             </div>
