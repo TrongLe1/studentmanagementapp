@@ -157,31 +157,85 @@ router.post('/teaching-class/scores/:cid/:sid/edit', async function (req, res) {
     const namhoc = req.query.NamHoc
     const hs1 = [req.body.diem0, req.body.diem1, req.body.diem2, req.body.diem3]
     const hs2 = [req.body.diem4, req.body.diem5]
-    const hs3 = req.body.diem6
+    let hs3 = req.body.diem6
+    let old_hs3 = 0.0
     const scores = await studentModel.getStudentScoresInSubjectByHKNH(studentID, subjectID, hocky, namhoc)
-    // chua xy lu truong hop nhap vao chua co
-    for (const score of scores) {
-        if (score.HeSoDiem === 1.0) {
-            for (const d of hs1) {
-                if (d !== "Chưa có") {
-                    score.SoDiem = parseFloat(d)
-                    hs1.splice(hs1.indexOf(d), 1)
-                    break
+    for (let i = 0, j = 0, k = 0; i < scores.length; i++) {
+        if (scores[i].HeSoDiem === 1.0) {
+            if (hs1[k] !== '') {
+                if (scores[i].SoDiem !== parseFloat(hs1[k])) {
+                    scores[i].SoDiem = parseFloat(hs1[k])
+                    hs1.splice(k, 1)
+                    await studentModel.updateStudentScore(scores[i], scores[i].MaDiem)
+                } else {
+                    hs1.splice(k, 1)
                 }
+            } else {
+                hs1.splice(k, 1)
             }
-        } else if (score.HeSoDiem === 2.0) {
-            for (const d of hs2) {
-                if (d !== "Chưa có") {
-                    score.SoDiem = parseFloat(d)
-                    hs2.splice(hs2.indexOf(d), 1)
-                    break
+        } else if (scores[i].HeSoDiem === 2.0) {
+            if (hs2[j] !== '') {
+                if (scores[i].SoDiem !== parseFloat(hs2[j])) {
+                    scores[i].SoDiem = parseFloat(hs2[j])
+                    hs2.splice(j, 1)
+                    await studentModel.updateStudentScore(scores[i], scores[i].MaDiem)
+                } else {
+                    hs2.splice(j, 1)
                 }
+            } else {
+                hs2.splice(j, 1)
             }
         } else {
-            if (hs3 !== "Chưa có") {
-                score.SoDiem = parseFloat(hs3)
+            old_hs3 = scores[i].SoDiem
+            if (hs3 !== '') {
+                if (scores[i].SoDiem !== parseFloat(hs3)) {
+                    scores[i].SoDiem = parseFloat(hs3)
+                    hs3 = ''
+                    await studentModel.updateStudentScore(scores[i], scores[i].MaDiem)
+                } else {
+                    hs3 = ''
+                }
+            } else {
+                hs3 = ''
             }
         }
+    }
+    for (const d of hs1) {
+        if (d !== '') {
+            const scoreEntity = {
+                MaHocSinh: studentID,
+                MaMon: subjectID,
+                HocKy: hocky,
+                NamHoc: namhoc,
+                HeSoDiem: 1.0,
+                SoDiem: parseFloat(d)
+            }
+            await studentModel.addStudentScore(scoreEntity);
+        }
+    }
+    for (const d of hs2) {
+        if (d !== '') {
+            const scoreEntity = {
+                MaHocSinh: studentID,
+                MaMon: subjectID,
+                HocKy: hocky,
+                NamHoc: namhoc,
+                HeSoDiem: 2.0,
+                SoDiem: parseFloat(d)
+            }
+            await studentModel.addStudentScore(scoreEntity);
+        }
+    }
+    if (hs3 !== '' && parseFloat(hs3) !== old_hs3) {
+        const scoreEntity = {
+            MaHocSinh: studentID,
+            MaMon: subjectID,
+            HocKy: hocky,
+            NamHoc: namhoc,
+            HeSoDiem: 3.0,
+            SoDiem: parseFloat(hs3)
+        }
+        await studentModel.addStudentScore(scoreEntity);
     }
     console.log(scores)
     res.redirect('/teacher/teaching-class/scores/' + classID + '/' + subjectID + '?HocKy=' + hocky + '&NamHoc=' + namhoc)

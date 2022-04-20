@@ -42,7 +42,7 @@ export default {
             .where('MaMon', subjectID)
             .where('HocKy', HocKy)
             .where('NamHoc', NamHoc)
-            .orderBy('HeSoDiem')
+            .orderBy('HeSoDiem', "asc")
     },
     async getListSubjectScoresByHKNH(studentID, HK, NH) {
         let list = await db('diem').where('MaHocSinh', studentID)
@@ -78,4 +78,7 @@ export default {
     addStudentScore(entity) {
         return db('diem').insert(entity)
     },
+    updateStudentScore(entity, id) {
+        return db('diem').where('MaDiem', '=', id).update(entity)
+    }
 }
