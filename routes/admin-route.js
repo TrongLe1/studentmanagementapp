@@ -95,7 +95,7 @@ router.post('/teacher/add', async function (req, res) {
             Matkhau: bcrypt.hashSync(password, salt),
             LoaiTaiKhoan: 1
         }
-        const accId = await accountModel.createTeacherAccount(account)
+        const accId = await accountModel.createAccount(account)
         await teacherModel.createAccount(accId[0], result[0].MaGV)
     //}
     res.render('admin/teacher-add', {
@@ -199,7 +199,7 @@ router.post('/teacher/createaccount', async function (req, res) {
             Matkhau: bcrypt.hashSync(password, salt),
             LoaiTaiKhoan: 1
         }
-        const id = await accountModel.createTeacherAccount(account)
+        const id = await accountModel.createAccount(account)
         await teacherModel.createAccount(id[0], result[0].MaGV)
     }
     res.redirect(req.headers.referer || '/admin/teacher')
@@ -738,7 +738,7 @@ router.post('/student/add', async function (req, res) {
         Matkhau: bcrypt.hashSync(password, salt),
         LoaiTaiKhoan: 2
     }
-    const accId = await accountModel.createTeacherAccount(account)
+    const accId = await accountModel.createAccount(account)
     await studentModel.createAccount(accId[0], result[0].MaHocSinh)
     res.render('admin/student-add', {
         layout: "admin.hbs",
