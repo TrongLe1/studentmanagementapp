@@ -1,0 +1,172 @@
+{{#section 'js'}}
+    <script>
+        $("body").delegate("#date", "focusin", function () {
+            $(this).datepicker();
+        });
+        $(document).ready(function() {
+            $('#gender').select({
+                dropdownParent: $('#myModal .modal-content')});
+        });
+        $('#myModal').on('shown.bs-modal',function(){
+            $("#date").datepicker({
+                format: 'dd/mm/yyyy',
+                container: '#myModal modal-body',
+                todayHighlight: true,
+                autoclose: true,
+            })
+        })
+
+        $(".btn[data-target='#myModal']").click(function() {
+            var columnHeadings = $("card h4").map(function() {
+                return $(this).text();
+            }).get();
+            var columnValues = $(".col-sm-9").map(function() {
+                return $(this).text();
+            }).get();
+            columnHeadings.splice(1, 1);
+            columnValues.splice(1, 1);
+            var modalTitle = $('<h3 class="modal-title" id="myModalLabel">Chỉnh sửa thông tin</h3>');
+            var modalBody = $('<div id="modalContent"></div>');
+            var modalForm = $('<form name="modalForm" action="info/edit" method="post" class="needs-validation"></form>');
+            $.each(columnHeadings, function(i, columnHeader) {
+                var formGroup = $('<div class="form-group"></div>');
+                if (columnHeader === "Ngày sinh") {
+                    formGroup.append('<label for="date">'+columnHeader+'</label>');
+                    formGroup.append('<input class="form-control" id="date" name="date" value="{{format_date teacher.NgaySinh}}" type="text" onkeydown="return false;" />');
+                } else if (columnHeader === "Giới tính") {
+                    var select = $('<select id="gender" name="gender" class="form-select"></select>')
+                    formGroup.append('<label for="gender">'+columnHeader+'</label>');
+                    {{#if teacher.GioiTinh}}
+                        select.append('<option value="1" selected>Nữ</option>');
+                        select.append('<option value="0">Nam</option>');
+                    {{else}}
+                        select.append('<option value="0" selected>Nam</option>')
+                        select.append('<option value="1">Nữ</option>');
+                    {{/if}}
+                    formGroup.append(select);
+                } else if (columnHeader === "Số điện thoại")  {
+                    formGroup.append('<label for="sdt">'+columnHeader+'</label>');
+                    formGroup.append('<input class="form-control"  type="text" maxlength="10" name="sdt" id="sdt" value="'+columnValues[i].trim()+'" />');
+                }
+                else {
+                    formGroup.append('<label for="info'+i+'">'+columnHeader+'</label>');
+                    formGroup.append('<input class="form-control" name="info'+i+'" id="info'+i+'" value="'+columnValues[i].trim()+'" />');
+                }
+                modalForm.append(formGroup);
+            });
+            modalForm.append('<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>');
+            modalForm.append('<button type="submit" class="btn btn-primary">Lưu thay đổi</button>')
+            modalBody.append(modalForm);
+            $('.modal-body').html(modalBody);
+            $('.modal-header').html(modalTitle);
+        });
+        $('.submit .btn-primary').click(function() {
+            $('form[name="modalForm"]').submit();
+        });
+
+        $(function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+{{/section}}
+
+<div class="u-content">
+    <div class="u-body">
+        <header class="section-header mb-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2 class="h3 card-header-title">Thông tin giáo viên</h2>
+                </div>
+            </div>
+        </header>
+        <div class="row">
+            <div class="container col d-flex justify-content-center">
+                <div class="col-md-12">
+                    <card>
+                        <div class="card-body bg-white">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-sm-3">
+                                    <h4 class="mb-0 text-primary">Họ và tên</h4>
+                                </div>
+                                <div class="col-sm-9">
+                                    {{this.teacher.HoTen}}
+                                </div>
+                            </div>
+                            <hr class="mt-3 mb-3">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-sm-3">
+                                    <h4 class="mb-0 text-primary">Chủ nhiệm lớp</h4>
+                                </div>
+                                <div class="col-sm-9">
+                                    {{this.className}}
+                                </div>
+                            </div>
+                            <hr class="mt-3 mb-3">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-sm-3 text-primary">
+                                    <h4 class="mb-0">Giới tính</h4>
+                                </div>
+                                <div class="col-sm-9">
+                                    {{checkGender teacher.GioiTinh}}
+                                </div>
+                            </div>
+                            <hr class="mt-3 mb-3">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-sm-3">
+                                    <h4 class="mb-0 text-primary">Ngày sinh</h4>
+                                </div>
+                                <div class="col-sm-9">
+                                    {{formatDate teacher.NgaySinh}}
+                                </div>
+                            </div>
+                            <hr class="mt-3 mb-3">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-sm-3">
+                                    <h4 class="mb-0 text-primary">Địa chỉ</h4>
+                                </div>
+                                <div class="col-sm-9">
+                                    {{teacher.DiaChi}}
+                                </div>
+                            </div>
+                            <hr class="mt-3 mb-3">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-sm-3">
+                                    <h4 class="mb-0 text-primary">Số điện thoại</h4>
+                                </div>
+                                <div class="col-sm-9">
+                                    {{teacher.SDT}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex justify-content-center p-1" >
+                            <button type="submit" class="btn btn-primary my-3"
+                                    data-toggle="modal" data-target="#myModal">Sửa thông tin</button>
+                        </div>
+                    </card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"></div>
+            <div class="modal-body"></div>
+        </div>
+    </div>
+</div>

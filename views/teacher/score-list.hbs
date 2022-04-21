@@ -16,7 +16,7 @@
             columnValues.splice(0, 3);
             var modalTitle = $('<h3 class="modal-title" id="myModalLabel">'+fullTitle+'</h3>');
             var modalBody = $('<div id="modalContent"></div>');
-            var modalForm = $('<form name="modalForm" novalidate action="/teacher/teaching-class/scores/{{classID}}/{{subjectID}}/edit?HocKy={{hocky}}&NamHoc={{namhoc}}" method="post" class="needs-validation"></form>');
+            var modalForm = $('<form name="modalForm" action="/teacher/teaching-class/scores/{{classID}}/{{subjectID}}/edit?HocKy={{hocky}}&NamHoc={{namhoc}}" method="post" class="needs-validation"></form>');
             $.each(columnHeadings, function(i, columnHeader) {
                 var formGroup = $('<div class="form-group"></div>');
                 formGroup.append('<label for="diem'+i+'">'+columnHeader+'</label>');

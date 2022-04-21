@@ -328,10 +328,28 @@ router.post('/homeroom-class/student/delete', async function (req, res) {
     res.redirect(req.headers.referer || '/teacher/homeroom-class/students')
 })
 
-router.get('/info', function (req, res) {
+router.get('/info', async function (req, res) {
+    const teacherInfo = (await teacherModel.findTeacherById(1))[0]
+    const homeroomClass = (await classModel.findHomeroomClass(1))[0]
+    const className = (await classModel.findClassById(homeroomClass.MaLop))[0].TenLop
+    console.log(teacherInfo)
     res.render('teacher/info', {
-        layout:"teacher.hbs"
+        layout: "teacher.hbs",
+        teacher: teacherInfo,
+        className
     })
+})
+
+router.post('/info/edit', async function (req, res) {
+    console.log()
+    const updateTeacher = {
+        HoTen: req.body.info0,
+        NgaySinh: req.body.date.format(),
+        SDT: req.body.sdt,
+        DiaChi: req.body.address,
+        GioiTinh: parseInt(req.body.gender)
+    }
+    res.redirect(req.headers.referer || '/teacher/info')
 })
 
 export default router
