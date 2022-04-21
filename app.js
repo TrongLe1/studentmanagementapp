@@ -11,7 +11,6 @@ import teacher from './routes/teacher-route.js'
 import studentRoute from "./routes/student-route.js"
 import accountModel from "./models/account-model.js"
 import bcrypt from 'bcryptjs'
-import cheerio from "cheerio";
 import studentModel from "./models/student-model.js";
 import classModel from "./models/class-model.js";
 
@@ -160,14 +159,28 @@ app.use(session({
     cookie: {}
 }))
 
-app.use('/admin', admin)
+function authAdmin(req, res, next) {
+    if (req.session.login === false || typeof (req.session.login) === 'undefined') {
+        req.session.retUrl = req.originalUrl
+        return res.redirect('/login')
+    }
+    else if (req.session.accountAuth.LoaiTaiKhoan === 4)
+        next()
+    else if (req.session.accountAuth.LoaiTaiKhoan === 2)
+        return res.redirect('/')
+    else
+        return res.redirect('/teacher')
+}
+
+
+app.use('/admin', authAdmin, admin)
 app.use('/', studentRoute)
 app.use('/teacher', teacher)
 
 app.get('/logout', function (req, res) {
 
     req.session.login = false;
-    req.session.account = null;
+    req.session.accountAuth = null;
 
     res.redirect('login')
 })
