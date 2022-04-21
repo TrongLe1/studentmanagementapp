@@ -1,0 +1,142 @@
+<div class="u-content">
+    <div class="u-body">
+        <div class="row">
+            <div class="col-md-12">
+                <header class="section-header mb-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <h2 class="h3 card-header-title">Chi tiết thời khóa biểu</h2>
+                        </div>
+                    </div>
+                </header>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered text-center" style="background-color: #ffffff;">
+                        <thead style="background-color: #ffffa6;">
+                        <tr class="bg-light-gray">
+                            <th></th>
+                            <th class="font-weight-bold">Thứ 2</th>
+                            <th class="font-weight-bold">Thứ 3</th>
+                            <th class="font-weight-bold">Thứ 4</th>
+                            <th class="font-weight-bold">Thứ 5</th>
+                            <th class="font-weight-bold">Thứ 6</th>
+                            <th class="font-weight-bold">Thứ 7</th>
+                            <th class="font-weight-bold">Chủ nhật</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="align-middle" style="background-color: #acf5eb; font-weight: bold;">7:15 - 8:00</td>
+                                {{{timeTableCheck listOne}}}
+                            </tr>
+                            <tr>
+                                <td class="align-middle" style="background-color: #acf5eb; font-weight: bold;">8:05 - 8:50</td>
+                                {{{timeTableCheck listTwo}}}
+
+                            </tr>
+                            <tr>
+                                <td class="align-middle" style="background-color: #acf5eb; font-weight: bold;">9:10 - 9:55</td>
+                                {{{timeTableCheck listThree}}}
+
+                            </tr>
+                            <tr>
+                                <td class="align-middle" style="background-color: #acf5eb; font-weight: bold;">10:00 - 10:45</td>
+                                {{{timeTableCheck listFour}}}
+
+                            </tr>
+                            <tr>
+                                <td class="align-middle" style="background-color: #acf5eb; font-weight: bold;">10:50 - 11:35</td>
+                                {{{timeTableCheck listFive}}}
+
+                            </tr>
+                            <tr>
+                                <td class="align-middle" style="background-color: #acf5eb; font-weight: bold;">13:00 - 13:45</td>
+                                {{{timeTableCheck listSix}}}
+
+                            </tr>
+                            <tr>
+                                <td class="align-middle" style="background-color: #acf5eb; font-weight: bold;">13:50 - 14:35</td>
+                                {{{timeTableCheck listSeven}}}
+
+                            </tr>
+                            <tr>
+                                <td class="align-middle" style="background-color: #acf5eb; font-weight: bold;">14:40 - 15:25</td>
+                                {{{timeTableCheck listEight}}}
+
+                            </tr>
+                            <tr>
+                                <td class="align-middle" style="background-color: #acf5eb; font-weight: bold;">15:40 - 16:25</td>
+                                {{{timeTableCheck listNine}}}
+
+                            </tr>
+                            <tr>
+                                <td class="align-middle" style="background-color: #acf5eb; font-weight: bold;">16:30 - 17:15</td>
+                                {{{timeTableCheck listTen}}}
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form method="post">
+                            <div class="form-group">
+                                <label for="subject">Môn học</label>
+                                <select id="subject" name="subject">
+                                    <option data-display="Chọn môn học" value="">Môn học</option>
+                                    {{#each subjects}}
+                                        <option value="{{MaMon}}">{{MaMon}}. {{TenMonHoc}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            <div class="form-group">&nbsp;</div>
+                            <div class="form-group">
+                                <label for="time">Thời gian</label>
+                                <select id="time" name="time" required>
+                                    <option data-display="Chọn thời gian" value="">Thời gian</option>
+                                    <option value="7:15">7:15</option>
+                                    <option value="8:05">8:05</option>
+                                    <option value="9:10">9:10</option>
+                                    <option value="10:00">10:00</option>
+                                    <option value="10:50">10:50</option>
+                                    <option value="13:00">13:00</option>
+                                    <option value="13:50">13:50</option>
+                                    <option value="14:40">14:40</option>
+                                    <option value="15:40">15:40</option>
+                                    <option value="16:30">16:30</option>
+                                </select>
+                            </div>
+                            <div class="form-group">&nbsp;</div>
+                            <div class="form-group">
+                                <label for="day">Ngày học</label>
+                                <select id="day" name="day" required>
+                                    <option data-display="Chọn ngày học" value="">Ngày học</option>
+                                    <option value="2">Thứ 2</option>
+                                    <option value="3">Thứ 3</option>
+                                    <option value="4">Thứ 4</option>
+                                    <option value="5">Thứ 5</option>
+                                    <option value="6">Thứ 6</option>
+                                    <option value="7">Thứ 7</option>
+                                    <option value="8">Chủ nhật</option>
+                                </select>
+                            </div>
+                            <div class="form-group">&nbsp;</div>
+                            <input name="id" value="{{id}}" hidden>
+                            <div class="form-group">
+                                <button class="btn btn-outline-success" type="submit" formaction="/admin/class/timetable/detail/add">Thêm</button>
+                                <button class="btn btn-outline-danger" type="submit" formaction="/admin/class/timetable/detail/delete">Xóa</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

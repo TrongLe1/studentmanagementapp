@@ -81,5 +81,14 @@ export default {
     },
     deleteScheduleInClass(id, cId) {
         return db('ctltlh').where('MaLichThi', '=', id).where('MaLop', '=', cId).del()
+    },
+    removeScheduleFromClass(id) {
+        return db('ctltlh').where('MaLop', '=', id).del()
+    },
+    deleteDetailScheduleFromClass(id) {
+        return db('ctltlh').where('MaLichThi', '=', id).del()
+    },
+    deleteSubjectFromDetailSchedule(id) {
+        return db('ctltmh').where('MaMon', '=', id).del()
     }
 }

@@ -36,7 +36,7 @@ app.engine('hbs', engine({
             ].join('/')
         },
         format_gender(val) {
-            if (val === 0) return 'Nam'
+            if (val === 1) return 'Nam'
             else return 'Nữ'
         },
         formatDate(val) {
@@ -85,6 +85,8 @@ app.engine('hbs', engine({
         format_type(val) {
             if (val === 1) return "Giáo viên"
             else if (val === 2) return "Học sinh"
+            else if (val === 3) return "Giáo viên chủ nhiệm"
+            else if (val === 4) return "Giáo vụ"
         },
         formatScores: function (val) {
             // console.log(val)

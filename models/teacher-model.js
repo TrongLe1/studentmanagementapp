@@ -26,14 +26,20 @@ export default {
     getNotHomeroomTeacher() {
         return db.select('*').from('giaovien').whereNull('ChuNhiemLop')
     },
-    assignHomeroomTeacher(teacherId, classId) {
-        return db('giaovien').where('MaGV', '=', teacherId).update({ChuNhiemLop: classId})
+    async assignHomeroomTeacher(teacherId, classId) {
+        await db('giaovien').where('MaGV', '=', teacherId).update({ChuNhiemLop: classId})
+        const result = await db.select('*').from('giaovien').where('MaGV', '=', teacherId)
+        return db('taikhoan').where('MaTaiKhoan', '=', result[0].TaiKhoan).update({LoaiTaiKhoan: 3})
     },
     findHomeroomTeacher(classId) {
         return db.select('*').from('giaovien').where('ChuNhiemLop', '=', classId)
     },
-    removeHomeroomTeacherFromClass(classId) {
-        return db('giaovien').where('ChuNhiemLop', classId).update({ChuNhiemLop: null})
+    async removeHomeroomTeacherFromClass(classId) {
+        const result = await db.select('*').from('giaovien').where('ChuNhiemLop', classId)
+        await db('giaovien').where('ChuNhiemLop', classId).update({ChuNhiemLop: null})
+        if (result.length !== 0)
+            return db('taikhoan').where('MaTaiKhoan', '=', result[0].TaiKhoan).update({LoaiTaiKhoan: 1})
+        return
     },
     getAllTeacher() {
         return db.select('*').from('giaovien')

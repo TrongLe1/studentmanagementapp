@@ -197,7 +197,7 @@ create table CTTKB
     MaTKB      bigint,
     MaMon      bigint,
     ThoiGianBD time,
-    NgayHoc    varchar,
+    NgayHoc    int,
     primary key (MaTKB, MaMon, ThoiGianBD,NgayHoc),
     CONSTRAINT FK_CTTKB_ThoiKhoaBieu FOREIGN KEY (MaTKB)
         REFERENCES ThoiKhoaBieu (MaTKB),

@@ -6,6 +6,7 @@ import classModel from '../models/class-model.js'
 import subjectModel from '../models/subject-model.js'
 import studentModel from '../models/student-model.js'
 import examModel from '../models/exam-model.js'
+import timetableModel from '../models/timetable-model.js'
 
 const router = express.Router();
 
@@ -276,6 +277,7 @@ router.get('/class/edit', async function (req, res) {
     }
     if (teacher.length !== 0)
         teacher[0].check = true
+    req.session.retUrl = req.headers.referer
     res.render('admin/class-edit', {
         layout: "admin.hbs",
         class: true,
@@ -296,6 +298,8 @@ router.post('/class/edit', async function (req, res) {
         await teacherModel.removeHomeroomTeacherFromClass(req.body.id)
         await teacherModel.assignHomeroomTeacher(req.body.teacher, req.body.id)
     }
+    res.redirect(req.session.retUrl || '/admin/class')
+    /*
     const result = await teacherModel.getNotHomeroomTeacher()
     const teacher = await teacherModel.findHomeroomTeacher(req.body.id)
     const temp = clss.NamHoc.split(' - ')
@@ -312,13 +316,17 @@ router.post('/class/edit', async function (req, res) {
         teachers: teacher[0],
         clss
     })
+
+     */
 })
 
 router.post('/class/delete', async function (req, res) {
-    //
+    await classModel.removeTuitionFromClass(req.body.id)
+    await timetableModel.removeTimetableFromClass(req.body.id)
     await studentModel.removeAllStudentFromClass(req.body.id)
     await classModel.removeAllTeacherFromClass(req.body.id)
     await teacherModel.removeHomeroomTeacherFromClass(req.body.id)
+    await examModel.removeScheduleFromClass(req.body.id)
     await classModel.deleteClass(req.body.id)
     res.redirect(req.headers.referer || '/admin/class')
 })
@@ -425,6 +433,7 @@ router.post('/class/teacher/add', async function (req, res) {
 router.get('/class/teacher/edit', async function (req, res) {
     const teachers = await classModel.getSpecificTeacherInClass(req.query.id, req.query.uid)
     const subjects = await subjectModel.getAllSubject()
+    req.session.retUrl = req.headers.referer
     res.render('admin/class-teacher-edit', {
         layout: "admin.hbs",
         class: true,
@@ -435,6 +444,8 @@ router.get('/class/teacher/edit', async function (req, res) {
 
 router.post('/class/teacher/edit', async function (req, res) {
     await classModel.editDetailTeaching(req.body.id, req.body.uid, req.body.subject)
+    res.redirect(req.session.retUrl || `/class/teacher?id=${req.body.id}`)
+    /*
     const teachers = await classModel.getSpecificTeacherInClass(req.body.id, req.body.uid)
     const subjects = await subjectModel.getAllSubject()
     res.render('admin/class-teacher-edit', {
@@ -444,6 +455,8 @@ router.post('/class/teacher/edit', async function (req, res) {
         subjects,
         teachers: teachers[0]
     })
+
+     */
 })
 
 router.post('/class/teacher/delete', async function (req, res) {
@@ -531,6 +544,7 @@ router.post('/class/tuition/delete', async function (req, res) {
 
 router.get('/class/tuition/edit', async function (req, res) {
     const result = await classModel.findTuitionByID(req.query.id)
+    req.session.retUrl = req.headers.referer
     res.render('admin/class-tuition-edit', {
         layout: "admin.hbs",
         class: true,
@@ -545,6 +559,8 @@ router.post('/class/tuition/edit', async function (req, res) {
         TongTien: req.body.price
     }
     await classModel.updateTuition(req.body.id, tuition)
+    res.redirect(req.session.retUrl || `/admin/class/tuition?id=${req.body.id}`)
+    /*
     const result = await classModel.findTuitionByID(req.body.id)
     res.render('admin/class-tuition-edit', {
         layout: "admin.hbs",
@@ -552,6 +568,8 @@ router.post('/class/tuition/edit', async function (req, res) {
         result: result[0],
         added: true,
     })
+
+     */
 })
 //Mon Hoc
 router.get('/subject', async function (req, res) {
@@ -599,6 +617,7 @@ router.post('/subject/add', async function (req, res) {
 
 router.get('/subject/edit', async function (req, res) {
     const result = await subjectModel.findSubject(req.query.id)
+    req.session.retUrl = req.headers.referer
     res.render('admin/subject-edit', {
         layout: "admin.hbs",
         subject: true,
@@ -612,6 +631,8 @@ router.post('/subject/edit', async function (req, res) {
         TenMonHoc: req.body.name
     }
     await subjectModel.editSubject(req.body.id, req.body.name)
+    res.redirect(req.session.retUrl || '/admin/subject')
+    /*
     res.render('admin/subject-edit', {
         layout: "admin.hbs",
         subject: true,
@@ -619,7 +640,10 @@ router.post('/subject/edit', async function (req, res) {
         result: subject
     })})
 
+     */
+})
 router.post('/subject/delete', async function (req, res) {
+    await examModel.deleteSubjectFromDetailSchedule(req.body.id)
     await subjectModel.deleteSubject(req.body.id)
     res.redirect(req.headers.referer || '/admin/subject')
 })
@@ -752,6 +776,7 @@ router.get('/student/editclass', async function (req, res) {
     const clss = await classModel.getAllClass()
     const student = await studentModel.findStudentById(req.query.id)
     const result = await classModel.findClassById(student[0].ThuocLop)
+    req.session.retUrl = req.headers.referer
     res.render('admin/student-editclass', {
         layout: "admin.hbs",
         student: true,
@@ -763,6 +788,8 @@ router.get('/student/editclass', async function (req, res) {
 
 router.post('/student/editclass', async function (req, res) {
     await studentModel.updateStudent({ThuocLop: req.body.class}, req.body.id)
+    res.redirect(req.session.retUrl || '/admin/student')
+    /*
     const clss = await classModel.getAllClass()
     const student = await studentModel.findStudentById(req.body.id)
     const result = await classModel.findClassById(student[0].ThuocLop)
@@ -774,6 +801,8 @@ router.post('/student/editclass', async function (req, res) {
         result: result[0],
         students: student[0]
     })
+
+     */
 })
 
 //Lich thi
@@ -825,6 +854,7 @@ router.get('/schedule/edit', async function (req, res) {
         item.BatDau = temp[0]
         item.KetThuc = temp[1]
     }
+    req.session.retUrl = req.headers.referer
     res.render('admin/schedule-edit', {
         layout: "admin.hbs",
         schedule: true,
@@ -839,6 +869,8 @@ router.post('/schedule/edit', async function (req, res) {
     if (req.body.semester)
         schedule.HocKy = req.body.semester
     await examModel.updateScheduleByID(req.body.id, schedule)
+    res.redirect(req.session.retUrl || '/admin/schedule')
+    /*
     const result = await examModel.findScheduleByID(req.body.id)
     for (const item of result) {
         const temp = item.NamHoc.split(' - ')
@@ -851,9 +883,11 @@ router.post('/schedule/edit', async function (req, res) {
         added: true,
         result: result[0]
     })
+    */
 })
 
 router.post('/schedule/delete', async function (req, res) {
+    await examModel.deleteDetailScheduleFromClass(req.body.id)
     await examModel.deleteSchedule(req.body.id)
     res.redirect(req.headers.referer || '/admin/schedule')
 })
@@ -919,6 +953,7 @@ router.get('/schedule/detail/edit', async function (req, res) {
     const entity = await examModel.getAllSubjectIDInSchedule(req.query.id)
     const subjects = await subjectModel.getSubjectWithout(entity)
     const result = await examModel.findDetailScheduleByID(req.query.id, req.query.sId)
+    req.session.retUrl = req.headers.referer
     res.render('admin/schedule-detail-edit', {
         layout: "admin.hbs",
         schedule: true,
@@ -939,6 +974,8 @@ router.post('/schedule/detail/edit', async function (req, res) {
         PhongThi: req.body.room
     }
     await examModel.updateDetailScheduleByID(req.body.id, req.body.sId, schedule)
+    res.redirect(req.session.retUrl || `/admin/schedule/detail?id=${req.body.id}`)
+    /*
     const entity = await examModel.getAllSubjectIDInSchedule(req.body.id)
     const subjects = await subjectModel.getSubjectWithout(entity)
     const result = await examModel.findDetailScheduleByID(req.body.id, req.body.subject)
@@ -950,6 +987,7 @@ router.post('/schedule/detail/edit', async function (req, res) {
         result: result[0],
         added: true
     })
+    */
 })
 
 router.post('/schedule/detail/delete', async function (req, res) {
@@ -1010,7 +1048,113 @@ router.post('/class/schedule/add', async function (req, res) {
 
 router.post('/class/schedule/delete', async function (req, res) {
     await examModel.deleteScheduleInClass(req.body.id, req.body.cId)
-    res.redirect(req.headers.referer || '/admin/schedule')
+    res.redirect(req.headers.referer || `/admin/class/schedule?id=${req.body.cId}`)
 })
+
+//Lop Hoc Thoi Khoa Bieu
+router.get('/class/timetable', async function (req, res) {
+    const clss = await classModel.findClassById(req.query.id)
+    const result = await timetableModel.findTimetableInClass(req.query.id)
+    res.render('admin/class-timetable-list', {
+        layout: "admin.hbs",
+        class: true,
+        clss: clss[0],
+        result
+    })
+})
+
+router.get('/class/timetable/add', async function (req, res) {
+    const clss = await classModel.findClassById(req.query.id)
+    const semester = []
+    for (let i = 1; i <= 2; i++) {
+        const temp = await timetableModel.findSemesterTimetableInClass(req.query.id, i)
+        if (temp.length === 0)
+            semester.push({HocKy: i})
+    }
+    res.render('admin/class-timetable-add', {
+        layout: "admin.hbs",
+        class: true,
+        clss: clss[0],
+        semester
+    })
+})
+
+router.post('/class/timetable/add', async function (req, res) {
+    const timetable = {
+        HocKy: req.body.semester,
+        NamHoc: req.body.year,
+        MaLop: req.body.id
+    }
+    await timetableModel.addTimetable(timetable)
+    const clss = await classModel.findClassById(req.body.id)
+    res.render('admin/class-timetable-add', {
+        layout: "admin.hbs",
+        class: true,
+        clss: clss[0],
+        added: true,
+    })
+})
+
+router.post('/class/timetable/delete', async function (req, res) {
+    await timetableModel.deleteAllDetailTimetable(req.body.id)
+    await timetableModel.deleteTimetable(req.body.id)
+    res.redirect(req.headers.referer || `/admin/class/timetable?id=${req.body.cId}`)
+})
+
+router.get('/class/timetable/detail', async function (req, res) {
+    const subjects = await subjectModel.getAllSubject()
+    const listOne = await timetableModel.getDetailTimetableByTime('7:15')
+    const listTwo = await timetableModel.getDetailTimetableByTime('8:05')
+    const listThree = await timetableModel.getDetailTimetableByTime('9:10')
+    const listFour = await timetableModel.getDetailTimetableByTime('10:00')
+    const listFive = await timetableModel.getDetailTimetableByTime('10:50')
+    const listSix = await timetableModel.getDetailTimetableByTime('13:00')
+    const listSeven = await timetableModel.getDetailTimetableByTime('13:50')
+    const listEight = await timetableModel.getDetailTimetableByTime('14:40')
+    const listNine = await timetableModel.getDetailTimetableByTime('15:40')
+    const listTen = await timetableModel.getDetailTimetableByTime('16:30')
+    res.render('admin/class-timetable-detail', {
+        layout: "admin.hbs",
+        class: true,
+        subjects,
+        id: req.query.id,
+        listOne,
+        listTwo,
+        listThree,
+        listFour,
+        listFive,
+        listSix,
+        listSeven,
+        listEight,
+        listNine,
+        listTen
+    })
+})
+
+router.post('/class/timetable/detail/add', async function (req, res) {
+    if (req.body.subject) {
+        const detail = {
+            MaMon: req.body.subject
+        }
+        const check = await timetableModel.findDetailTimetableExist(req.body.id, req.body.time, req.body.day)
+        if (check.length !== 0)
+            await timetableModel.updateDetailTimetable(req.body.id, req.body.time, req.body.day, req.body.subject)
+        else {
+            detail.MaTKB = req.body.id
+            detail.ThoiGianBD = req.body.time
+            detail.NgayHoc = req.body.day
+            await timetableModel.addDetailTimetable(detail)
+        }
+    }
+    res.redirect(req.headers.referer || `/class/timetable/detail?id=${req.body.id}`)
+})
+
+router.post('/class/timetable/detail/delete', async function (req, res) {
+    const check = await timetableModel.findDetailTimetableExist(req.body.id, req.body.time, req.body.day)
+    if (check.length !== 0)
+        await timetableModel.deleteDetailTimeTable(req.body.id, req.body.time, req.body.day)
+    res.redirect(req.headers.referer || `/class/timetable/detail?id=${req.body.id}`)
+})
+
 
 export default router

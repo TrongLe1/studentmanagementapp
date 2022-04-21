@@ -43,6 +43,41 @@ export default {
         }
         // console.log(timetableList)
         return timetableList
+    },
+    findTimetableInClass(id) {
+        return db.select('*').from('thoikhoabieu').where('MaLop', '=', id)
+    },
+    addTimetable(entity) {
+        return db('thoikhoabieu').insert(entity)
+    },
+    findSemesterTimetableInClass(id, semester) {
+        return db.select('*').from('thoikhoabieu').where('MaLop', '=', id).where('HocKy', '=', semester)
+    },
+    deleteTimetable(id) {
+        return db('thoikhoabieu').where('MaTKB', '=', id).del()
+    },
+    addDetailTimetable(entity) {
+        return db('cttkb').insert(entity)
+    },
+    getDetailTimetableByTime(time) {
+        return db("cttkb").select('*').join('monhoc', 'monhoc.MaMon', 'cttkb.MaMon').where('ThoiGianBD', '=', time).orderBy('NgayHoc', "asc")
+    },
+    findDetailTimetableExist(id, time, day) {
+        return db("cttkb").select('*').where('ThoiGianBD', '=', time).where('MaTKB', '=', id).where('NgayHoc', '=', day)
+    },
+    updateDetailTimetable(id, time, day, subject) {
+        return db('cttkb').where('MaTKB', '=', id).where('ThoiGianBD', '=', time).where('NgayHoc', '=', day).update({MaMon: subject})
+    },
+    deleteDetailTimeTable(id, time, day) {
+        return db('cttkb').where('MaTKB', '=', id).where('ThoiGianBD', '=', time).where('NgayHoc', '=', day).del()
+    },
+    deleteAllDetailTimetable(id) {
+        return db('cttkb').where('MaTKB', '=', id).del()
+    },
+    async removeTimetableFromClass(id) {
+        const result = await db.select('MaTKB').from('thoikhoabieu').where('MaLop', '=', id)
+        for (const item of result)
+            await db('cttkb').where('MaTKB', '=', item.MaTKB).del()
+        return db('thoikhoabieu').where('MaLop', '=', id).del()
     }
-
 }

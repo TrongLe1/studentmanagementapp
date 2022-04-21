@@ -86,4 +86,7 @@ export default {
         return db('giaovien').join('lophoc', 'lophoc.MaLop', 'giaovien.ChuNhiemLop')
             .where('MaGV', '=', teacherID)
     },
+    removeTuitionFromClass(id) {
+        return db('hocphi').where('MaLop', '=', id).del()
+    }
 }
