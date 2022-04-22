@@ -1,5 +1,6 @@
 import express from 'express'
 import bcrypt from 'bcryptjs'
+import moment from 'moment'
 import teacherModel from '../models/teacher-model.js'
 import classModel from '../models/class-model.js'
 import studentModel from '../models/student-model.js'
@@ -247,9 +248,13 @@ router.get('/homeroom-class/students', async function (req, res) {
     const limit = 8
     const homeroomClass = (await classModel.findHomeroomClass(1))[0]
     const className = (await classModel.findClassById(homeroomClass.MaLop))[0].TenLop
+    const today = moment().format('YYYY-MM-DD')
     const page = req.query.page || 1
     const offset = (page - 1) * limit
     const result = await studentModel.getStudentInClass(homeroomClass.MaLop, limit, offset)
+    for (const student of result) {
+        student.VangHoc = await studentModel.checkAbsent(student.MaHocSinh, today)
+    }
     const total = await studentModel.countStudentInClass(homeroomClass.MaLop)
     let nPage = Math.floor(total / limit)
     if (total % limit > 0) nPage++
@@ -328,6 +333,16 @@ router.post('/homeroom-class/student/delete', async function (req, res) {
     res.redirect(req.headers.referer || '/teacher/homeroom-class/students')
 })
 
+router.post('/homeroom-class/student/absent', async function (req, res) {
+    const studentID = req.body.id
+    const today = moment().format('YYYY-MM-DD')
+    await studentModel.markAbsentStudent({
+        TenHoatDong: "Vắng học",
+        NgayDienRa: today
+    }, studentID)
+    res.redirect(req.headers.referer || '/homeroom-class/students')
+})
+
 router.get('/info', async function (req, res) {
     const teacherInfo = (await teacherModel.findTeacherById(1))[0]
     const homeroomClass = (await classModel.findHomeroomClass(1))[0]
@@ -341,14 +356,16 @@ router.get('/info', async function (req, res) {
 })
 
 router.post('/info/edit', async function (req, res) {
-    console.log()
-    const updateTeacher = {
+    const dateParts = req.body.date.split("/");
+    const dateObject = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
+    const teacher = {
         HoTen: req.body.info0,
-        NgaySinh: req.body.date.format(),
+        NgaySinh: moment(dateObject).format('YYYY-MM-DD'),
         SDT: req.body.sdt,
         DiaChi: req.body.address,
         GioiTinh: parseInt(req.body.gender)
     }
+    await teacherModel.updateTeacher(teacher, 1);
     res.redirect(req.headers.referer || '/teacher/info')
 })
 

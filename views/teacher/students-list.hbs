@@ -1,3 +1,28 @@
+{{#section 'js'}}
+    <script>
+        $(".btn[data-target='#myModal']").click(function() {
+            var columnValues = $(this).parent().siblings().map(function() {
+                return $(this).text();
+            }).get();
+            var studentID = columnValues[0];
+            var studentName = columnValues[1];
+            var fullTitle = 'Đánh vắng học sinh  ' + studentName + '?';
+            var modalTitle = $('<h3 class="modal-title" id="myModalLabel">'+fullTitle+'</h3>');
+            var modalBody = $('<div id="modalContent"></div>');
+            var modalForm = $('<form name="modalForm" action="/teacher/homeroom-class/student/absent" method="post"></form>');
+            modalForm.append('<input name="id" value='+studentID+' hidden>');
+            modalForm.append('<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>');
+            modalForm.append('<button type="submit" class="btn btn-primary">Lưu thay đổi</button>')
+            modalBody.append(modalForm);
+            $('.modal-body').html(modalBody);
+            $('.modal-header').html(modalTitle);
+        });
+        $('.submit .btn-primary').click(function() {
+            $('form[name="modalForm"]').submit();
+        });;
+    </script>
+{{/section}}
+
 <div class="u-content">
     <div class="u-body">
         <div class="row">
@@ -40,9 +65,6 @@
                                 </thead>
                                 <tbody>
                                 {{#each result}}
-                                    <form method="get" id="formGet{{MaHocSinh}}">
-                                        <input name="id" value="{{MaHocSinh}}" hidden>
-                                    </form>
                                     <form method="post" id="formPost{{MaHocSinh}}">
                                         <input name="id" value="{{MaHocSinh}}" hidden>
                                     </form>
@@ -58,7 +80,11 @@
                                         <td>{{TonGiao}}</td>
                                         {{#if ../homeroom_class}}
                                             <td class="text-center">
-                                                <button type="submit" class="btn btn-outline-warning" form="formGet{{MaHocSinh}}" formaction="/teacher/homeroom-class/student/{{MaHocSinh}}/absent">Đánh vắng</button>
+                                                {{#if VangHoc}}
+                                                    <button type="submit" disabled class="btn btn-outline-warning">Đánh vắng</button>
+                                                {{else}}
+                                                    <button type="submit" data-toggle="modal" data-target="#myModal" class="btn btn-outline-warning">Đánh vắng</button>
+                                                {{/if}}
                                                 <button type="submit" class="btn btn-outline-danger" form="formPost{{MaHocSinh}}" formaction="/teacher/homeroom-class/student/delete">Xóa</button>
                                             </td>
                                         {{/if}}
@@ -117,6 +143,15 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"></div>
+            <div class="modal-body"></div>
         </div>
     </div>
 </div>

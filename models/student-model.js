@@ -80,5 +80,54 @@ export default {
     },
     updateStudentScore(entity, id) {
         return db('diem').where('MaDiem', '=', id).update(entity)
+    },
+    async updateMistake(entity, score, studentID) {
+        const res = await db('thanhtich').where('thanhtich.TenHoatDong', entity.TenHoatDong)
+        const existsAchievement = !(res.length === 0)
+        if (!existsAchievement) {
+            const id = await db('thanhtich').insert(entity)
+            return db('vipham').insert({
+                MaThanhTich: id,
+                DiemTru: score
+            })
+            await db('ctthanhtich').insert({
+                MaThanhTich: id,
+                MaHocSinh: studentID,
+                SoLanThamGia: 1
+            })
+        } else {
+            const id = res[0].MaThanhTich
+            await db('ctthanhtich').insert({
+                MaThanhTich: id,
+                MaHocSinh: studentID,
+                SoLanThamGia: 1
+            })
+        }
+    },
+    async updateMerit(entity, score, studentID) {
+        const id = await db('thanhtich').insert(entity)
+        const result = await db('ctthanhtich').join('thanhtich', 'thanhtich.MaThanhTich', 'ctthanhtich.MaThanhTich')
+            .where('thanhtich.TenHoatDong', entity.TenHoatDong)
+            .count('*')
+        const count = result[0]['count(*)']
+        await db('ctthanhtich').insert({
+            MaThanhTich: id,
+            MaHocSinh: studentID,
+            SoLanThamGia: count
+        })
+        return db('khenthuong').insert({
+            MaThanhTich: id,
+            DiemCong: score
+        })
+    },
+    async markAbsentStudent(entity, id) {
+        await this.updateMistake(entity, 5, id)
+    },
+    async checkAbsent(studentID, today) {
+        const result = await db('ctthanhtich').join('thanhtich', 'thanhtich.MaThanhTich', 'ctthanhtich.MaThanhTich')
+            .where('thanhtich.TenHoatDong', 'Vắng học')
+            .where('ctthanhtich.MaHocSinh', studentID)
+            .where('thanhtich.NgayDienRa', today)
+        return !(result.length === 0);
     }
 }
