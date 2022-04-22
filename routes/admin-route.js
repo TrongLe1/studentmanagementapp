@@ -1094,11 +1094,18 @@ router.post('/class/timetable/add', async function (req, res) {
     }
     await timetableModel.addTimetable(timetable)
     const clss = await classModel.findClassById(req.body.id)
+    const semester = []
+    for (let i = 1; i <= 2; i++) {
+        const temp = await timetableModel.findSemesterTimetableInClass(req.body.id, i)
+        if (temp.length === 0)
+            semester.push({HocKy: i})
+    }
     res.render('admin/class-timetable-add', {
         layout: "admin.hbs",
         class: true,
         clss: clss[0],
         added: true,
+        semester
     })
 })
 
