@@ -19,6 +19,9 @@ app.use(express.urlencoded({
     extended: true
 }))
 app.use('/public', express.static('public'))
+sessionMdw(app)
+localMdw(app)
+viewMdw(app)
 
 app.get('/logout', function (req, res) {
     req.session.login = false;
@@ -70,10 +73,8 @@ app.post('/forgot-password', function (req, res) {
     res.redirect('/forgot-password')
 })
 
-sessionMdw(app)
-localMdw(app)
-viewMdw(app)
 routeMdw(app)
+
 
 const port = 3000
 app.listen(port, () => {

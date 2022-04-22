@@ -1,5 +1,6 @@
 import {engine} from 'express-handlebars'
 import express_section from 'express-handlebars-sections'
+import numeral from 'numeral';
 
 export default function (app) {
     app.engine('hbs', engine({
@@ -29,6 +30,9 @@ export default function (app) {
             },
             formatMoney(val) {
                 return val.toLocaleString({style: 'currency', currency: 'VNĐ'}) + " VNĐ";
+            },
+            format_price(val) {
+                return numeral(val).format('0, 0');
             },
             checkTimeSession(val) {
                 let s = val.split(':')[0]

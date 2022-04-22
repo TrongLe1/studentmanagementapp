@@ -1,3 +1,17 @@
+{{#section 'js'}}
+    <script>
+        $('#frmAddTuition').on('submit', function (e) {
+            e.preventDefault()
+            const price = parseInt($('#price').val())
+            if (price > 0) {
+                $('#frmAddTuition').off('submit').submit()
+            }
+            return
+        })
+    </script>
+{{/section}}
+
+
 <div class="u-content">
     <div class="u-body">
         <header class="section-header mb-4">
@@ -11,7 +25,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="category-add-form-wrap">
-                    <form action="/admin/class/tuition/add" method="post" class="category-add-form">
+                    <form action="/admin/class/tuition/add" method="post" class="category-add-form" id="frmAddTuition">
                         <div class="form-group">
                             <label for="name">Tên học phí</label>
                             <input type="text" class="form-control" id="name" name="name" placeholder="Nhập tên học phí" required>

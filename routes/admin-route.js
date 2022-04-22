@@ -473,7 +473,7 @@ router.get('/class/tuition', async function (req, res) {
     let result
     let total
     let check = false
-    let sum
+    let sum = 0
     let check1 = false
     if (req.query.semester) {
         result = await classModel.getTuitionInClassSemester(req.query.id, req.query.semester, limit, offset)
@@ -643,6 +643,7 @@ router.post('/subject/edit', async function (req, res) {
      */
 })
 router.post('/subject/delete', async function (req, res) {
+    await timetableModel.deleteSubjectFromTimetable(req.body.id)
     await examModel.deleteSubjectFromDetailSchedule(req.body.id)
     await subjectModel.deleteSubject(req.body.id)
     res.redirect(req.headers.referer || '/admin/subject')
@@ -843,7 +844,10 @@ router.get('/schedule', async function (req, res) {
     res.render('admin/schedule-list', {
         layout: "admin.hbs",
         schedule: true,
-        result
+        result,
+        nexPage,
+        curPage,
+        prevPage
     })
 })
 
@@ -911,7 +915,10 @@ router.get('/schedule/detail', async function (req, res) {
         layout: "admin.hbs",
         schedule: true,
         MaLichThi: req.query.id,
-        result
+        result,
+        prevPage,
+        curPage,
+        nexPage
     })
 })
 
@@ -938,7 +945,7 @@ router.post('/schedule/detail/add', async function (req, res) {
         PhongThi: req.body.room
     }
     await examModel.addDetailExamSchedule(detail)
-    const entity = await examModel.getAllSubjectIDInSchedule(req.query.id)
+    const entity = await examModel.getAllSubjectIDInSchedule(req.body.id)
     const subjects = await subjectModel.getSubjectWithout(entity)
     res.render('admin/schedule-detail-add', {
         layout: "admin.hbs",

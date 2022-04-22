@@ -79,5 +79,8 @@ export default {
         for (const item of result)
             await db('cttkb').where('MaTKB', '=', item.MaTKB).del()
         return db('thoikhoabieu').where('MaLop', '=', id).del()
+    },
+    deleteSubjectFromTimetable(id) {
+        return db('cttkb').where('MaMon', '=', id).del()
     }
 }
