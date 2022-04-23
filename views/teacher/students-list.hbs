@@ -33,11 +33,18 @@
                             <h2 class="h3 card-header-title">Danh sách học sinh lớp {{className}}</h2>
                         </div>
                         {{#if homeroom_class}}
-                            <div class="col-md-6 text-right">
-                                <a href="/teacher/homeroom-class/student/add" class="box-btn">Thêm học sinh</a>
-                            </div>
+                        <div class="col-md-3 text-right">
+                            <form method="post" id="formPostStudent">
+                                <select id="student" name="student">
+                                    <option data-display="Chọn học sinh" value="">Học sinh</option>
+                                    {{#each students}}
+                                        <option value="{{MaHocSinh}}">{{MaHocSinh}}. {{HoTen}}</option>
+                                    {{/each}}
+                                </select>
+                            </form>
+                            <button type="submit" class="btn btn-primary" formaction="/teacher/homeroom-class/student/add" form="formPostStudent">Thêm học sinh</button>
+                        </div>
                         {{/if}}
-                    </div>
                 </header>
             </div>
         </div>
@@ -50,7 +57,7 @@
                                 <thead>
                                 <tr>
                                     <th scope="col" class="text-center">ID</th>
-                                    <th scope="col" width="200">Họ tên</th>
+                                    <th scope="col">Họ tên</th>
                                     <th scope="col">Giới tính</th>
                                     <th scope="col">Ngày sinh</th>
                                     <th scope="col">Số điện thoại</th>
@@ -59,7 +66,7 @@
                                     <th scope="col">Dân tộc</th>
                                     <th scope="col">Tôn giáo</th>
                                     {{#if homeroom_class}}
-                                        <th scope="col" class="text-center" width="250">Hành động</th>
+                                        <th scope="col" class="text-center">Hành động</th>
                                     {{/if}}
                                 </tr>
                                 </thead>

@@ -10,7 +10,6 @@ import accountModel from '../models/account-model.js'
 const router = express.Router();
 
 router.get('/', function (req, res) {
-
     res.redirect('/teacher/teaching-class')
 })
 
@@ -18,8 +17,9 @@ router.get('/teaching-class', async function (req, res) {
     const limit = 3
     const page = req.query.page || 1
     const offset = (page - 1) * limit
-    const result = await teacherModel.getTeachingClass(1, limit, offset)
-    const total = await teacherModel.countTeachingClass(1)
+    const teacher = req.session.teacher
+    const result = await teacherModel.getTeachingClass(teacher.MaGV, limit, offset)
+    const total = await teacherModel.countTeachingClass(teacher.MaGV)
     let nPage = Math.floor(total / limit)
     if (total % limit > 0) nPage++
     let nexPage = {check: true, value: (+page + 1)}
@@ -31,6 +31,7 @@ router.get('/teaching-class', async function (req, res) {
     res.render('teacher/teaching-class', {
         layout: "teacher.hbs",
         teaching_class: true,
+        homeroom_teacher: req.session.isHomeroomTeacher,
         result,
         nexPage,
         curPage,
@@ -57,6 +58,7 @@ router.get('/teaching-class/students/:id', async function (req, res) {
     res.render('teacher/students-list', {
         layout: "teacher.hbs",
         teaching_class: true,
+        homeroom_teacher: req.session.isHomeroomTeacher,
         classID,
         className,
         result,
@@ -75,7 +77,7 @@ router.get('/teaching-class/scores/:cid/:sid', async function (req, res) {
     const page = req.query.page || 1
     const offset = (page - 1) * limit
     const students = await studentModel.getStudentInClass(classID, limit, offset)
-    let chooseSemesterList = await studentModel.getChooseSemesterAndYearList(1)
+    let chooseSemesterList = await studentModel.getChooseSemesterAndYearList(students[0].MaHocSinh)
     let hocky = req.query.HocKy || chooseSemesterList[0].HocKy
     let namhoc = req.query.NamHoc || chooseSemesterList[0].NamHoc
     for (let i in chooseSemesterList) {
@@ -132,6 +134,7 @@ router.get('/teaching-class/scores/:cid/:sid', async function (req, res) {
     res.render('teacher/score-list', {
         layout: "teacher.hbs",
         teaching_class: true,
+        homeroom_teacher: req.session.isHomeroomTeacher,
         subjectName: subject.TenMonHoc,
         classID,
         subjectID,
@@ -150,7 +153,7 @@ router.post('/teaching-class/scores/:cid/:sid', function (req, res) {
     let result = req.body.value.split('/')
     const classID = req.params.cid
     const subjectID = req.params.sid
-    res.redirect(req.headers.referer ||'/teacher/teaching-class/scores/'+classID+'/'+subjectID+'/?HocKy='+result[0]+'&NamHoc='+result[1]+'')
+    res.redirect('/teacher/teaching-class/scores/'+classID+'/'+subjectID+'/?HocKy='+result[0]+'&NamHoc='+result[1]+'')
 })
 
 router.post('/teaching-class/scores/:cid/:sid/edit', async function (req, res) {
@@ -247,16 +250,17 @@ router.post('/teaching-class/scores/:cid/:sid/edit', async function (req, res) {
 
 router.get('/homeroom-class/students', async function (req, res) {
     const limit = 8
-    const homeroomClass = (await classModel.findHomeroomClass(1))[0]
-    const className = (await classModel.findClassById(homeroomClass.MaLop))[0].TenLop
+    const teacher = req.session.teacher
+    const className = (await classModel.findClassById(teacher.ChuNhiemLop))[0].TenLop
+    const students = await studentModel.getStudentNotInClass()
     const today = moment().format('YYYY-MM-DD')
     const page = req.query.page || 1
     const offset = (page - 1) * limit
-    const result = await studentModel.getStudentInClass(homeroomClass.MaLop, limit, offset)
+    const result = await studentModel.getStudentInClass(teacher.ChuNhiemLop, limit, offset)
     for (const student of result) {
         student.VangHoc = await studentModel.checkAbsent(student.MaHocSinh, today)
     }
-    const total = await studentModel.countStudentInClass(homeroomClass.MaLop)
+    const total = await studentModel.countStudentInClass(teacher.ChuNhiemLop)
     let nPage = Math.floor(total / limit)
     if (total % limit > 0) nPage++
     let nexPage = {check: true, value: (+page + 1)}
@@ -268,65 +272,21 @@ router.get('/homeroom-class/students', async function (req, res) {
     res.render('teacher/students-list', {
         layout: "teacher.hbs",
         homeroom_class: true,
-        classID: homeroomClass,
+        homeroom_teacher: req.session.isHomeroomTeacher,
         className,
         result,
+        students,
         nexPage,
         curPage,
         prevPage
     })
 })
 
-router.get('/homeroom-class/student/add', function (req, res) {
-    res.render('teacher/add-student', {
-        layout: "teacher.hbs"
-    })
-})
-
 router.post('/homeroom-class/student/add', async function (req, res) {
-    const dateParts = req.body.date.split('/')
-    const date = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0])
-    const student = {
-        HoTen: req.body.name,
-        NgaySinh: date,
-        GioiTinh: req.body.gender,
-        ThuocLop: (await classModel.findHomeroomClass(1))[0].MaLop
-    }
-    const id = await studentModel.addStudent(student)
-    const result = await studentModel.findStudentById(id[0])
-    const datePass = result[0].NgaySinh.getDate()
-    const month = result[0].NgaySinh.getMonth() + 1
-    const password = [
-        datePass.toString().padStart(2, '0'),
-        month.toString().padStart(2, '0'),
-        result[0].NgaySinh.getFullYear()
-    ].join('')
-    for (const item of result) {
-        item.HoTen = item.HoTen.toLowerCase()
-        item.HoTen = item.HoTen.replace(/ /g, '')
-        item.HoTen = item.HoTen.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a")
-        item.HoTen = item.HoTen.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e")
-        item.HoTen = item.HoTen.replace(/ì|í|ị|ỉ|ĩ/g, "i")
-        item.HoTen = item.HoTen.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o")
-        item.HoTen = item.HoTen.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u")
-        item.HoTen = item.HoTen.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y")
-        item.HoTen = item.HoTen.replace(/đ/g, "d")
-        item.HoTen = item.HoTen.replace(/\u0300|\u0301|\u0303|\u0309|\u0323/g, "")
-        item.HoTen = item.HoTen.replace(/\u02C6|\u0306|\u031B/g, "")
-    }
-    const salt = bcrypt.genSaltSync(10)
-    const account = {
-        TenDangNhap: result[0].HoTen,
-        Matkhau: bcrypt.hashSync(password, salt),
-        LoaiTaiKhoan: 2
-    }
-    const accId = await accountModel.createAccount(account)
-    await studentModel.createAccount(accId[0], result[0].MaHocSinh)
-    res.render('teacher/add-student', {
-        layout: "teacher.hbs",
-        homeroom_class: true,
-        added: true
-    })
+    const teacher = req.session.teacher
+    const homeroomClass = (await classModel.findHomeroomClass(teacher.MaGV))[0]
+    await studentModel.updateStudent({ThuocLop: homeroomClass.MaLop}, req.body.student)
+    res.redirect(req.headers.referer || '/homeroom-class/students')
 })
 
 router.post('/homeroom-class/student/delete', async function (req, res) {
@@ -382,6 +342,7 @@ router.get('/homeroom-class/achievements/:cid', async function (req, res) {
     res.render('teacher/achievements', {
         layout: "teacher.hbs",
         homeroom_class: true,
+        homeroom_teacher: req.session.isHomeroomTeacher,
         result,
         className,
         nexPage,
@@ -396,28 +357,34 @@ router.post('/homeroom-class/achievement/delete', async function (req, res) {
 })
 
 router.get('/info', async function (req, res) {
-    const teacherInfo = (await teacherModel.findTeacherById(1))[0]
-    const homeroomClass = (await classModel.findHomeroomClass(1))[0]
-    const className = (await classModel.findClassById(homeroomClass.MaLop))[0].TenLop
+    const teacher = req.session.teacher
+    const teacherInfo = (await teacherModel.findTeacherById(teacher.MaGV))[0]
+    const result = (await classModel.findClassById(teacher.ChuNhiemLop))
+    let className = 'Không có'
+    if (result.length !== 0) {
+        className = result[0].TenLop
+    }
     console.log(teacherInfo)
     res.render('teacher/info', {
         layout: "teacher.hbs",
         teacher: teacherInfo,
+        homeroom_teacher: req.session.isHomeroomTeacher,
         className
     })
 })
 
 router.post('/info/edit', async function (req, res) {
+    const teacher = req.session.teacher
     const dateParts = req.body.date.split("/");
-    const dateObject = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
-    const teacher = {
+    const dateString = dateParts[2] + '/' + (dateParts[0].toString() + '/' + dateParts[1]).toString();
+    const updatedTeacher = {
         HoTen: req.body.info0,
-        NgaySinh: moment(dateObject).format('YYYY-MM-DD'),
+        NgaySinh: moment(dateString).format('YYYY-MM-DD'),
         SDT: req.body.sdt,
         DiaChi: req.body.info3,
         GioiTinh: parseInt(req.body.gender)
     }
-    await teacherModel.updateTeacher(teacher, 1);
+    await teacherModel.updateTeacher(updatedTeacher,teacher.MaGV);
     res.redirect(req.headers.referer || '/teacher/info')
 })
 

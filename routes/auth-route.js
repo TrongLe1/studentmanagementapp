@@ -8,7 +8,22 @@ import teacherModel from "../models/teacher-model.js";
 const router = express.Router();
 
 router.get('/', function (req, res) {
-    res.redirect('/login')
+   if (req.session.login) {
+       let role = req.session.accountAuth.LoaiTaiKhoan
+       switch (role) {
+           case 1: case 3:
+               return res.redirect('/teacher')
+               break
+           case 2:
+               return res.redirect('/student')
+               break
+           case 4:
+               return res.redirect('admin')
+               break
+       }
+   } else {
+       res.redirect('/login')
+   }
 })
 
 router.get('/logout', function (req, res) {
@@ -25,9 +40,9 @@ router.get('/login', function (req, res) {
 
 router.post('/login', async function (req, res) {
     let account = req.body
-    if (account.TenDangNhap === '') {
+    if (account.TenDangNhap === '' || account.MatKhau === '') {
         res.redirect('/login')
-        return;
+        return
     }
     let checkAccount = (await accountModel.findAccountByUsername(account.TenDangNhap))[0]
     if (bcrypt.compareSync(account.MatKhau, checkAccount.Matkhau)) {
@@ -41,12 +56,12 @@ router.post('/login', async function (req, res) {
         } else if (checkAccount.LoaiTaiKhoan === 4) {
             res.redirect('/admin')
         } else if (checkAccount.LoaiTaiKhoan === 1) {
-            req.locals.isTeacher = true
+            req.session.isHomeroomTeacher = false
             req.session.teacher = (await teacherModel.findTeacherAccount(req.session.accountAuth.MaTaiKhoan))[0]
             res.redirect('/teacher')
-        } else {
-            res.locals.isHomeroomTeacher = true
-            req.session.homeroomTeacher = (await teacherModel.findTeacherAccount(req.session.accountAuth.MaTaiKhoan))[0]
+        } else if (checkAccount.LoaiTaiKhoan === 3) {
+            req.session.isHomeroomTeacher = true
+            req.session.teacher = (await teacherModel.findTeacherAccount(req.session.accountAuth.MaTaiKhoan))[0]
             req.session.homeroomClass = (await classModel.findHomeroomClass(req.session.homeroomTeacher.ChuNhiemLop))[0]
             res.redirect('/teacher')
         }

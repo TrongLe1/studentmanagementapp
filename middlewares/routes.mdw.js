@@ -9,11 +9,12 @@ export default function (app) {
     app.use('/', authRoute)
     app.use('/student', auth, studentRoute)
     app.use('/teacher', auth, teacherRoute)
-    app.use(function (req, res, next) {
+
+    app.use(function (req, res) {
         res.render('404', { layout: false });
     });
 
-    app.use(function (err, req, res, next) {
+    app.use(function (err, req, res) {
         console.error(err.stack)
         res.render('500', { layout: false });
     });

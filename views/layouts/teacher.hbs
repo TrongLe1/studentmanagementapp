@@ -86,36 +86,38 @@
                         </a>
                     </li>
 
-                    <li class="u-sidebar-nav-menu__item clearfix">
-                        {{#if homeroom_class}}
+                    {{#if homeroom_teacher}}
+                        <li class="u-sidebar-nav-menu__item clearfix">
+                            {{#if homeroom_class}}
                             <a class="u-sidebar-nav-menu__link active" href="" data-target="#homeroom_classes">
-                        {{else}}
+                            {{else}}
                             <a class="u-sidebar-nav-menu__link" href="" data-target="#homeroom_classes">
-                        {{/if}}
+                            {{/if}}
                             <i class="fas fa-chalkboard-teacher u-sidebar-nav-menu__item-icon"></i>
                             <span class="u-sidebar-nav-menu__item-title">Lớp học chủ nhiệm</span>
                             <i class="fa fa-angle-right u-sidebar-nav-menu__item-arrow"></i>
                             <span class="u-sidebar-nav-menu__indicator"></span>
                         </a>
 
-                        <ul id="homeroom_classes" class="u-sidebar-nav-menu u-sidebar-nav-menu--second-level text-center" style="display: none;">
-                            <li class="u-sidebar-nav-menu__item">
-                                <a class="u-sidebar-nav-menu__link" href="/teacher/homeroom-class/students">
-                                    <span class="u-sidebar-nav-menu__item-title">Danh sách học sinh</span>
-                                </a>
-                            </li>
-                            <li class="u-sidebar-nav-menu__item">
-                                <a class="u-sidebar-nav-menu__link" href="/teacher/homeroom-class/student-seating">
-                                    <span class="u-sidebar-nav-menu__item-title">Sơ đồ lớp học</span>
-                                </a>
-                            </li>
-                            <li class="u-sidebar-nav-menu__item">
-                                <a class="u-sidebar-nav-menu__link" href="/teacher/homeroom-class/achievements/">
-                                    <span class="u-sidebar-nav-menu__item-title">Khen thưởng vi phạm</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                            <ul id="homeroom_classes" class="u-sidebar-nav-menu u-sidebar-nav-menu--second-level text-center" style="display: none;">
+                                <li class="u-sidebar-nav-menu__item">
+                                    <a class="u-sidebar-nav-menu__link" href="/teacher/homeroom-class/students">
+                                        <span class="u-sidebar-nav-menu__item-title">Danh sách học sinh</span>
+                                    </a>
+                                </li>
+                                <li class="u-sidebar-nav-menu__item">
+                                    <a class="u-sidebar-nav-menu__link" href="/teacher/homeroom-class/student-seating">
+                                        <span class="u-sidebar-nav-menu__item-title">Sơ đồ lớp học</span>
+                                    </a>
+                                </li>
+                                <li class="u-sidebar-nav-menu__item">
+                                    <a class="u-sidebar-nav-menu__link" href="/teacher/homeroom-class/achievements/">
+                                        <span class="u-sidebar-nav-menu__item-title">Khen thưởng vi phạm</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    {{/if}}
                 </ul>
             </nav>
         </div>
