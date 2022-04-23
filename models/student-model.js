@@ -24,6 +24,10 @@ export default {
     getStudentInClass(classId, limit, offset) {
         return db.select('*').from('hocsinh').where('ThuocLop', '=', classId).limit(limit).offset(offset)
     },
+    async deleteStudent(id) {
+        await db('ctthanhtich').where('MaHocSinh', '=', id).del()
+        return db('hocsinh').where('MaHocSinh', '=', id).del()
+    },
     async countStudentInClass(classId) {
         const result = await db('hocsinh').where('ThuocLop', '=', classId).count('*')
         return result[0]['count(*)']

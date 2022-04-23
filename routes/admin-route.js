@@ -217,7 +217,6 @@ router.post('/teacher/createaccount', async function (req, res) {
 */
 router.post('/teacher/delete', async function (req, res) {
     const result = await teacherModel.findTeacherById(req.body.id)
-    console.log(result)
     await teacherModel.deleteTeacher(req.body.id)
     await accountModel.deleteAccount(result[0].TaiKhoan)
     res.redirect(req.headers.referer || '/admin/teacher')
@@ -836,6 +835,13 @@ router.post('/student/editclass', async function (req, res) {
     })
 
      */
+})
+
+router.post('/student/delete', async function (req, res) {
+    const result = await studentModel.findStudentById(req.body.id)
+    await studentModel.deleteStudent(req.body.id)
+    await accountModel.deleteAccount(result[0].TaiKhoan)
+    res.redirect(req.headers.referer || '/admin/student')
 })
 
 //Lich thi
