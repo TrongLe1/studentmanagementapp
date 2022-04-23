@@ -31,8 +31,15 @@ router.get('/teacher', async function (req, res) {
     const limit = 6
     const page = req.query.page || 1
     const offset = (page - 1) * limit
-    const result = await teacherModel.getTeacher(limit, offset)
-    const total = await teacherModel.countTeacher()
+    let result
+    let total
+    if (req.query.keyword) {
+
+    }
+    else {
+        result = await teacherModel.getTeacher(limit, offset)
+        total = await teacherModel.countTeacher()
+    }
     let nPage = Math.floor(total / limit)
     if (total % limit > 0) nPage++
     let nexPage = {check: true, value: (+page + 1)}
@@ -47,7 +54,8 @@ router.get('/teacher', async function (req, res) {
         result,
         nexPage,
         curPage,
-        prevPage
+        prevPage,
+        keyword: req.query.keyword
     })
 })
 
@@ -219,8 +227,17 @@ router.get('/class', async function (req, res) {
     const limit = 6
     const page = req.query.page || 1
     const offset = (page - 1) * limit
-    const result = await classModel.getClass(limit, offset)
-    const total = await classModel.countClass()
+    let result
+    const year = await classModel.getClassYear()
+    let total
+    if (req.query.year) {
+        result = await classModel.getClassByYear(limit, offset, req.query.year)
+        total = await classModel.countClassByYear(req.query.year)
+    }
+    else {
+        result = await classModel.getClass(limit, offset)
+        total = await classModel.countClass()
+    }
     let nPage = Math.floor(total / limit)
     if (total % limit > 0) nPage++
     let nexPage = {check: true, value: (+page + 1)}
@@ -235,7 +252,8 @@ router.get('/class', async function (req, res) {
         result,
         nexPage,
         curPage,
-        prevPage
+        prevPage,
+        year
     })
 })
 
@@ -692,8 +710,16 @@ router.get('/student', async function (req, res) {
     const limit = 6
     const page = req.query.page || 1
     const offset = (page - 1) * limit
-    const result = await studentModel.getStudent(limit, offset)
-    const total = await studentModel.countStudent()
+    let result
+    let total
+    if (req.query.keyword) {
+
+    }
+    else {
+        result = await studentModel.getStudent(limit, offset)
+        total = await studentModel.countStudent()
+    }
+
     let nPage = Math.floor(total / limit)
     if (total % limit > 0) nPage++
     let nexPage = {check: true, value: (+page + 1)}
@@ -702,16 +728,20 @@ router.get('/student', async function (req, res) {
     if (nexPage.value === nPage + 1) nexPage.check = false
     if (prevPage.value === 0) prevPage.check = false
     if (total === 0) curPage.check = false
+    /*
     for (const item of result)
         if (item.ThuocLop === null)
             item.add = true
+
+    */
     res.render('admin/student-list', {
         layout: "admin.hbs",
         student: true,
         result,
         nexPage,
         curPage,
-        prevPage
+        prevPage,
+        keyword: req.query.keyword
     })
 })
 

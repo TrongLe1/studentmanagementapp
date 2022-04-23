@@ -5,7 +5,7 @@ export default {
         return db('lophoc').insert(entity)
     },
     getClass(limit, offset) {
-        return db.select('*').from('lophoc').limit(limit).offset(offset)
+        return db.select('*').from('lophoc').leftJoin('giaovien', 'lophoc.MaLop', '=', 'giaovien.ChuNhiemLop').limit(limit).offset(offset)
     },
     getAllClass() {
         return db.select('*').from('lophoc')
@@ -88,5 +88,15 @@ export default {
     },
     removeTuitionFromClass(id) {
         return db('hocphi').where('MaLop', '=', id).del()
-    }
+    },
+    getClassYear() {
+        return db('lophoc').distinct('NamHoc').orderBy('NamHoc', 'asc')
+    },
+    getClassByYear(limit, offset, year) {
+        return db('lophoc').leftJoin('giaovien', 'lophoc.MaLop', '=', 'giaovien.ChuNhiemLop').where('NamHoc', '=', year).limit(limit).offset(offset)
+    },
+    async countClassByYear(year) {
+        const result = await db('lophoc').where('NamHoc', '=', year).count('*')
+        return result[0]['count(*)']
+    },
 }

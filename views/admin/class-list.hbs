@@ -11,6 +11,16 @@
                 </div>
                 --}}
             </div>
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <select id="year" name="year" onchange="location = this.value;">
+                        <option data-display="Chọn năm học" value="/admin/class">Năm học</option>
+                        {{#each year}}
+                            <option value="/admin/class?year={{NamHoc}}">{{NamHoc}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
         </header>
         <div class="row">
             {{#each result}}
@@ -24,7 +34,11 @@
                                 <div class="category-content">
                                     <h2>{{TenLop}}</h2>
                                     <ul>
-                                        <li>Mã lớp: {{MaLop}}</li>
+                                        {{#if HoTen}}
+                                        <li>Giáo viên chủ nhiệm: {{HoTen}}</li>
+                                        {{else}}
+                                            <li>Giáo viên chủ nhiệm: Chưa có</li>
+                                        {{/if}}
                                         <li>Phòng học: {{PhongHoc}}</li>
                                         <li>Năm học: {{NamHoc}}</li>
                                     </ul>

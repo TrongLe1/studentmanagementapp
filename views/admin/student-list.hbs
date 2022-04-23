@@ -7,6 +7,19 @@
                         <div class="col-md-6">
                             <h2 class="h3 card-header-title">Danh sách học sinh</h2>
                         </div>
+                        <div class="col-md-4">
+                            <div class="teachio-header-search u-header-search" data-search-mobile-invoker="#headerSearchMobileInvoker" data-search-target="#headerSearch">
+                                <a id="headerSearchMobileInvoker" class="btn btn-link input-group-prepend u-header-search__mobile-invoker">
+                                    <i class="fa fa-search"></i>
+                                </a>
+                                <div class="header-search">
+                                    <form action="/admin/student" method="get">
+                                        <input type="text" name="keyword" placeholder="Nhập tên học sinh">
+                                        <button type="submit" class="bg-gr" style="width: fit-content;">Tìm kiếm</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </header>
             </div>
@@ -67,23 +80,41 @@
                                 <nav aria-label="Bootstrap Pagination Example">
                                     <ul class="pagination mb-0">
                                         {{#if prevPage.check}}
+                                            {{#if keyword}}
+                                                <li class="page-item">
+                                                    <a class="page-link" href="/admin/student?keyword={{keyword}}&page={{prevPage.value}}">&larr; <span class="ml-1 d-none d-xl-inline-block">Previous</span></a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="/admin/student?keyword={{keyword}}&page={{prevPage.value}}">{{prevPage.value}}</a>
+                                                </li>
+                                            {{else}}
                                             <li class="page-item">
                                                 <a class="page-link" href="/admin/student?page={{prevPage.value}}">&larr; <span class="ml-1 d-none d-xl-inline-block">Previous</span></a>
                                             </li>
                                             <li class="page-item">
                                                 <a class="page-link" href="/admin/student?page={{prevPage.value}}">{{prevPage.value}}</a>
                                             </li>
+                                            {{/if}}
                                         {{/if}}
                                         <li class="page-item active">
                                             <a class="page-link">{{curPage.value}}</a>
                                         </li>
                                         {{#if nexPage.check}}
+                                            {{#if keyword}}
+                                                <li class="page-item">
+                                                    <a class="page-link" href="/admin/student?keyword={{keyword}}&page={{nexPage.value}}">{{nexPage.value}}</a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="/admin/student?keyword={{keyword}}&page={{nexPage.value}}"><span class="mr-1 d-none d-xl-inline-block">Next</span> &rarr;</a>
+                                                </li>
+                                            {{else}}
                                             <li class="page-item">
                                                 <a class="page-link" href="/admin/student?page={{nexPage.value}}">{{nexPage.value}}</a>
                                             </li>
                                             <li class="page-item">
                                                 <a class="page-link" href="/admin/student?page={{nexPage.value}}"><span class="mr-1 d-none d-xl-inline-block">Next</span> &rarr;</a>
                                             </li>
+                                            {{/if}}
                                         {{/if}}
                                     </ul>
                                 </nav>

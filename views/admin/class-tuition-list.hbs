@@ -8,6 +8,11 @@
                             <h2 class="h3 card-header-title">Học phí {{clss.TenLop}}</h2>
                         </div>
                         <div class="col-md-6 text-right">
+                            <a href="/admin/class/tuition/add?id={{clss.MaLop}}" class="box-btn">Thêm học phí</a>
+                        </div>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
                             <select id="semester" name="semester" onchange="location = this.value;">
                                 <option data-display="Chọn học kỳ" value="/admin/class/tuition?id={{clss.MaLop}}">Học kỳ</option>
                                 {{#if check}}
@@ -23,7 +28,6 @@
                                     <option value="/admin/class/tuition?id={{clss.MaLop}}&semester=2">Học kỳ 2</option>
                                 {{/if}}
                             </select>
-                            <a href="/admin/class/tuition/add?id={{clss.MaLop}}" class="box-btn">Thêm học phí</a>
                         </div>
                     </div>
                 </header>
