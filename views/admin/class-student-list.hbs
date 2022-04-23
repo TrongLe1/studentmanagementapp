@@ -7,17 +7,17 @@
                         <div class="col-md-6">
                             <h2 class="h3 card-header-title">Danh sách học sinh {{clss.TenLop}}</h2>
                         </div>
-                        <div class="col-md-3 text-right">
-                            <form method="post" id="formPostStudent">
+                        <div class="col-md-6">
+                            <form class="form-inline float-right" method="post" id="formPostStudent">
                                 <input name="id" value="{{clss.MaLop}}" hidden>
-                                <select id="student" name="student">
+                                <select id="student" name="student" class="mr-2">
                                     <option data-display="Chọn học sinh" value="">Học sinh</option>
                                     {{#each students}}
                                         <option value="{{MaHocSinh}}">{{MaHocSinh}}. {{HoTen}}</option>
                                     {{/each}}
                                 </select>
+                                <button type="submit" class="btn btn-primary" formaction="/admin/class/student/add" form="formPostStudent">Thêm học sinh</button>
                             </form>
-                            <button type="submit" class="btn btn-success" formaction="/admin/class/student/add" form="formPostStudent">Thêm học sinh</button>
                         </div>
                     </div>
                 </header>

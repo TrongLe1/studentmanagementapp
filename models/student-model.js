@@ -24,6 +24,9 @@ export default {
     getStudentInClass(classId, limit, offset) {
         return db.select('*').from('hocsinh').where('ThuocLop', '=', classId).limit(limit).offset(offset)
     },
+    getAllStudentInClass(classId) {
+        return db.select('MaHocSinh', 'HoTen','GioiTinh').from('hocsinh').where('ThuocLop', '=', classId)
+    },
     async deleteStudent(id) {
         await db('ctthanhtich').where('MaHocSinh', '=', id).del()
         return db('hocsinh').where('MaHocSinh', '=', id).del()

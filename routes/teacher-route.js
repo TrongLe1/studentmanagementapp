@@ -1,5 +1,7 @@
 import express from 'express'
 import moment from 'moment'
+import fs from 'fs'
+import os from 'os'
 import teacherModel from '../models/teacher-model.js'
 import classModel from '../models/class-model.js'
 import studentModel from '../models/student-model.js'
@@ -70,7 +72,7 @@ router.get('/teaching-class/students/:id', async function (req, res) {
 } )
 
 router.get('/teaching-class/scores/:cid/:sid', async function (req, res) {
-    const limit = 7
+    const limit = 6
     const classID = req.params.cid
     const teacher = req.session.teacher
     const subjectID = req.params.sid
@@ -247,8 +249,67 @@ router.post('/teaching-class/scores/:cid/:sid/edit', async function (req, res) {
         }
         await studentModel.addStudentScore(scoreEntity);
     }
-    console.log(scores)
     res.redirect(req.headers.referer || '/teacher/teaching-class/scores/' + classID + '/' + subjectID + '?HocKy=' + hocky + '&NamHoc=' + namhoc)
+})
+
+router.post('/teaching-class/scores/:cid/:sid/export', async function (req, res) {
+    const classID = req.params.cid
+    const subjectID = req.params.sid
+    let hocky = req.query.HocKy
+    let namhoc = req.query.NamHoc
+    const subject = (await subjectModel.findSubject(subjectID))[0]
+    const className = (await classModel.findClassById(classID))[0].TenLop
+    const students = await studentModel.getAllStudentInClass(classID)
+    for (const student of students) {
+        student.HeSo1 = []
+        student.HeSo2 = []
+        student.HeSo3 = []
+        const scores = await studentModel.getStudentScoresInSubjectByHKNH(student.MaHocSinh, subjectID, hocky, namhoc)
+        for (const score of scores) {
+            if (score.HeSoDiem === 1.0) {
+                student.HeSo1.push(score.SoDiem)
+            } else if (score.HeSoDiem === 2.0) {
+                student.HeSo2.push(score.SoDiem)
+            } else {
+                student.HeSo3.push(score.SoDiem)
+            }
+        }
+        while (student.HeSo1.length < 4) {
+            student.HeSo1.push("Chưa có")
+        }
+        while (student.HeSo2.length < 2) {
+            student.HeSo2.push("Chưa có")
+        }
+        while (student.HeSo3.length < 1) {
+            student.HeSo3.push("Chưa có")
+        }
+        if (student.HeSo1.includes("Chưa có") || student.HeSo2.includes("Chưa có") || student.HeSo3.includes("Chưa có")) {
+            student.TongDiem = "Chưa có"
+        } else {
+            let totalScore = 0.0
+            for (const hs1 of student.HeSo1) {
+                totalScore += hs1
+            }
+            for (const hs2 of student.HeSo2) {
+                totalScore += hs2 * 2.0
+            }
+            totalScore += student.HeSo3[0] * 3.0
+            totalScore /= 11.0
+            student.TongDiem = Math.round(totalScore * 100) / 100
+        }
+    }
+    var data='Mã học sinh'+','+'Họ tên'+','+'Hệ số 1'+','+'Hệ số 1'+','+'Hệ số 1'+','+'Hệ số 1'+','
+        +'Hệ số 2'+','+'Hệ số 2'+','+'Hệ số 3'+','+'Tổng kết'+'\n';
+    for (let i = 0; i < students.length; i++) {
+        data=data+students[i].MaHocSinh+','+students[i].HoTen+','+students[i].HeSo1[0]+','
+            +students[i].HeSo1[1]+','+students[i].HeSo1[2]+','+students[i].HeSo1[3]+','
+            +students[i].HeSo2[0]+','+students[i].HeSo2[1]+','+students[i].HeSo3+','+students[i].TongDiem+ '\n';
+    }
+    var fileName = 'Bảng điểm môn ' + subject.TenMonHoc + ' lớp ' + className + ' HK' + hocky + '-' + namhoc
+    fs.appendFile('C://Users//'+os.userInfo().username+'//Downloads/'+fileName+'.csv', data, {encoding: 'utf8'},(err) => {
+        if (err) throw err;
+    });
+    res.redirect(req.headers.referer)
 })
 
 router.get('/homeroom-class/students', async function (req, res) {
@@ -310,11 +371,7 @@ router.post('/homeroom-class/student/absent', async function (req, res) {
     res.redirect(req.headers.referer || '/homeroom-class/students')
 })
 
-router.get('/homeroom-class/achievements/:cid', async function (req, res) {
-    // const classID = req.params.cid
-    // const className = (await classModel.findClassById(classID))[0].TenLop
-    // const page = req.query.page || 1
-    // const offset = (page - 1) * limit
+router.get('/homeroom-class/achievements', async function (req, res) {
     // const students = await studentModel.getStudentInClass(classID, limit, offset)
     // let chooseSemesterList = await studentModel.getChooseSemesterAndYearList(1)
     // let hocky = req.query.HocKy || chooseSemesterList[0].HocKy
@@ -323,10 +380,12 @@ router.get('/homeroom-class/achievements/:cid', async function (req, res) {
     //     chooseSemesterList[i].isSelected = (chooseSemesterList[i].HocKy == hocky
     //         && chooseSemesterList[i].NamHoc == namhoc);
     // }
-    // for (const student of students) {
+    // for (const student of students) {}
 
     const limit = 8
-    const homeroomClass = (await classModel.findHomeroomClass(1))[0]
+    const teacher = req.session.teacher
+    const homeroomClass = (await classModel.findHomeroomClass(teacher.MaGV))[0]
+    const classID = req.params.cid
     const className = (await classModel.findClassById(homeroomClass.MaLop))[0].TenLop
     const page = req.query.page || 1
     const offset = (page - 1) * limit

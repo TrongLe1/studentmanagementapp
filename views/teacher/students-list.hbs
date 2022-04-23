@@ -33,16 +33,16 @@
                             <h2 class="h3 card-header-title">Danh sách học sinh lớp {{className}}</h2>
                         </div>
                         {{#if homeroom_class}}
-                        <div class="col-md-3 text-right">
-                            <form method="post" id="formPostStudent">
-                                <select id="student" name="student">
+                        <div class="col-md-6">
+                            <form class="form-inline float-right" method="post" id="formPostStudent">
+                                <select id="student" name="student" class="mr-2">
                                     <option data-display="Chọn học sinh" value="">Học sinh</option>
                                     {{#each students}}
                                         <option value="{{MaHocSinh}}">{{MaHocSinh}}. {{HoTen}}</option>
                                     {{/each}}
                                 </select>
+                                <button type="submit" class="btn btn-primary" formaction="/teacher/homeroom-class/student/add" form="formPostStudent">Thêm học sinh</button>
                             </form>
-                            <button type="submit" class="btn btn-primary" formaction="/teacher/homeroom-class/student/add" form="formPostStudent">Thêm học sinh</button>
                         </div>
                         {{/if}}
                 </header>
@@ -88,7 +88,7 @@
                                         {{#if ../homeroom_class}}
                                             <td class="text-center">
                                                 {{#if VangHoc}}
-                                                    <button type="submit" disabled class="btn btn-outline-warning">Đánh vắng</button>
+                                                    <button type="submit" disabled class="btn btn-warning">Đánh vắng</button>
                                                 {{else}}
                                                     <button type="submit" data-toggle="modal" data-target="#myModal" class="btn btn-outline-warning">Đánh vắng</button>
                                                 {{/if}}
