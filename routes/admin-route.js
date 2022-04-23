@@ -34,7 +34,8 @@ router.get('/teacher', async function (req, res) {
     let result
     let total
     if (req.query.keyword) {
-
+        result = await teacherModel.searchTeacherByName(req.query.keyword, limit, offset)
+        total = await teacherModel.countSearchTeacher(req.query.keyword)
     }
     else {
         result = await teacherModel.getTeacher(limit, offset)
@@ -216,7 +217,6 @@ router.post('/teacher/createaccount', async function (req, res) {
 */
 router.post('/teacher/delete', async function (req, res) {
     const result = await teacherModel.findTeacherById(req.body.id)
-    console.log(result)
     await teacherModel.deleteTeacher(req.body.id)
     await accountModel.deleteAccount(result[0].TaiKhoan)
     res.redirect(req.headers.referer || '/admin/teacher')
@@ -713,7 +713,8 @@ router.get('/student', async function (req, res) {
     let result
     let total
     if (req.query.keyword) {
-
+        result = await studentModel.searchStudentByName(req.query.keyword, limit, offset)
+        total = await studentModel.countSearchStudent(req.query.keyword)
     }
     else {
         result = await studentModel.getStudent(limit, offset)
@@ -834,6 +835,13 @@ router.post('/student/editclass', async function (req, res) {
     })
 
      */
+})
+
+router.post('/student/delete', async function (req, res) {
+    const result = await studentModel.findStudentById(req.body.id)
+    await studentModel.deleteStudent(req.body.id)
+    await accountModel.deleteAccount(result[0].TaiKhoan)
+    res.redirect(req.headers.referer || '/admin/student')
 })
 
 //Lich thi
