@@ -40,11 +40,14 @@ router.get('/login', function (req, res) {
 
 router.post('/login', async function (req, res) {
     let account = req.body
-    if (account.TenDangNhap === '' || account.MatKhau === '') {
-        res.redirect('/login')
-        return
-    }
-    let checkAccount = (await accountModel.findAccountByUsername(account.TenDangNhap))[0]
+    if (account.TenDangNhap === '' || account.MatKhau === '')
+        return res.redirect('/login')
+    let checkAccount = ''
+    let result = (await accountModel.findAccountByUsername(account.TenDangNhap))
+    if (result.length !== 0) {
+        checkAccount = result[0]
+    } else
+        return res.redirect('/login')
     if (bcrypt.compareSync(account.MatKhau, checkAccount.Matkhau)) {
         delete checkAccount.Matkhau
         req.session.login = true

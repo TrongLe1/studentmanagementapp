@@ -1,11 +1,9 @@
 import express from 'express'
-import bcrypt from 'bcryptjs'
 import moment from 'moment'
 import teacherModel from '../models/teacher-model.js'
 import classModel from '../models/class-model.js'
 import studentModel from '../models/student-model.js'
 import subjectModel from '../models/subject-model.js'
-import accountModel from '../models/account-model.js'
 
 const router = express.Router();
 
@@ -31,6 +29,7 @@ router.get('/teaching-class', async function (req, res) {
     res.render('teacher/teaching-class', {
         layout: "teacher.hbs",
         teaching_class: true,
+        teacher_name: teacher.HoTen,
         homeroom_teacher: req.session.isHomeroomTeacher,
         result,
         nexPage,
@@ -41,6 +40,7 @@ router.get('/teaching-class', async function (req, res) {
 
 router.get('/teaching-class/students/:id', async function (req, res) {
     const limit = 9
+    const teacher = req.session.teacher
     const classID = req.params.id
     const className = (await classModel.findClassById(classID))[0].TenLop
     const page = req.query.page || 1
@@ -59,6 +59,7 @@ router.get('/teaching-class/students/:id', async function (req, res) {
         layout: "teacher.hbs",
         teaching_class: true,
         homeroom_teacher: req.session.isHomeroomTeacher,
+        teacher_name: teacher.HoTen,
         classID,
         className,
         result,
@@ -71,6 +72,7 @@ router.get('/teaching-class/students/:id', async function (req, res) {
 router.get('/teaching-class/scores/:cid/:sid', async function (req, res) {
     const limit = 7
     const classID = req.params.cid
+    const teacher = req.session.teacher
     const subjectID = req.params.sid
     const subject = (await subjectModel.findSubject(subjectID))[0]
     const className = (await classModel.findClassById(classID))[0].TenLop
@@ -137,6 +139,7 @@ router.get('/teaching-class/scores/:cid/:sid', async function (req, res) {
         homeroom_teacher: req.session.isHomeroomTeacher,
         subjectName: subject.TenMonHoc,
         classID,
+        teacher_name: teacher.HoTen,
         subjectID,
         className,
         students,
@@ -273,6 +276,7 @@ router.get('/homeroom-class/students', async function (req, res) {
         layout: "teacher.hbs",
         homeroom_class: true,
         homeroom_teacher: req.session.isHomeroomTeacher,
+        teacher_name: teacher.HoTen,
         className,
         result,
         students,
@@ -364,10 +368,10 @@ router.get('/info', async function (req, res) {
     if (result.length !== 0) {
         className = result[0].TenLop
     }
-    console.log(teacherInfo)
     res.render('teacher/info', {
         layout: "teacher.hbs",
         teacher: teacherInfo,
+        teacher_name: teacher.HoTen,
         homeroom_teacher: req.session.isHomeroomTeacher,
         className
     })

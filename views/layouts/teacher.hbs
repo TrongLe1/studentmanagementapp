@@ -14,6 +14,13 @@
     <link rel="stylesheet" href="/public/admin-assets/css/theme.css">
     <link rel="stylesheet" href="/public/admin-assets/css/style.css">
     <link rel="stylesheet" href="/public/admin-assets/css/nice-select.css">
+
+    <style>
+        .js-doughnut-chart {
+            width: 70px !important;
+            height: 70px !important;
+        }
+    </style>
     {{{_sections.css}}}
 </head>
 
@@ -21,9 +28,9 @@
 <div class="body-bg"></div>
 <header class="teachio-header u-header">
     <div class="u-header-left">
-        <a class="u-header-logo" href="/teacher/teaching-class">
-<!--            <img class="u-logo-desktop" src="public/admin-assets/img/logo.png" width="160" alt="Logo">-->
-<!--            <img class="img-fluid u-logo-mobile" src="public/admin-assets/img/logo2.png" width="50" alt="Logo">-->
+        <a class="u-header-logo" href="/teacher">
+            <img class="u-logo-desktop" src="/public/admin-assets/img/logo.png" width="160" alt="Logo Dashboard">
+            <img class="img-fluid u-logo-mobile" src="/public/admin-assets/img/logo2.png" width="50" alt="Logo Dashboard">
         </a>
     </div>
 
@@ -37,9 +44,8 @@
     <div class="u-header-right">
         <div class="teachio-user-top-corner dropdown ml-2">
             <a class="link-muted d-flex align-items-center" href="" role="button" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown">
-<!--                <img class="u-avatar--xs img-fluid mr-2" src="public/admin-assets/img/avatars/img2.jpg" alt="User Profile">-->
                 <span class="d-none d-sm-inline-block align-items-center menu-dots-wrap">
-                        Thu Nguyễn <img src="/public/admin-assets/img/menu-dots.png" alt="" class="menu-dots">
+                        {{teacher_name}} <img src="/public/admin-assets/img/menu-dots.png" alt="" class="menu-dots">
                     </span>
             </a>
             <div class="dropdown-menu dropdown-menu-right border-0 py-0 mt-3" aria-labelledby="dropdownMenuLink" style="width: 260px;">
