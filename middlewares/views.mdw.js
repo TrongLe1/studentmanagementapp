@@ -19,6 +19,10 @@ export default function (app) {
                 if (val === 1) return 'Nam'
                 else return 'Nữ'
             },
+            format_achievement(val) {
+                if (val === 1) return 'Khen thưởng'
+                else return 'Vi phạm'
+            },
             formatDate(val) {
                 return new Intl.DateTimeFormat('vi-VN').format(new Date(val))
             },

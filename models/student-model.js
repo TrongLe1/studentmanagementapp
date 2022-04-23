@@ -57,18 +57,6 @@ export default {
         }
         return list
     },
-    async getStudentScoresByHKNH(studentID, HK, NH) {
-        let list = await db('diem').where('MaHocSinh', studentID)
-            .where('HocKy', HK)
-            .where('NamHoc',NH)
-            .orderBy('MaMon', "asc")
-            .orderBy('HeSoDiem','asc')
-        for(let idx in list){
-            let subjectInfo = await subjectModel.findSubject(list[idx].MaMon)
-            list[idx].TenMonHoc = subjectInfo[0].TenMonHoc
-        }
-        return list
-    },
     getChooseSemesterAndYearList(studentID){
         return db('diem').where('MaHocSinh',studentID).groupBy('HocKy', 'NamHoc')
             .select('HocKy','NamHoc')
@@ -81,15 +69,11 @@ export default {
     updateStudentScore(entity, id) {
         return db('diem').where('MaDiem', '=', id).update(entity)
     },
-    async updateMistake(entity, score, studentID) {
+    async updateAchievement(entity, studentID) {
         const res = await db('thanhtich').where('thanhtich.TenHoatDong', entity.TenHoatDong)
         const existsAchievement = !(res.length === 0)
         if (!existsAchievement) {
             const id = await db('thanhtich').insert(entity)
-            return db('vipham').insert({
-                MaThanhTich: id,
-                DiemTru: score
-            })
             await db('ctthanhtich').insert({
                 MaThanhTich: id,
                 MaHocSinh: studentID,
@@ -103,25 +87,6 @@ export default {
                 SoLanThamGia: 1
             })
         }
-    },
-    async updateMerit(entity, score, studentID) {
-        const id = await db('thanhtich').insert(entity)
-        const result = await db('ctthanhtich').join('thanhtich', 'thanhtich.MaThanhTich', 'ctthanhtich.MaThanhTich')
-            .where('thanhtich.TenHoatDong', entity.TenHoatDong)
-            .count('*')
-        const count = result[0]['count(*)']
-        await db('ctthanhtich').insert({
-            MaThanhTich: id,
-            MaHocSinh: studentID,
-            SoLanThamGia: count
-        })
-        return db('khenthuong').insert({
-            MaThanhTich: id,
-            DiemCong: score
-        })
-    },
-    async markAbsentStudent(entity, id) {
-        await this.updateMistake(entity, 5, id)
     },
     async checkAbsent(studentID, today) {
         const result = await db('ctthanhtich').join('thanhtich', 'thanhtich.MaThanhTich', 'ctthanhtich.MaThanhTich')

@@ -7,9 +7,6 @@ export default {
     findAccountByUsername(user) {
         return db('taikhoan').where({TenDangNhap: user}).select('*')
     },
-    updateAccountById(id, account) {
-        return db('taikhoan').where('MaTaiKhoan', '=', id).update(account)
-    },
     deleteAccount(id) {
         return db('taikhoan').where('MaTaiKhoan', '=', id).del()
     },
@@ -25,5 +22,8 @@ export default {
     },
     unlockAccount(id) {
         return db('taikhoan').where('MaTaiKhoan', '=', id).update({TrangThai: 1})
+    },
+    getRole(id) {
+        return db.select('LoaiTaiKhoan').from('taikhoan').where('MaTaiKhoan', id)
     }
 }

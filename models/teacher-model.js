@@ -14,6 +14,9 @@ export default {
     findTeacherById(id) {
         return db.select('*').from('giaovien').where('MaGV', '=', id)
     },
+    findTeacherAccount(accountID) {
+        return db('giaovien').where('TaiKhoan', accountID)
+    },
     updateTeacher(entity, id) {
         return db('giaovien').where('MaGV', '=', id).update(entity)
     },
@@ -39,7 +42,6 @@ export default {
         await db('giaovien').where('ChuNhiemLop', classId).update({ChuNhiemLop: null})
         if (result.length !== 0)
             return db('taikhoan').where('MaTaiKhoan', '=', result[0].TaiKhoan).update({LoaiTaiKhoan: 1})
-        return
     },
     getAllTeacher() {
         return db.select('*').from('giaovien')
@@ -55,4 +57,14 @@ export default {
         const result = await db('ctgiangday').where('MaGV', teacherID).count('*')
         return result[0]['count(*)']
     },
+    getAchievements(limit, offset) {
+        return db('thanhtich').limit(limit).offset(offset)
+    },
+    async countAchievements() {
+        const result = await db('thanhtich').count('*')
+        return result[0]['count(*)']
+    },
+    removeAchievement(id) {
+        return db('thanhtich').where('MaThanhTich', '=', id).delete()
+    }
 }

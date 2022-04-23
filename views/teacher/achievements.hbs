@@ -1,0 +1,149 @@
+{{#section 'js'}}
+    <script>
+        $(".btn[data-target='#myModal']").click(function() {
+            var columnHeadings = $("thead th").map(function() {
+                return $(this).text();
+            }).get();
+            columnHeadings.pop();
+            columnHeadings.pop();
+            columnHeadings.splice(0, 3);
+            var columnValues = $(this).parent().siblings().map(function() {
+                return $(this).text();
+            }).get();
+            var studentID = columnValues[0];
+            var studentName = columnValues[1];
+            var fullTitle = 'Chỉnh sửa điểm của học sinh ' + studentName;
+            columnValues.splice(0, 3);
+            var modalTitle = $('<h3 class="modal-title" id="myModalLabel">'+fullTitle+'</h3>');
+            var modalBody = $('<div id="modalContent"></div>');
+            var modalForm = $('<form name="modalForm" action="/teacher/teaching-class/scores/{{classID}}/{{subjectID}}/edit?HocKy={{hocky}}&NamHoc={{namhoc}}" method="post" class="needs-validation"></form>');
+            $.each(columnHeadings, function(i, columnHeader) {
+                var formGroup = $('<div class="form-group"></div>');
+                formGroup.append('<label for="diem'+i+'">'+columnHeader+'</label>');
+                formGroup.append('<input type="number" min="0" max="10" class="form-control" name="diem'+i+'" id="diem'+i+'" value="'+columnValues[i]+'" />');
+                modalForm.append(formGroup);
+            });
+            modalForm.append('<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>');
+            modalForm.append('<button type="submit" class="btn btn-primary">Lưu thay đổi</button>')
+            modalBody.append(modalForm);
+            $('.modal-body').html(modalBody);
+            $('.modal-header').html(modalTitle);
+            modalForm.append('<input name="id" value='+studentID+' hidden>');
+        });
+        $('.submit .btn-primary').click(function() {
+            $('form[name="modalForm"]').submit();
+        });
+
+        $(function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+{{/section}}
+
+<div class="u-content">
+    <div class="u-body">
+        <header class="section-header mb-4">
+            <div class="row align-items-center">
+                <div class="col-md-12">
+                    <header class="section-header mb-2">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <h2 class="h3 card-header-title">Quản lý thành tích lớp {{className}}</h2>
+                            </div>
+                        </div>
+                    </header>
+                </div>
+            </div>
+        </header>
+        <div class="row mt-2">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th scope="col" class="text-center">ID</th>
+                                    <th scope="col">Tên hoạt động</th>
+                                    <th scope="col">Ngày diễn ra</th>
+                                    <th scope="col">Loại thành tích</th>
+                                    <th scope="col">Điểm thành tích</th>
+                                    <th scope="col" class="text-center" width="200">Hành động</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {{#each result}}
+                                    <form method="post" id="formPost{{MaThanhTich}}">
+                                        <input name="id" value="{{MaThanhTich}}" hidden>
+                                    </form>
+                                    <tr>
+                                        <td class="text-center">{{MaThanhTich}}</td>
+                                        <td>{{TenHoatDong}}</td>
+                                        <td>{{format_date NgayDienRa}}</td>
+                                        <td>{{format_achievement LoaiThanhTich}}</td>
+                                        <td>{{DiemThanhTich}}</td>
+                                        <td class="text-center">
+                                            <button type="submit" class="btn btn-outline-primary"
+                                                    data-toggle="modal" data-target="#myModal">Chỉnh sửa</button>
+                                            <button type="submit" class="btn btn-outline-danger" form="formPost{{MaThanhTich}}" formaction="/teacher/homeroom-class/achievement/delete">Xóa</button>
+                                        </td>
+                                    </tr>
+                                {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                        {{#if curPage.check}}
+                            <div class="pagination-wrap mt-3 text-center">
+                                <nav aria-label="Bootstrap Pagination Example">
+                                    <ul class="pagination mb-0">
+                                        {{#if prevPage.check}}
+                                            <li class="page-item">
+                                                <a class="page-link" href="/teacher/homeroom-class/achievements?page={{prevPage.value}}">&larr; <span class="ml-1 d-none d-xl-inline-block">Previous</span></a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="/teacher/homeroom-class/achievements?page={{prevPage.value}}">{{prevPage.value}}</a>
+                                            </li>
+                                        {{/if}}
+                                        <li class="page-item active">
+                                            <a class="page-link">{{curPage.value}}</a>
+                                        </li>
+                                        {{#if nexPage.check}}
+                                            <li class="page-item">
+                                                <a class="page-link" href="/teacher/homeroom-class/achievements?page={{nexPage.value}}">{{nexPage.value}}</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="/teacher/homeroom-class/achievements?page={{nexPage.value}}"><span class="mr-1 d-none d-xl-inline-block">Next</span> &rarr;</a>
+                                            </li>
+                                        {{/if}}
+                                    </ul>
+                                </nav>
+                            </div>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"></div>
+            <div class="modal-body"></div>
+        </div>
+    </div>
+</div>

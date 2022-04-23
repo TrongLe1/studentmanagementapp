@@ -7,7 +7,6 @@ import timetableModel from "../models/timetable-model.js";
 
 const router = express.Router();
 
-
 router.get('/score', async function (req, res) {
 
     let stud = req.session.student
@@ -43,10 +42,10 @@ router.get('/score', async function (req, res) {
 router.post('/score', function (req, res) {
     // console.log(req.body.value)
     let result = req.body.value.split('/')
-    res.redirect(`/score?HocKy=${result[0]}&NamHoc=${result[1]}`)
+    res.redirect(`/student/score?HocKy=${result[0]}&NamHoc=${result[1]}`)
 })
 
-router.get('/student', function (req, res) {
+router.get('/', function (req, res) {
     res.render('student/home', {
         layout: "student.hbs"
     })
@@ -86,7 +85,7 @@ router.post('/profile/edit' , async function (req, res) {
     let val = await studentModel.updateStudent(student, req.session.student.MaHocSinh)
     // console.log(val)
     req.session.student = (await studentModel.findStudentById(req.session.student.MaHocSinh))[0]
-    res.redirect("/profile");
+    res.redirect("/student/profile");
 })
 
 router.get('/relative/edit/:MaPHHS' , async function (req, res) {
@@ -114,7 +113,7 @@ router.post('/relative/edit/:MaPHHS' , async function (req, res) {
     if(detail.NgaySinh === '')
         delete detail.NgaySinh
     let val = await relativeModel.updateRelativeDetail(detail, MaPHHS)
-    res.redirect('/profile')
+    res.redirect('/student/profile')
 })
 
 router.get('/time-table',async function (req, res) {
@@ -155,7 +154,7 @@ router.get('/exam-schedule', async function (req, res) {
 router.post('/tuition', function (req, res) {
     let acc = req.body
     let s = acc.value.split(`/`)
-    res.redirect(`/tuition?HocKy=${s[0]}&NamHoc=${s[1]}`)
+    res.redirect(`/student/tuition?HocKy=${s[0]}&NamHoc=${s[1]}`)
 })
 
 router.get('/tuition',async function (req, res) {
@@ -188,12 +187,6 @@ router.get('/tuition',async function (req, res) {
     res.render('student/tuition', {
         layout: "student.hbs", student: stud,studentClass: studClass.TenLop,
         tuitions, chooseList, flag, tong
-    })
-})
-
-router.get('/student', function (req, res) {
-    res.render('student/home', {
-        layout: "student.hbs"
     })
 })
 

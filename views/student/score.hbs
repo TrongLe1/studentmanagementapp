@@ -10,10 +10,10 @@
                     <button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
                     <ul class="menu">
                         <li class="menu-item mr-1"><a href="/student">Trang chủ</a></li>
-                        <li class="menu-item mr-1"><a href="/exam-schedule">Lịch Thi</a></li>
-                        <li class="menu-item mr-1"><a href="/time-table">Thời khóa biểu</a></li>
-                        <li class="menu-item mr-1"><a href="/tuition">Học Phí</a></li>
-                        <li class="menu-item mr-1 current-menu-item"><a href="/profile">Thông tin cá nhân</a></li>
+                        <li class="menu-item mr-1"><a href="/student/exam-schedule">Lịch Thi</a></li>
+                        <li class="menu-item mr-1"><a href="/student/time-table">Thời khóa biểu</a></li>
+                        <li class="menu-item mr-1"><a href="/student/tuition">Học Phí</a></li>
+                        <li class="menu-item mr-1 current-menu-item"><a href="/student/profile">Thông tin cá nhân</a></li>
                         <li class="menu-item mr-1"><a href="/logout">
                             Đăng xuất</a></li>
                     </ul> <!-- .menu -->
@@ -32,7 +32,7 @@
             {{#if flag}}
                 <div class="row">
                     <div class="col-md-6">
-                        <form class="form-inline" method="post" action="/score">
+                        <form class="form-inline" method="post" action="/student/score">
                             <label class="my-1 mr-2" for="value">Chọn học kì - năm học</label>
                             <select onchange="this.form.submit()" class="custom-select my-1 mr-sm-2" id="value" name="value">
                                 {{#each chooseList}}

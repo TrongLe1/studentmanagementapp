@@ -10,6 +10,7 @@ import accountModel from '../models/account-model.js'
 const router = express.Router();
 
 router.get('/', function (req, res) {
+
     res.redirect('/teacher/teaching-class')
 })
 
@@ -336,11 +337,62 @@ router.post('/homeroom-class/student/delete', async function (req, res) {
 router.post('/homeroom-class/student/absent', async function (req, res) {
     const studentID = req.body.id
     const today = moment().format('YYYY-MM-DD')
-    await studentModel.markAbsentStudent({
+    await studentModel.updateAchievement({
+        LoaiThanhTich: -1,
         TenHoatDong: "Vắng học",
+        DiemThanhTich: 5,
         NgayDienRa: today
     }, studentID)
     res.redirect(req.headers.referer || '/homeroom-class/students')
+})
+
+router.get('/homeroom-class/achievements/:cid', async function (req, res) {
+    // const classID = req.params.cid
+    // const className = (await classModel.findClassById(classID))[0].TenLop
+    // const page = req.query.page || 1
+    // const offset = (page - 1) * limit
+    // const students = await studentModel.getStudentInClass(classID, limit, offset)
+    // let chooseSemesterList = await studentModel.getChooseSemesterAndYearList(1)
+    // let hocky = req.query.HocKy || chooseSemesterList[0].HocKy
+    // let namhoc = req.query.NamHoc || chooseSemesterList[0].NamHoc
+    // for (let i in chooseSemesterList) {
+    //     chooseSemesterList[i].isSelected = (chooseSemesterList[i].HocKy == hocky
+    //         && chooseSemesterList[i].NamHoc == namhoc);
+    // }
+    // for (const student of students) {
+
+    const limit = 8
+    const homeroomClass = (await classModel.findHomeroomClass(1))[0]
+    const className = (await classModel.findClassById(homeroomClass.MaLop))[0].TenLop
+    const page = req.query.page || 1
+    const offset = (page - 1) * limit
+    const result = await teacherModel.getAchievements(limit, offset)
+    for (const achieve of result) {
+        achieve.DiemThanhTich *= achieve.LoaiThanhTich
+    }
+    const total = await teacherModel.countAchievements()
+    let nPage = Math.floor(total / limit)
+    if (total % limit > 0) nPage++
+    let nexPage = {check: true, value: (+page + 1)}
+    let curPage = {check: (+page > 0 && +page <= nPage && result.length !== 0), value: +page}
+    let prevPage = {check: true, value: (+page - 1)}
+    if (nexPage.value === nPage + 1) nexPage.check = false
+    if (prevPage.value === 0) prevPage.check = false
+    if (total === 0) curPage.check = false
+    res.render('teacher/achievements', {
+        layout: "teacher.hbs",
+        homeroom_class: true,
+        result,
+        className,
+        nexPage,
+        curPage,
+        prevPage
+    })
+})
+
+router.post('/homeroom-class/achievement/delete', async function (req, res) {
+    await teacherModel.removeAchievement(req.body.id)
+    res.redirect(req.headers.referer || '/teacher/homeroom-class/achievements')
 })
 
 router.get('/info', async function (req, res) {
@@ -362,7 +414,7 @@ router.post('/info/edit', async function (req, res) {
         HoTen: req.body.info0,
         NgaySinh: moment(dateObject).format('YYYY-MM-DD'),
         SDT: req.body.sdt,
-        DiaChi: req.body.address,
+        DiaChi: req.body.info3,
         GioiTinh: parseInt(req.body.gender)
     }
     await teacherModel.updateTeacher(teacher, 1);

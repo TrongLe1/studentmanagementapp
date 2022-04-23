@@ -11,10 +11,10 @@
                     <button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
                     <ul class="menu">
                         <li class="menu-item mr-1"><a href="/student">Trang chủ</a></li>
-                        <li class="menu-item mr-1"><a href="/exam-schedule">Lịch Thi</a></li>
-                        <li class="menu-item mr-1"><a href="/time-table">Thời khóa biểu</a></li>
-                        <li class="menu-item mr-1"><a href="/tuition">Học Phí</a></li>
-                        <li class="menu-item mr-1 current-menu-item"><a href="/profile">Thông tin cá nhân</a></li>
+                        <li class="menu-item mr-1"><a href="/student/exam-schedule">Lịch Thi</a></li>
+                        <li class="menu-item mr-1"><a href="/student/time-table">Thời khóa biểu</a></li>
+                        <li class="menu-item mr-1"><a href="/student/tuition">Học Phí</a></li>
+                        <li class="menu-item mr-1 current-menu-item"><a href="/student/profile">Thông tin cá nhân</a></li>
                         <li class="menu-item mr-1"><a href="/logout">Đăng xuất</a></li>
                     </ul> <!-- .menu -->
                 </div> <!-- .main-navigation -->
@@ -119,11 +119,11 @@
                             </div>
                         </div>
                         <div class="card-footer d-flex justify-content-center p-1" >
-                            <a href="/profile/edit" class="btn btn-primary mr-3">
+                            <a href="/student/profile/edit" class="btn btn-primary mr-3">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                                 Sửa thông tin
                             </a>
-                            <a href="/score" class="btn btn-secondary">
+                            <a href="/student/score" class="btn btn-secondary">
                                 <i class="fa fa-eye" aria-hidden="true"></i>
                                 Xem điểm quá trình
                             </a>
@@ -158,7 +158,7 @@
                                     <td>{{this.info.SDT}}</td>
                                     <td>{{this.info.ChucVu}}</td>
                                     <td>
-                                        <a class="btn btn-primary btn-sm" href="/relative/edit/{{this.info.MaPHHS}}">Sửa</a>
+                                        <a class="btn btn-primary btn-sm" href="/student/relative/edit/{{this.info.MaPHHS}}">Sửa</a>
                                     </td>
                                 </tr>
                                 {{/each}}
