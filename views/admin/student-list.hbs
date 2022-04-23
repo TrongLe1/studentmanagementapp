@@ -14,7 +14,11 @@
                                 </a>
                                 <div class="header-search">
                                     <form action="/admin/student" method="get">
+                                        {{#if keyword}}
+                                            <input type="text" name="keyword" value="{{this.keyword}}">
+                                        {{else}}
                                         <input type="text" name="keyword" placeholder="Nhập tên học sinh">
+                                        {{/if}}
                                         <button type="submit" class="bg-gr" style="width: fit-content;">Tìm kiếm</button>
                                     </form>
                                 </div>

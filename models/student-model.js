@@ -37,6 +37,19 @@ export default {
     removeAllStudentFromClass(id) {
         return db('hocsinh').where('ThuocLop', '=', id).update({ThuocLop: null})
     },
+    async searchStudentByName(keyword, limit, offset) {
+        const result = await db.raw(`SELECT *
+                                     FROM hocsinh
+                                     WHERE MATCH (HoTen) AGAINST('${keyword}') LIMIT ${limit} OFFSET ${offset};`)
+        return result[0]
+
+    },
+    async countSearchStudent(keyword) {
+        const result = await db.raw(`SELECT COUNT(*)
+                                     FROM hocsinh
+                                     WHERE MATCH (HoTen) AGAINST('${keyword}');`)
+        return result[0][0]['COUNT(*)']
+    },
     getStudentScoresInSubjectByHKNH(studentID, subjectID, HocKy, NamHoc) {
         return db('diem').where('MaHocSinh', studentID)
             .where('MaMon', subjectID)

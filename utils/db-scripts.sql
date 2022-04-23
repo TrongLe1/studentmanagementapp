@@ -239,3 +239,9 @@ create table Diem
     CONSTRAINT FK_MaMon_HocSinh FOREIGN KEY (MaHocSinh)
         REFERENCES HocSinh (MaHocSinh)
 );
+
+ALTER TABLE hocsinh
+    ADD FULLTEXT(HoTen);
+
+ALTER TABLE giaovien
+    ADD FULLTEXT(HoTen);

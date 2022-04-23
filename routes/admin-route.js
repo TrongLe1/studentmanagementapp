@@ -34,7 +34,8 @@ router.get('/teacher', async function (req, res) {
     let result
     let total
     if (req.query.keyword) {
-
+        result = await teacherModel.searchTeacherByName(req.query.keyword, limit, offset)
+        total = await teacherModel.countSearchTeacher(req.query.keyword)
     }
     else {
         result = await teacherModel.getTeacher(limit, offset)
@@ -713,7 +714,8 @@ router.get('/student', async function (req, res) {
     let result
     let total
     if (req.query.keyword) {
-
+        result = await studentModel.searchStudentByName(req.query.keyword, limit, offset)
+        total = await studentModel.countSearchStudent(req.query.keyword)
     }
     else {
         result = await studentModel.getStudent(limit, offset)

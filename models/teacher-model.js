@@ -66,5 +66,18 @@ export default {
     },
     removeAchievement(id) {
         return db('thanhtich').where('MaThanhTich', '=', id).delete()
+    },
+    async searchTeacherByName(keyword, limit, offset) {
+        const result = await db.raw(`SELECT *
+                                     FROM giaovien
+                                     WHERE MATCH (HoTen) AGAINST('${keyword}') LIMIT ${limit} OFFSET ${offset};`)
+        return result[0]
+
+    },
+    async countSearchTeacher(keyword) {
+        const result = await db.raw(`SELECT COUNT(*)
+                                     FROM giaovien
+                                     WHERE MATCH (HoTen) AGAINST('${keyword}');`)
+        return result[0][0]['COUNT(*)']
     }
 }
