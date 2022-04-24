@@ -158,7 +158,7 @@ router.post('/teaching-class/scores/:cid/:sid', function (req, res) {
     let result = req.body.value.split('/')
     const classID = req.params.cid
     const subjectID = req.params.sid
-    res.redirect('/teacher/teaching-class/scores/'+classID+'/'+subjectID+'/?HocKy='+result[0]+'&NamHoc='+result[1]+'')
+    res.redirect('/teacher/teaching-class/scores/'+classID+'/'+subjectID+'?HocKy='+result[0]+'&NamHoc='+result[1]+'')
 })
 
 router.post('/teaching-class/scores/:cid/:sid/edit', async function (req, res) {
@@ -372,28 +372,27 @@ router.post('/homeroom-class/student/absent', async function (req, res) {
 })
 
 router.get('/homeroom-class/achievements', async function (req, res) {
-    // const students = await studentModel.getStudentInClass(classID, limit, offset)
-    // let chooseSemesterList = await studentModel.getChooseSemesterAndYearList(1)
-    // let hocky = req.query.HocKy || chooseSemesterList[0].HocKy
-    // let namhoc = req.query.NamHoc || chooseSemesterList[0].NamHoc
-    // for (let i in chooseSemesterList) {
-    //     chooseSemesterList[i].isSelected = (chooseSemesterList[i].HocKy == hocky
-    //         && chooseSemesterList[i].NamHoc == namhoc);
-    // }
-    // for (const student of students) {}
-
-    const limit = 8
+    const limit = 6
     const teacher = req.session.teacher
     const homeroomClass = (await classModel.findHomeroomClass(teacher.MaGV))[0]
-    const classID = req.params.cid
+    const classID = teacher.ChuNhiemLop
     const className = (await classModel.findClassById(homeroomClass.MaLop))[0].TenLop
     const page = req.query.page || 1
     const offset = (page - 1) * limit
-    const result = await teacherModel.getAchievements(limit, offset)
+    const students = await studentModel.getStudentInClass(classID, limit, offset)
+    let chooseSemesterList = await studentModel.getChooseSemesterAndYearList(students[0].MaHocSinh)
+    let hocky = req.query.HocKy || chooseSemesterList[0].HocKy
+    let namhoc = req.query.NamHoc || chooseSemesterList[0].NamHoc
+    for (let i in chooseSemesterList) {
+        chooseSemesterList[i].isSelected = (chooseSemesterList[i].HocKy == hocky
+            && chooseSemesterList[i].NamHoc == namhoc);
+    }
+    const result = await teacherModel.getAchievementsByHKNH(classID, limit, offset, hocky, namhoc)
+    console.log(result)
     for (const achieve of result) {
         achieve.DiemThanhTich *= achieve.LoaiThanhTich
     }
-    const total = await teacherModel.countAchievements()
+    const total = await teacherModel.countAchievementsByHKNH(classID, hocky, namhoc)
     let nPage = Math.floor(total / limit)
     if (total % limit > 0) nPage++
     let nexPage = {check: true, value: (+page + 1)}
@@ -402,11 +401,15 @@ router.get('/homeroom-class/achievements', async function (req, res) {
     if (nexPage.value === nPage + 1) nexPage.check = false
     if (prevPage.value === 0) prevPage.check = false
     if (total === 0) curPage.check = false
-    res.render('teacher/achievements', {
+    res.render('teacher/achievement-list', {
         layout: "teacher.hbs",
         homeroom_class: true,
         homeroom_teacher: req.session.isHomeroomTeacher,
+        teacher_name: teacher.HoTen,
         result,
+        chooseList: chooseSemesterList,
+        hocky,
+        namhoc,
         className,
         nexPage,
         curPage,
@@ -414,8 +417,20 @@ router.get('/homeroom-class/achievements', async function (req, res) {
     })
 })
 
+router.post('/homeroom-class/achievements', function (req, res) {
+    let result = req.body.value.split('/')
+    res.redirect('/teacher/homeroom-class/achievements?HocKy='+result[0]+'&NamHoc='+result[1]+'')
+})
+
+router.post('/homeroom-class/achievements/edit', async function (req, res) {
+    await teacherModel.updateAchievement({
+        SoLanThamGia: req.body.joinCount
+        }, req.body.sid, req.body.aid)
+    res.redirect(req.headers.referer || '/teacher/teaching-class/scores/' + classID + '/' + subjectID + '?HocKy=' + hocky + '&NamHoc=' + namhoc)
+})
+
 router.post('/homeroom-class/achievement/delete', async function (req, res) {
-    await teacherModel.removeAchievement(req.body.id)
+    await teacherModel.removeAchievement(req.body.sid, req.body.aid)
     res.redirect(req.headers.referer || '/teacher/homeroom-class/achievements')
 })
 

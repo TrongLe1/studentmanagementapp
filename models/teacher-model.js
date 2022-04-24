@@ -57,15 +57,32 @@ export default {
         const result = await db('ctgiangday').where('MaGV', teacherID).count('*')
         return result[0]['count(*)']
     },
-    getAchievements(limit, offset) {
-        return db('thanhtich').limit(limit).offset(offset)
+    getAchievementsByHKNH(classID, limit, offset, HK, NH) {
+        return db('ctthanhtich').join('thanhtich', 'ctthanhtich.MaThanhTich', 'thanhtich.MaThanhTich')
+            .join ('hocsinh', 'ctthanhtich.MaHocSinh', 'hocsinh.MaHocSinh')
+            .where ('ThuocLop', classID)
+            .where('HocKy', HK)
+            .where('NamHoc', NH).limit(limit).offset(offset)
     },
-    async countAchievements() {
-        const result = await db('thanhtich').count('*')
+    async countAchievementsByHKNH(classID, HK, NH)  {
+        const result = await db('ctthanhtich').join('thanhtich', 'ctthanhtich.MaThanhTich', 'thanhtich.MaThanhTich')
+            .join ('hocsinh', 'ctthanhtich.MaHocSinh', 'hocsinh.MaHocSinh')
+            .where ('ThuocLop', classID)
+            .where('HocKy', HK)
+            .where('NamHoc', NH).count('*')
         return result[0]['count(*)']
     },
-    removeAchievement(id) {
-        return db('thanhtich').where('MaThanhTich', '=', id).delete()
+    updateAchievement(entity, studentID, achievementID) {
+        return db('ctthanhtich')
+            .where('MaHocSinh', '=', studentID)
+            .where('MaThanhTich', '=', achievementID)
+            .update(entity)
+    },
+    removeAchievement(studentID, achievementID) {
+        return db('ctthanhtich')
+            .where('MaHocSinh', '=', studentID)
+            .where('MaThanhTich', '=', achievementID)
+            .delete()
     },
     async searchTeacherByName(keyword, limit, offset) {
         const result = await db.raw(`SELECT *
