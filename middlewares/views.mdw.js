@@ -131,7 +131,11 @@ export default function (app) {
                 return result
             },
             plusIdx(val) {
-                return val++
+                val++
+                return val
+            },
+            formatTime(val){
+                return val.toString().slice(0,5);
             }
         }
     }));

@@ -2,10 +2,10 @@
     <header class="site-header">
         <div class="primary-header">
             <div class="container">
-                <a href="/student" id="branding">
-                    <img src="/public/home-assets/images/logo.png" alt="Lincoln high School">
-                    <h1 class="site-title">Lincoln High School</h1>
-                </a> <!-- #branding -->
+<!--                <a href="/student" id="branding">-->
+<!--                    <img src="/public/home-assets/images/logo.png" alt="Lincoln high School">-->
+<!--                    <h1 class="site-title">Lincoln High School</h1>-->
+<!--                </a> &lt;!&ndash; #branding &ndash;&gt;-->
 
 
                 <div class="main-navigation">
@@ -57,7 +57,7 @@
                     {{#each schedule}}
                         <tr>
                             <td class="align-middle" style="background-color: #f6caca">
-                                <span class="font-weight-bold" style="font-size: 20px">{{formatDate this.NgayThi}}</span>
+                                <span class="font-weight-bold" style="font-size: 16px">{{formatDate this.NgayThi}}</span>
                             </td>
                             <td style="background-color: #dbeff8">
                                 {{checkTimeSession ThoiGianBD}}
@@ -69,13 +69,13 @@
                             </td>
                             <td style="background-color: #dbeff8">
                             <span class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16  xs-font-size13">
-                                {{this.ThoiGianBD}}
+                                {{formatTime this.ThoiGianBD}}
                             </span>
                             </td>
 
                             <td style="background-color: #dbeff8">
                             <span class="bg-yellow padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom    font-size16  xs-font-size13">
-                                {{this.ThoiGianKt}}
+                                {{formatTime this.ThoiGianKt}}
                             </span>
                             </td>
                             <td style="background-color: #dbeff8">
