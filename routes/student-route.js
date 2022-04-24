@@ -69,7 +69,6 @@ router.get('/student', function (req, res) {
         res.render('student/home', {
             layout: "student.hbs"
         })
-
         else
             res.redirect('/login')
     } catch (e) {

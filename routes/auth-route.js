@@ -44,6 +44,7 @@ router.post('/login', async function (req, res) {
         return res.redirect('/login')
     let checkAccount = ''
     let result = (await accountModel.findAccountByUsername(account.TenDangNhap))
+    console.log(result)
     if (result.length !== 0) {
         checkAccount = result[0]
     } else
@@ -52,6 +53,7 @@ router.post('/login', async function (req, res) {
         delete checkAccount.Matkhau
         req.session.login = true
         req.session.accountAuth = checkAccount
+        console.log(checkAccount)
         if (checkAccount.LoaiTaiKhoan === 2) {
             req.session.student = (await studentModel.findStudentById(req.session.accountAuth.MaTaiKhoan))[0]
             req.session.class = (await classModel.findClassById(req.session.student.ThuocLop))[0]
@@ -65,7 +67,7 @@ router.post('/login', async function (req, res) {
         } else if (checkAccount.LoaiTaiKhoan === 3) {
             req.session.isHomeroomTeacher = true
             req.session.teacher = (await teacherModel.findTeacherAccount(req.session.accountAuth.MaTaiKhoan))[0]
-            req.session.homeroomClass = (await classModel.findHomeroomClass(req.session.homeroomTeacher.ChuNhiemLop))[0]
+            req.session.homeroomClass = (await classModel.findHomeroomClass(req.session.teacher.ChuNhiemLop))[0]
             res.redirect('/teacher')
         }
     } else {
