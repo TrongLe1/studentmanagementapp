@@ -1,275 +1,320 @@
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (1, 1, 1, 2, 2022, 1, 5);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (2, 1, 1, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (3, 1, 1, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (4, 1, 1, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (5, 1, 1, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (6, 1, 2, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (7, 1, 2, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (8, 1, 2, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (9, 1, 2, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (10, 1, 2, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (11, 1, 3, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (12, 1, 3, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (13, 1, 3, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (14, 1, 3, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (15, 1, 3, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (16, 1, 4, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (17, 1, 4, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (18, 1, 4, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (19, 1, 4, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (20, 1, 4, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (21, 1, 5, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (22, 1, 5, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (23, 1, 5, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (24, 1, 5, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (25, 1, 5, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (26, 1, 6, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (27, 1, 6, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (28, 1, 6, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (29, 1, 6, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (30, 1, 6, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (31, 1, 7, 2, 2022, 1, 1);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (32, 1, 7, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (33, 1, 7, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (34, 1, 7, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (35, 1, 7, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (36, 1, 8, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (37, 1, 8, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (38, 1, 8, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (39, 1, 8, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (40, 1, 8, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (41, 1, 9, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (42, 1, 9, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (43, 1, 9, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (44, 1, 9, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (45, 1, 9, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (46, 1, 10, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (47, 1, 10, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (48, 1, 10, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (49, 1, 10, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (50, 1, 10, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (51, 1, 11, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (52, 1, 11, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (53, 1, 11, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (54, 1, 11, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (55, 1, 11, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (56, 2, 1, 2, 2022, 1, 5);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (57, 2, 1, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (58, 2, 1, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (59, 2, 1, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (60, 2, 1, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (61, 2, 2, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (62, 2, 2, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (63, 2, 2, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (64, 2, 2, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (65, 2, 2, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (66, 2, 3, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (67, 2, 3, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (68, 2, 3, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (69, 2, 3, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (70, 2, 3, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (71, 2, 4, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (72, 2, 4, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (73, 2, 4, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (74, 2, 4, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (75, 2, 4, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (76, 2, 5, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (77, 2, 5, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (78, 2, 5, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (79, 2, 5, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (80, 2, 5, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (81, 2, 6, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (82, 2, 6, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (83, 2, 6, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (84, 2, 6, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (85, 2, 6, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (86, 2, 7, 2, 2022, 1, 1);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (87, 2, 7, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (88, 2, 7, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (89, 2, 7, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (90, 2, 7, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (91, 2, 8, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (92, 2, 8, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (93, 2, 8, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (94, 2, 8, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (95, 2, 8, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (96, 2, 9, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (97, 2, 9, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (98, 2, 9, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (99, 2, 9, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (100, 2, 9, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (101, 2, 10, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (102, 2, 10, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (103, 2, 10, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (104, 2, 10, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (105, 2, 10, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (106, 2, 11, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (107, 2, 11, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (108, 2, 11, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (109, 2, 11, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (110, 2, 11, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (111, 3, 1, 2, 2022, 1, 5);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (112, 3, 1, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (113, 3, 1, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (114, 3, 1, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (115, 3, 1, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (116, 3, 2, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (117, 3, 2, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (118, 3, 2, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (119, 3, 2, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (120, 3, 2, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (121, 3, 3, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (122, 3, 3, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (123, 3, 3, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (124, 3, 3, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (125, 3, 3, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (126, 3, 4, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (127, 3, 4, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (128, 3, 4, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (129, 3, 4, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (130, 3, 4, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (131, 3, 5, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (132, 3, 5, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (133, 3, 5, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (134, 3, 5, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (135, 3, 5, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (136, 3, 6, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (137, 3, 6, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (138, 3, 6, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (139, 3, 6, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (140, 3, 6, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (141, 3, 7, 2, 2022, 1, 1);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (142, 3, 7, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (143, 3, 7, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (144, 3, 7, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (145, 3, 7, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (146, 3, 8, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (147, 3, 8, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (148, 3, 8, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (149, 3, 8, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (150, 3, 8, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (151, 3, 9, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (152, 3, 9, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (153, 3, 9, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (154, 3, 9, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (155, 3, 9, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (156, 3, 10, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (157, 3, 10, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (158, 3, 10, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (159, 3, 10, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (160, 3, 10, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (161, 3, 11, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (162, 3, 11, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (163, 3, 11, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (164, 3, 11, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (165, 3, 11, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (166, 4, 1, 2, 2022, 1, 5);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (167, 4, 1, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (168, 4, 1, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (169, 4, 1, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (170, 4, 1, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (171, 4, 2, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (172, 4, 2, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (173, 4, 2, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (174, 4, 2, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (175, 4, 2, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (176, 4, 3, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (177, 4, 3, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (178, 4, 3, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (179, 4, 3, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (180, 4, 3, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (181, 4, 4, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (182, 4, 4, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (183, 4, 4, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (184, 4, 4, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (185, 4, 4, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (186, 4, 5, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (187, 4, 5, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (188, 4, 5, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (189, 4, 5, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (190, 4, 5, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (191, 4, 6, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (192, 4, 6, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (193, 4, 6, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (194, 4, 6, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (195, 4, 6, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (196, 4, 7, 2, 2022, 1, 1);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (197, 4, 7, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (198, 4, 7, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (199, 4, 7, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (200, 4, 7, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (201, 4, 8, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (202, 4, 8, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (203, 4, 8, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (204, 4, 8, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (205, 4, 8, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (206, 4, 9, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (207, 4, 9, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (208, 4, 9, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (209, 4, 9, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (210, 4, 9, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (211, 4, 10, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (212, 4, 10, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (213, 4, 10, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (214, 4, 10, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (215, 4, 10, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (216, 4, 11, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (217, 4, 11, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (218, 4, 11, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (219, 4, 11, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (220, 4, 11, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (221, 5, 1, 2, 2022, 1, 5);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (222, 5, 1, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (223, 5, 1, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (224, 5, 1, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (225, 5, 1, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (226, 5, 2, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (227, 5, 2, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (228, 5, 2, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (229, 5, 2, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (230, 5, 2, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (231, 5, 3, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (232, 5, 3, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (233, 5, 3, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (234, 5, 3, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (235, 5, 3, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (236, 5, 4, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (237, 5, 4, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (238, 5, 4, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (239, 5, 4, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (240, 5, 4, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (241, 5, 5, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (242, 5, 5, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (243, 5, 5, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (244, 5, 5, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (245, 5, 5, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (246, 5, 6, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (247, 5, 6, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (248, 5, 6, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (249, 5, 6, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (250, 5, 6, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (251, 5, 7, 2, 2022, 1, 1);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (252, 5, 7, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (253, 5, 7, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (254, 5, 7, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (255, 5, 7, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (256, 5, 8, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (257, 5, 8, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (258, 5, 8, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (259, 5, 8, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (260, 5, 8, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (261, 5, 9, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (262, 5, 9, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (263, 5, 9, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (264, 5, 9, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (265, 5, 9, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (266, 5, 10, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (267, 5, 10, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (268, 5, 10, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (269, 5, 10, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (270, 5, 10, 2, 2022, 3, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (271, 5, 11, 2, 2022, 1, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (272, 5, 11, 2, 2022, 1, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (273, 5, 11, 2, 2022, 2, 8);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (274, 5, 11, 2, 2022, 2, 9);
-INSERT INTO std_management_app.diem (MaDiem, MaHocSinh, MaMon, HocKy, NamHoc, HeSoDiem, SoDiem) VALUES (275, 5, 11, 2, 2022, 3, 8);
+INSERT INTO `diem` (`MaDiem`, `MaHocSinh`, `MaMon`, `HocKy`, `NamHoc`, `HeSoDiem`, `SoDiem`) VALUES
+ (1, 1, 1, 2, 2022, 1, 5),
+ (2, 1, 1, 2, 2022, 1, 9),
+ (3, 1, 1, 2, 2022, 2, 8),
+ (4, 1, 1, 2, 2022, 2, 9),
+ (5, 1, 1, 2, 2022, 3, 8),
+ (6, 1, 2, 2, 2022, 1, 8),
+ (7, 1, 2, 2, 2022, 1, 9),
+ (8, 1, 2, 2, 2022, 2, 8),
+ (9, 1, 2, 2, 2022, 2, 9),
+ (10, 1, 2, 2, 2022, 3, 8),
+ (11, 1, 3, 2, 2022, 1, 8),
+ (12, 1, 3, 2, 2022, 1, 9),
+ (13, 1, 3, 2, 2022, 2, 8),
+ (14, 1, 3, 2, 2022, 2, 9),
+ (15, 1, 3, 2, 2022, 3, 8),
+ (16, 1, 4, 2, 2022, 1, 1),
+ (17, 1, 4, 1, 2022, 1, 9),
+ (18, 1, 4, 2, 2022, 2, 10),
+ (19, 1, 4, 2, 2022, 2, 9),
+ (20, 1, 4, 2, 2022, 3, 8),
+ (21, 1, 5, 2, 2022, 1, 8),
+ (22, 1, 5, 2, 2022, 1, 9),
+ (23, 1, 5, 2, 2022, 2, 8),
+ (24, 1, 5, 2, 2022, 2, 9),
+ (25, 1, 5, 2, 2022, 3, 8),
+ (26, 1, 6, 2, 2022, 1, 8),
+ (27, 1, 6, 2, 2022, 1, 9),
+ (28, 1, 6, 2, 2022, 2, 8),
+ (29, 1, 6, 2, 2022, 2, 9),
+ (30, 1, 6, 2, 2022, 3, 8),
+ (31, 1, 7, 2, 2022, 1, 1),
+ (32, 1, 7, 2, 2022, 1, 9),
+ (33, 1, 7, 2, 2022, 2, 8),
+ (34, 1, 7, 2, 2022, 2, 9),
+ (35, 1, 7, 2, 2022, 3, 8),
+ (36, 1, 8, 2, 2022, 1, 8),
+ (37, 1, 8, 2, 2022, 1, 9),
+ (38, 1, 8, 2, 2022, 2, 8),
+ (39, 1, 8, 2, 2022, 2, 9),
+ (40, 1, 8, 2, 2022, 3, 8),
+ (41, 1, 9, 2, 2022, 1, 8),
+ (42, 1, 9, 2, 2022, 1, 9),
+ (43, 1, 9, 2, 2022, 2, 8),
+ (44, 1, 9, 2, 2022, 2, 9),
+ (45, 1, 9, 2, 2022, 3, 8),
+ (46, 1, 10, 2, 2022, 1, 8),
+ (47, 1, 10, 2, 2022, 1, 9),
+ (48, 1, 10, 2, 2022, 2, 8),
+ (49, 1, 10, 2, 2022, 2, 9),
+ (50, 1, 10, 2, 2022, 3, 8),
+ (51, 1, 11, 2, 2022, 1, 8),
+ (52, 1, 11, 2, 2022, 1, 9),
+ (53, 1, 11, 2, 2022, 2, 8),
+ (54, 1, 11, 2, 2022, 2, 9),
+ (55, 1, 11, 2, 2022, 3, 8),
+ (56, 2, 1, 2, 2022, 1, 5),
+ (57, 2, 1, 2, 2022, 1, 9),
+ (58, 2, 1, 2, 2022, 2, 8),
+ (59, 2, 1, 2, 2022, 2, 9),
+ (60, 2, 1, 2, 2022, 3, 8),
+ (61, 2, 2, 2, 2022, 1, 8),
+ (62, 2, 2, 2, 2022, 1, 9),
+ (63, 2, 2, 2, 2022, 2, 8),
+ (64, 2, 2, 2, 2022, 2, 9),
+ (65, 2, 2, 2, 2022, 3, 8),
+ (66, 2, 3, 2, 2022, 1, 8),
+ (67, 2, 3, 2, 2022, 1, 9),
+ (68, 2, 3, 2, 2022, 2, 8),
+ (69, 2, 3, 2, 2022, 2, 9),
+ (70, 2, 3, 2, 2022, 3, 8),
+ (71, 2, 4, 2, 2022, 1, 8),
+ (72, 2, 4, 2, 2022, 1, 9),
+ (73, 2, 4, 2, 2022, 2, 8),
+ (74, 2, 4, 2, 2022, 2, 9),
+ (75, 2, 4, 2, 2022, 3, 8),
+ (76, 2, 5, 2, 2022, 1, 8),
+ (77, 2, 5, 2, 2022, 1, 9),
+ (78, 2, 5, 2, 2022, 2, 8),
+ (79, 2, 5, 2, 2022, 2, 9),
+ (80, 2, 5, 2, 2022, 3, 8),
+ (81, 2, 6, 2, 2022, 1, 8),
+ (82, 2, 6, 2, 2022, 1, 9),
+ (83, 2, 6, 2, 2022, 2, 8),
+ (84, 2, 6, 2, 2022, 2, 9),
+ (85, 2, 6, 2, 2022, 3, 8),
+ (86, 2, 7, 2, 2022, 1, 1),
+ (87, 2, 7, 2, 2022, 1, 9),
+ (88, 2, 7, 2, 2022, 2, 8),
+ (89, 2, 7, 2, 2022, 2, 9),
+ (90, 2, 7, 2, 2022, 3, 8),
+ (91, 2, 8, 2, 2022, 1, 8),
+ (92, 2, 8, 2, 2022, 1, 9),
+ (93, 2, 8, 2, 2022, 2, 8),
+ (94, 2, 8, 2, 2022, 2, 9),
+ (95, 2, 8, 2, 2022, 3, 8),
+ (96, 2, 9, 2, 2022, 1, 8),
+ (97, 2, 9, 2, 2022, 1, 9),
+ (98, 2, 9, 2, 2022, 2, 8),
+ (99, 2, 9, 2, 2022, 2, 9),
+ (100, 2, 9, 2, 2022, 3, 8),
+ (101, 2, 10, 2, 2022, 1, 8),
+ (102, 2, 10, 2, 2022, 1, 9),
+ (103, 2, 10, 2, 2022, 2, 8),
+ (104, 2, 10, 2, 2022, 2, 9),
+ (105, 2, 10, 2, 2022, 3, 8),
+ (106, 2, 11, 2, 2022, 1, 8),
+ (107, 2, 11, 2, 2022, 1, 9),
+ (108, 2, 11, 2, 2022, 2, 8),
+ (109, 2, 11, 2, 2022, 2, 9),
+ (110, 2, 11, 2, 2022, 3, 8),
+ (111, 3, 1, 2, 2022, 1, 5),
+ (112, 3, 1, 2, 2022, 1, 9),
+ (113, 3, 1, 2, 2022, 2, 8),
+ (114, 3, 1, 2, 2022, 2, 9),
+ (115, 3, 1, 2, 2022, 3, 8),
+ (116, 3, 2, 2, 2022, 1, 8),
+ (117, 3, 2, 2, 2022, 1, 9),
+ (118, 3, 2, 2, 2022, 2, 8),
+ (119, 3, 2, 2, 2022, 2, 9),
+ (120, 3, 2, 2, 2022, 3, 8),
+ (121, 3, 3, 2, 2022, 1, 8),
+ (122, 3, 3, 2, 2022, 1, 9),
+ (123, 3, 3, 2, 2022, 2, 8),
+ (124, 3, 3, 2, 2022, 2, 9),
+ (125, 3, 3, 2, 2022, 3, 8),
+ (126, 3, 4, 2, 2022, 1, 8),
+ (127, 3, 4, 2, 2022, 1, 9),
+ (128, 3, 4, 2, 2022, 2, 8),
+ (129, 3, 4, 2, 2022, 2, 9),
+ (130, 3, 4, 2, 2022, 3, 8),
+ (131, 3, 5, 2, 2022, 1, 8),
+ (132, 3, 5, 2, 2022, 1, 9),
+ (133, 3, 5, 2, 2022, 2, 8),
+ (134, 3, 5, 2, 2022, 2, 9),
+ (135, 3, 5, 2, 2022, 3, 8),
+ (136, 3, 6, 2, 2022, 1, 8),
+ (137, 3, 6, 2, 2022, 1, 9),
+ (138, 3, 6, 2, 2022, 2, 8),
+ (139, 3, 6, 2, 2022, 2, 9),
+ (140, 3, 6, 2, 2022, 3, 8),
+ (141, 3, 7, 2, 2022, 1, 1),
+ (142, 3, 7, 2, 2022, 1, 9),
+ (143, 3, 7, 2, 2022, 2, 8),
+ (144, 3, 7, 2, 2022, 2, 9),
+ (145, 3, 7, 2, 2022, 3, 8),
+ (146, 3, 8, 2, 2022, 1, 8),
+ (147, 3, 8, 2, 2022, 1, 9),
+ (148, 3, 8, 2, 2022, 2, 8),
+ (149, 3, 8, 2, 2022, 2, 9),
+ (150, 3, 8, 2, 2022, 3, 8),
+ (151, 3, 9, 2, 2022, 1, 8),
+ (152, 3, 9, 2, 2022, 1, 9),
+ (153, 3, 9, 2, 2022, 2, 8),
+ (154, 3, 9, 2, 2022, 2, 9),
+ (155, 3, 9, 2, 2022, 3, 8),
+ (156, 3, 10, 2, 2022, 1, 8),
+ (157, 3, 10, 2, 2022, 1, 9),
+ (158, 3, 10, 2, 2022, 2, 8),
+ (159, 3, 10, 2, 2022, 2, 9),
+ (160, 3, 10, 2, 2022, 3, 8),
+ (161, 3, 11, 2, 2022, 1, 8),
+ (162, 3, 11, 2, 2022, 1, 9),
+ (163, 3, 11, 2, 2022, 2, 8),
+ (164, 3, 11, 2, 2022, 2, 9),
+ (165, 3, 11, 2, 2022, 3, 8),
+ (166, 4, 1, 2, 2022, 1, 5),
+ (167, 4, 1, 2, 2022, 1, 9),
+ (168, 4, 1, 2, 2022, 2, 8),
+ (169, 4, 1, 2, 2022, 2, 9),
+ (170, 4, 1, 2, 2022, 3, 8),
+ (171, 4, 2, 2, 2022, 1, 8),
+ (172, 4, 2, 2, 2022, 1, 9),
+ (173, 4, 2, 2, 2022, 2, 8),
+ (174, 4, 2, 2, 2022, 2, 9),
+ (175, 4, 2, 2, 2022, 3, 8),
+ (176, 4, 3, 2, 2022, 1, 8),
+ (177, 4, 3, 2, 2022, 1, 9),
+ (178, 4, 3, 2, 2022, 2, 8),
+ (179, 4, 3, 2, 2022, 2, 9),
+ (180, 4, 3, 2, 2022, 3, 8),
+ (181, 4, 4, 2, 2022, 1, 8),
+ (182, 4, 4, 2, 2022, 1, 9),
+ (183, 4, 4, 2, 2022, 2, 8),
+ (184, 4, 4, 2, 2022, 2, 9),
+ (185, 4, 4, 2, 2022, 3, 8),
+ (186, 4, 5, 2, 2022, 1, 8),
+ (187, 4, 5, 2, 2022, 1, 9),
+ (188, 4, 5, 2, 2022, 2, 8),
+ (189, 4, 5, 2, 2022, 2, 9),
+ (190, 4, 5, 2, 2022, 3, 8),
+ (191, 4, 6, 2, 2022, 1, 8),
+ (192, 4, 6, 2, 2022, 1, 9),
+ (193, 4, 6, 2, 2022, 2, 8),
+ (194, 4, 6, 2, 2022, 2, 9),
+ (195, 4, 6, 2, 2022, 3, 8),
+ (196, 4, 7, 2, 2022, 1, 1),
+ (197, 4, 7, 2, 2022, 1, 9),
+ (198, 4, 7, 2, 2022, 2, 8),
+ (199, 4, 7, 2, 2022, 2, 9),
+ (200, 4, 7, 2, 2022, 3, 8),
+ (201, 4, 8, 2, 2022, 1, 8),
+ (202, 4, 8, 2, 2022, 1, 9),
+ (203, 4, 8, 2, 2022, 2, 8),
+ (204, 4, 8, 2, 2022, 2, 9),
+ (205, 4, 8, 2, 2022, 3, 8),
+ (206, 4, 9, 2, 2022, 1, 8),
+ (207, 4, 9, 2, 2022, 1, 9),
+ (208, 4, 9, 2, 2022, 2, 8),
+ (209, 4, 9, 2, 2022, 2, 9),
+ (210, 4, 9, 2, 2022, 3, 8),
+ (211, 4, 10, 2, 2022, 1, 8),
+ (212, 4, 10, 2, 2022, 1, 9),
+ (213, 4, 10, 2, 2022, 2, 8),
+ (214, 4, 10, 2, 2022, 2, 9),
+ (215, 4, 10, 2, 2022, 3, 8),
+ (216, 4, 11, 2, 2022, 1, 8),
+ (217, 4, 11, 2, 2022, 1, 9),
+ (218, 4, 11, 2, 2022, 2, 8),
+ (219, 4, 11, 2, 2022, 2, 9),
+ (220, 4, 11, 2, 2022, 3, 8),
+ (221, 5, 1, 2, 2022, 1, 5),
+ (222, 5, 1, 2, 2022, 1, 9),
+ (223, 5, 1, 2, 2022, 2, 8),
+ (224, 5, 1, 2, 2022, 2, 9),
+ (225, 5, 1, 2, 2022, 3, 8),
+ (226, 5, 2, 2, 2022, 1, 8),
+ (227, 5, 2, 2, 2022, 1, 9),
+ (228, 5, 2, 2, 2022, 2, 8),
+ (229, 5, 2, 2, 2022, 2, 9),
+ (230, 5, 2, 2, 2022, 3, 8),
+ (231, 5, 3, 2, 2022, 1, 8),
+ (232, 5, 3, 2, 2022, 1, 9),
+ (233, 5, 3, 2, 2022, 2, 8),
+ (234, 5, 3, 2, 2022, 2, 9),
+ (235, 5, 3, 2, 2022, 3, 8),
+ (236, 5, 4, 2, 2022, 1, 8),
+ (237, 5, 4, 2, 2022, 1, 9),
+ (238, 5, 4, 2, 2022, 2, 8),
+ (239, 5, 4, 2, 2022, 2, 9),
+ (240, 5, 4, 2, 2022, 3, 8),
+ (241, 5, 5, 2, 2022, 1, 8),
+ (242, 5, 5, 2, 2022, 1, 9),
+ (243, 5, 5, 2, 2022, 2, 8),
+ (244, 5, 5, 2, 2022, 2, 9),
+ (245, 5, 5, 2, 2022, 3, 8),
+ (246, 5, 6, 2, 2022, 1, 8),
+ (247, 5, 6, 2, 2022, 1, 9),
+ (248, 5, 6, 2, 2022, 2, 8),
+ (249, 5, 6, 2, 2022, 2, 9),
+ (250, 5, 6, 2, 2022, 3, 8),
+ (251, 5, 7, 2, 2022, 1, 1),
+ (252, 5, 7, 2, 2022, 1, 9),
+ (253, 5, 7, 2, 2022, 2, 8),
+ (254, 5, 7, 2, 2022, 2, 9),
+ (255, 5, 7, 2, 2022, 3, 8),
+ (256, 5, 8, 2, 2022, 1, 8),
+ (257, 5, 8, 2, 2022, 1, 9),
+ (258, 5, 8, 2, 2022, 2, 8),
+ (259, 5, 8, 2, 2022, 2, 9),
+ (260, 5, 8, 2, 2022, 3, 8),
+ (261, 5, 9, 2, 2022, 1, 8),
+ (262, 5, 9, 2, 2022, 1, 9),
+ (263, 5, 9, 2, 2022, 2, 8),
+ (264, 5, 9, 2, 2022, 2, 9),
+ (265, 5, 9, 2, 2022, 3, 8),
+ (266, 5, 10, 2, 2022, 1, 8),
+ (267, 5, 10, 2, 2022, 1, 9),
+ (268, 5, 10, 2, 2022, 2, 8),
+ (269, 5, 10, 2, 2022, 2, 9),
+ (270, 5, 10, 2, 2022, 3, 8),
+ (271, 5, 11, 2, 2022, 1, 8),
+ (272, 5, 11, 2, 2022, 1, 9),
+ (273, 5, 11, 2, 2022, 2, 8),
+ (274, 5, 11, 2, 2022, 2, 9),
+ (275, 5, 11, 2, 2022, 3, 8),
+ (281, 1, 4, 2, 2022, 1, 2),
+ (282, 1, 4, 2, 2022, 1, 4),
+ (283, 1, 4, 2, 2022, 1, 4),
+ (288, 17, 4, 2, 2022, 1, 7),
+ (289, 17, 4, 2, 2022, 1, 5.2),
+ (290, 17, 4, 2, 2022, 1, 8),
+ (291, 17, 4, 2, 2022, 1, 6),
+ (292, 17, 4, 2, 2022, 2, 9),
+ (293, 17, 4, 2, 2022, 2, 9),
+ (294, 17, 4, 2, 2022, 3, 9),
+ (295, 20, 4, 2, 2022, 1, 3),
+ (296, 20, 4, 2, 2022, 1, 4),
+ (297, 20, 4, 2, 2022, 1, 8),
+ (298, 20, 4, 2, 2022, 1, 8),
+ (299, 20, 4, 2, 2022, 2, 8),
+ (300, 20, 4, 2, 2022, 2, 8),
+ (301, 20, 4, 2, 2022, 3, 8),
+ (327, 30, 4, 2, 2022, 1, 1),
+ (328, 30, 4, 2, 2022, 1, 2),
+ (329, 30, 4, 2, 2022, 1, 5),
+ (330, 30, 4, 2, 2022, 1, 4),
+ (331, 30, 4, 2, 2022, 2, 5),
+ (332, 30, 4, 2, 2022, 2, 9),
+ (333, 30, 4, 2, 2022, 3, 10),
+ (334, 47, 4, 2, 2022, 2, 3),
+ (335, 47, 4, 2, 2022, 2, 5),
+ (336, 47, 4, 2, 2022, 1, 10),
+ (337, 47, 4, 2, 2022, 1, 3),
+ (338, 47, 4, 2, 2022, 1, 10),
+ (339, 75, 4, 2, 2022, 1, 3),
+ (340, 30, 4, 1, 2022, 1, 2),
+ (341, 104, 4, 1, 2022, 1, 3),
+ (342, 173, 4, 1, 2022, 1, 2),
+ (343, 234, 4, 1, 2022, 1, 4),
+ (344, 104, 4, 2, 2022, 2, 9),
+ (345, 201, 4, 2, 2022, 1, 5),
+ (346, 234, 4, 2, 2022, 1, 3),
+ (347, 218, 4, 2, 2022, 1, 9),
+ (348, 173, 4, 2, 2022, 1, 3),
+ (349, 74, 4, 2, 2022, 1, 5),
+ (350, 125, 4, 2, 2022, 1, 3),
+ (351, 74, 4, 1, 2022, 1, 1),
+ (352, 125, 4, 1, 2022, 1, 1),
+ (353, 201, 4, 1, 2022, 1, 5);

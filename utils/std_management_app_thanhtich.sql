@@ -1,20 +1,21 @@
-INSERT INTO std_management_app.thanhtich (MaThanhTich, TenHoatDong, NgayDienRa) VALUES (1, 'Thành tích 1', '2021-12-19 00:00:00');
-INSERT INTO std_management_app.thanhtich (MaThanhTich, TenHoatDong, NgayDienRa) VALUES (2, 'Thành tích 2', '2021-12-01 00:00:00');
-INSERT INTO std_management_app.thanhtich (MaThanhTich, TenHoatDong, NgayDienRa) VALUES (3, 'Thành tích 3', '2021-10-07 00:00:00');
-INSERT INTO std_management_app.thanhtich (MaThanhTich, TenHoatDong, NgayDienRa) VALUES (4, 'Thành tích 4', '2021-10-24 00:00:00');
-INSERT INTO std_management_app.thanhtich (MaThanhTich, TenHoatDong, NgayDienRa) VALUES (5, 'Thành tích 5', '2021-10-12 00:00:00');
-INSERT INTO std_management_app.thanhtich (MaThanhTich, TenHoatDong, NgayDienRa) VALUES (6, 'Thành tích 6', '2021-12-26 00:00:00');
-INSERT INTO std_management_app.thanhtich (MaThanhTich, TenHoatDong, NgayDienRa) VALUES (7, 'Thành tích 7', '2021-11-28 00:00:00');
-INSERT INTO std_management_app.thanhtich (MaThanhTich, TenHoatDong, NgayDienRa) VALUES (8, 'Thành tích 8', '2021-10-28 00:00:00');
-INSERT INTO std_management_app.thanhtich (MaThanhTich, TenHoatDong, NgayDienRa) VALUES (9, 'Thành tích 9', '2021-11-06 00:00:00');
-INSERT INTO std_management_app.thanhtich (MaThanhTich, TenHoatDong, NgayDienRa) VALUES (10, 'Thành tích 10', '2021-10-22 00:00:00');
-INSERT INTO std_management_app.thanhtich (MaThanhTich, TenHoatDong, NgayDienRa) VALUES (11, 'Thành tích 11', '2021-11-07 00:00:00');
-INSERT INTO std_management_app.thanhtich (MaThanhTich, TenHoatDong, NgayDienRa) VALUES (12, 'Thành tích 12', '2021-11-09 00:00:00');
-INSERT INTO std_management_app.thanhtich (MaThanhTich, TenHoatDong, NgayDienRa) VALUES (13, 'Thành tích 13', '2021-10-18 00:00:00');
-INSERT INTO std_management_app.thanhtich (MaThanhTich, TenHoatDong, NgayDienRa) VALUES (14, 'Thành tích 14', '2021-12-05 00:00:00');
-INSERT INTO std_management_app.thanhtich (MaThanhTich, TenHoatDong, NgayDienRa) VALUES (15, 'Thành tích 15', '2021-10-30 00:00:00');
-INSERT INTO std_management_app.thanhtich (MaThanhTich, TenHoatDong, NgayDienRa) VALUES (16, 'Thành tích 16', '2021-10-27 00:00:00');
-INSERT INTO std_management_app.thanhtich (MaThanhTich, TenHoatDong, NgayDienRa) VALUES (17, 'Thành tích 17', '2021-12-19 00:00:00');
-INSERT INTO std_management_app.thanhtich (MaThanhTich, TenHoatDong, NgayDienRa) VALUES (18, 'Thành tích 18', '2021-11-17 00:00:00');
-INSERT INTO std_management_app.thanhtich (MaThanhTich, TenHoatDong, NgayDienRa) VALUES (19, 'Thành tích 19', '2021-12-11 00:00:00');
-INSERT INTO std_management_app.thanhtich (MaThanhTich, TenHoatDong, NgayDienRa) VALUES (20, 'Thành tích 20', '2022-01-26 00:00:00');
+INSERT INTO `thanhtich` (`MaThanhTich`, `LoaiThanhTich`, `HocKy`, `NamHoc`, `TenHoatDong`, `DiemThanhTich`, `NgayDienRa`) VALUES
+(1, -1, 2, 2022, 'Thành tích 1', 5, '2021-12-19 00:00:00'),
+(2, -1, 2, 2022, 'Thành tích 2', 10, '2021-12-01 00:00:00'),
+(3, -1, 2, 2022, 'Thành tích 3', 15, '2021-10-07 00:00:00'),
+(4, -1, 1, 2022, 'Thành tích 4', 20, '2021-10-24 00:00:00'),
+(5, -1, 2, 2022, 'Thành tích 5', 25, '2021-10-12 00:00:00'),
+(6, -1, 1, 2022, 'Thành tích 6', 30, '2021-12-26 00:00:00'),
+(7, -1, 2, 2022, 'Thành tích 7', 25, '2021-11-28 00:00:00'),
+(8, -1, 2, 2022, 'Thành tích 8', 2, '2021-10-28 00:00:00'),
+(9, -1, 2, 2022, 'Thành tích 9', 6, '2021-11-06 00:00:00'),
+(10, -1, 2, 2022, 'Thành tích 10', 7, '2021-10-22 00:00:00'),
+(11, 1, 2, 2022, 'Thành tích 11', 5, '2021-11-07 00:00:00'),
+(12, 1, 2, 2022, 'Thành tích 12', 3, '2021-11-09 00:00:00'),
+(13, 1, 1, 2022, 'Thành tích 13', 7, '2021-10-18 00:00:00'),
+(14, 1, 1, 2022, 'Thành tích 14', 16, '2021-12-05 00:00:00'),
+(15, 1, 1, 2022, 'Thành tích 15', 34, '2021-10-30 00:00:00'),
+(16, 1, 2, 2022, 'Thành tích 16', 45, '2021-10-27 00:00:00'),
+(17, 1, 2, 2022, 'Thành tích 17', 26, '2021-12-19 00:00:00'),
+(18, 1, 2, 2022, 'Thành tích 18', 26, '2021-11-17 00:00:00'),
+(19, 1, 2, 2022, 'Thành tích 19', 34, '2021-12-11 00:00:00'),
+(32, -1, 2, 2022, 'Vắng học', 5, '2022-04-24 00:00:00');

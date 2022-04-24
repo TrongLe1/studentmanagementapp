@@ -29,7 +29,11 @@ drop table if exists ThanhTich;
 create table ThanhTich
 (
     MaThanhTich bigint primary key auto_increment,
+    LoaiThanhTich tinyint(1) not null,
+    HocKy tinyint(1) not null,
+    NamHoc smallint(6) not null,
     TenHoatDong text,
+    DiemThanhTich int(11) not null,
     NgayDienRa  datetime
 );
 
@@ -121,24 +125,6 @@ create table CTThanhTich
     CONSTRAINT FK_CTPhuHuynh_ThanhTich FOREIGN KEY (MaThanhTich)
         REFERENCES ThanhTich (MaThanhTich)
 
-);
-
-drop table if exists ViPham;
-create table ViPham
-(
-    MaThanhTich bigint primary key,
-    DiemTru     float,
-    CONSTRAINT FK_ViPham_ThanhTich FOREIGN KEY (MaThanhTich)
-        REFERENCES ThanhTich (MaThanhTich)
-);
-
-drop table if exists KhenThuong;
-create table KhenThuong
-(
-    MaThanhTich bigint primary key,
-    DiemCong    float,
-    CONSTRAINT FK_KhenThuong_ThanhTich FOREIGN KEY (MaThanhTich)
-        REFERENCES ThanhTich (MaThanhTich)
 );
 
 drop table if exists HocPhi;
@@ -233,7 +219,7 @@ create table Diem
     NamHoc    bigint,
     HeSoDiem  float null,
     SoDiem    float null,
-#     primary key (MaHocSinh, MaMon, HocKy, NamHoc),
+    primary key (MaHocSinh, MaMon, HocKy, NamHoc),
     CONSTRAINT FK_Diem_MaMon FOREIGN KEY (MaMon)
         REFERENCES MonHoc (MaMon),
     CONSTRAINT FK_MaMon_HocSinh FOREIGN KEY (MaHocSinh)

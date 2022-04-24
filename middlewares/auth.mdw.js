@@ -15,19 +15,19 @@ export default async function auth(req, res, next) {
     if (req.session.accountAuth.LoaiTaiKhoan !== role[0].LoaiTaiKhoan){
         return res.redirect('/login')
     } else {
-        // if (req.baseUrl === '/admin') {
-        //     if(req.session.accountAuth.LoaiTaiKhoan !== 4){
-        //         nullifyAccount(req, res)
-        //     }
-        // } else if (req.baseUrl === '/teacher') {
-        //     if (req.session.accountAuth.LoaiTaiKhoan !== 1 || req.session.accountAuth.LoaiTaiKhoan !== 3) {
-        //         nullifyAccount(req, res)
-        //     }
-        // } else if (req.baseUrl === '/student') {
-        //     if (req.session.accountAuth.LoaiTaiKhoan !== 2) {
-        //         nullifyAccount(req, res)
-        //     }
-        // }
+        if (req.baseUrl === '/admin') {
+            if (req.session.accountAuth.LoaiTaiKhoan !== 4){
+                nullifyAccount(req, res)
+            }
+        } else if (req.baseUrl === '/student') {
+            if (req.session.accountAuth.LoaiTaiKhoan !== 2) {
+                nullifyAccount(req, res)
+            }
+        } else {
+            if (req.session.accountAuth.LoaiTaiKhoan === 2 || req.session.accountAuth.LoaiTaiKhoan === 4) {
+                nullifyAccount(req, res)
+            }
+        }
     }
     next();
 }

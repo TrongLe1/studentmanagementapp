@@ -1,4 +1,4 @@
-INSERT INTO std_management_app.giaovien (MaGV, HoTen, NgaySinh, SDT, GioiTinh, DiaChi, ChuNhiemLop, TaiKhoan) VALUES (1, 'Nguyễn Hoàng Việt', '2005-06-17', '0923322581', 0, 'Q7, TPHCM', null, 242);
+INSERT INTO std_management_app.giaovien (MaGV, HoTen, NgaySinh, SDT, GioiTinh, DiaChi, ChuNhiemLop, TaiKhoan) VALUES (1, 'Nguyễn Hoàng Việt', '2005-06-17', '0923322581', 1, 'Q7, TPHCM', 1, 242);
 INSERT INTO std_management_app.giaovien (MaGV, HoTen, NgaySinh, SDT, GioiTinh, DiaChi, ChuNhiemLop, TaiKhoan) VALUES (2, 'Trần Văn Chót', '2007-12-21', '0923322582', 1, 'Q6, TPHCM', 2, 243);
 INSERT INTO std_management_app.giaovien (MaGV, HoTen, NgaySinh, SDT, GioiTinh, DiaChi, ChuNhiemLop, TaiKhoan) VALUES (3, 'Đoàn Xuân Đức', '2007-02-10', '0923322583', 1, 'Q7, TPHCM', 3, 244);
 INSERT INTO std_management_app.giaovien (MaGV, HoTen, NgaySinh, SDT, GioiTinh, DiaChi, ChuNhiemLop, TaiKhoan) VALUES (4, 'Nguyễn Việt Đức', '2006-11-19', '0923322584', 0, 'Q6, TPHCM', 4, 245);
