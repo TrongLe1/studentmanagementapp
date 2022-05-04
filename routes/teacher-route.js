@@ -1,7 +1,7 @@
 import express from 'express'
 import moment from 'moment'
-import fs from 'fs'
 import os from 'os'
+import xlsx from 'xlsx'
 import teacherModel from '../models/teacher-model.js'
 import classModel from '../models/class-model.js'
 import studentModel from '../models/student-model.js'
@@ -298,17 +298,28 @@ router.post('/teaching-class/scores/:cid/:sid/export', async function (req, res)
             student.TongDiem = Math.round(totalScore * 100) / 100
         }
     }
-    var data='Mã học sinh'+','+'Họ tên'+','+'Hệ số 1'+','+'Hệ số 1'+','+'Hệ số 1'+','+'Hệ số 1'+','
-        +'Hệ số 2'+','+'Hệ số 2'+','+'Hệ số 3'+','+'Tổng kết'+'\n';
-    for (let i = 0; i < students.length; i++) {
-        data=data+students[i].MaHocSinh+','+students[i].HoTen+','+students[i].HeSo1[0]+','
-            +students[i].HeSo1[1]+','+students[i].HeSo1[2]+','+students[i].HeSo1[3]+','
-            +students[i].HeSo2[0]+','+students[i].HeSo2[1]+','+students[i].HeSo3+','+students[i].TongDiem+ '\n';
-    }
+    const rows = students.map(row => ({
+        id: row.MaHocSinh,
+        fullName: row.HoTen,
+        hs1_1: row.HeSo1[0],
+        hs1_2: row.HeSo1[1],
+        hs1_3: row.HeSo1[2],
+        hs1_4: row.HeSo1[3],
+        hs2_1: row.HeSo2[0],
+        hs2_2: row.HeSo2[1],
+        hs3: row.HeSo3,
+        total: row.TongDiem
+    }))
+    const worksheet = xlsx.utils.json_to_sheet(rows)
+    const workbook = xlsx.utils.book_new()
+    xlsx.utils.book_append_sheet(workbook, worksheet, 'Sheet')
+    xlsx.utils.sheet_add_aoa(worksheet, [['ID','Họ tên','Hệ số 1','Hệ số 1','Hệ số 1','Hệ số 1','Hệ số 2','Hệ số 2',
+        'Hệ số 3','Tổng kết']], {origin: 'A1'})
+    worksheet["!cols"] = [
+        {wch: 8}, {wch: 30}, {wch: 10}, {wch: 10}, {wch: 10}, {wch: 10}, {wch: 10}, {wch: 10}, {wch: 10}, {wch: 10}
+    ];
     var fileName = 'Bảng điểm môn ' + subject.TenMonHoc + ' lớp ' + className + ' HK' + hocky + '-' + namhoc
-    fs.appendFile('C://Users//'+os.userInfo().username+'//Downloads/'+fileName+'.csv', data, {encoding: 'utf8'},(err) => {
-        if (err) throw err;
-    });
+    xlsx.writeFile(workbook,'C://Users//'+os.userInfo().username+'//Downloads/'+fileName+'.xlsx')
     res.redirect(req.headers.referer)
 })
 

@@ -6,10 +6,6 @@ import sessionMdw from './middlewares/session.mdw.js'
 import {dirname} from 'path'
 import {fileURLToPath} from 'url'
 import morgan from 'morgan'
-import bcrypt from "bcryptjs";
-import accountModel from "./models/account-model.js";
-import studentModel from "./models/student-model.js";
-import classModel from "./models/class-model.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const app = express()
