@@ -99,4 +99,7 @@ export default {
         const result = await db('lophoc').where('NamHoc', '=', year).count('*')
         return result[0]['count(*)']
     },
+    findClassYear(classID) {
+        return db.select('NamHoc').from('lophoc').where('MaLop', classID)
+    }
 }

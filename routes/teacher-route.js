@@ -81,7 +81,8 @@ router.get('/teaching-class/scores/:cid/:sid', async function (req, res) {
     const page = req.query.page || 1
     const offset = (page - 1) * limit
     const students = await studentModel.getStudentInClass(classID, limit, offset)
-    let chooseSemesterList = await studentModel.getChooseSemesterAndYearList(students[0].MaHocSinh)
+    const classYear = (await classModel.findClassYear(classID))[0].NamHoc
+    let chooseSemesterList = [{HocKy: 2, NamHoc: classYear}, {HocKy: 1, NamHoc: classYear}]
     let hocky = req.query.HocKy || chooseSemesterList[0].HocKy
     let namhoc = req.query.NamHoc || chooseSemesterList[0].NamHoc
     for (let i in chooseSemesterList) {
@@ -390,8 +391,8 @@ router.get('/homeroom-class/achievements', async function (req, res) {
     const className = (await classModel.findClassById(homeroomClass.MaLop))[0].TenLop
     const page = req.query.page || 1
     const offset = (page - 1) * limit
-    const students = await studentModel.getStudentInClass(classID, limit, offset)
-    let chooseSemesterList = await studentModel.getChooseSemesterAndYearList(students[0].MaHocSinh)
+    const classYear = (await classModel.findClassYear(classID))[0].NamHoc
+    let chooseSemesterList = [{HocKy: 2, NamHoc: classYear}, {HocKy: 1, NamHoc: classYear}]
     let hocky = req.query.HocKy || chooseSemesterList[0].HocKy
     let namhoc = req.query.NamHoc || chooseSemesterList[0].NamHoc
     for (let i in chooseSemesterList) {
