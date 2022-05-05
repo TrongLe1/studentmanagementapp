@@ -383,13 +383,24 @@ router.post('/homeroom-class/student/delete', async function (req, res) {
 })
 
 router.post('/homeroom-class/student/absent', async function (req, res) {
+    const teacher = req.session.teacher
+    const classYear = (await classModel.findClassById(teacher.ChuNhiemLop))[0].NamHoc
     const studentID = req.body.id
     const today = moment().format('YYYY-MM-DD')
+    var month = moment().month() + 1
+    var hocky = 0
+    if (month >= 9 || month == 1) {
+        hocky = 1
+    } else if (month >= 2 || month <= 6) {
+        hocky = 2
+    }
     await studentModel.updateAchievement({
         LoaiThanhTich: -1,
         TenHoatDong: "Vắng học",
         DiemThanhTich: 5,
-        NgayDienRa: today
+        NgayDienRa: today,
+        NamHoc: classYear,
+        HocKy: hocky
     }, studentID)
     res.redirect(req.headers.referer || '/homeroom-class/students')
 })
@@ -486,10 +497,6 @@ router.post('/info/edit', async function (req, res) {
     }
     await teacherModel.updateTeacher(updatedTeacher,teacher.MaGV);
     res.redirect(req.headers.referer || '/teacher/info')
-})
-
-router.get('/homeroom-class/student-seating', function(req, res) {
-
 })
 
 export default router
