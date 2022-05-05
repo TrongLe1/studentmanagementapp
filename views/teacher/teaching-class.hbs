@@ -1,11 +1,19 @@
 <div class="u-content">
     <div class="u-body">
-        <header class="section-header mb-4">
+        <header class="section-header mb-2">
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <h2 class="h3 card-header-title">Danh sách lớp học giảng dạy</h2>
                 </div>
             </div>
+            <form class="form-inline" method="post" action="/teacher/teaching-class">
+                <label for="value"></label>
+                <select onchange="this.form.submit()" class="mr-sm-2" id="value" name="value">
+                    {{#each chooseList}}
+                        <option {{#if isSelected}}selected{{/if}} value="{{NamHoc}}">{{NamHoc}}</option>
+                    {{/each}}
+                </select>
+            </form>
         </header>
         <div class="row">
             {{#each result}}
@@ -40,10 +48,10 @@
                     <ul class="pagination mb-0">
                         {{#if prevPage.check}}
                             <li class="page-item">
-                                <a class="page-link" href="/teacher/teaching-class?page={{prevPage.value}}">&larr; <span class="ml-1 d-none d-xl-inline-block">Previous</span></a>
+                                <a class="page-link" href="/teacher/teaching-class?NamHoc={{namhoc}}&page={{prevPage.value}}">&larr; <span class="ml-1 d-none d-xl-inline-block">Previous</span></a>
                             </li>
                             <li class="page-item">
-                                <a class="page-link" href="/teacher/teaching-class?page={{prevPage.value}}">{{prevPage.value}}</a>
+                                <a class="page-link" href="/teacher/teaching-class?NamHoc={{namhoc}}&page={{prevPage.value}}">{{prevPage.value}}</a>
                             </li>
                         {{/if}}
                         <li class="page-item active">
@@ -51,10 +59,10 @@
                         </li>
                         {{#if nexPage.check}}
                             <li class="page-item">
-                                <a class="page-link" href="/teacher/teaching-class?page={{nexPage.value}}">{{nexPage.value}}</a>
+                                <a class="page-link" href="/teacher/teaching-class?NamHoc={{namhoc}}&page={{nexPage.value}}">{{nexPage.value}}</a>
                             </li>
                             <li class="page-item">
-                                <a class="page-link" href="/teacher/teaching-class?page={{nexPage.value}}"><span class="mr-1 d-none d-xl-inline-block">Next</span> &rarr;</a>
+                                <a class="page-link" href="/teacher/teaching-class?NamHoc={{namhoc}}&page={{nexPage.value}}"><span class="mr-1 d-none d-xl-inline-block">Next</span> &rarr;</a>
                             </li>
                         {{/if}}
                     </ul>

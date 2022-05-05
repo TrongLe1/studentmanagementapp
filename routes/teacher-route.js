@@ -18,8 +18,13 @@ router.get('/teaching-class', async function (req, res) {
     const page = req.query.page || 1
     const offset = (page - 1) * limit
     const teacher = req.session.teacher
-    const result = await teacherModel.getTeachingClass(teacher.MaGV, limit, offset)
-    const total = await teacherModel.countTeachingClass(teacher.MaGV)
+    let chooseYearList = await teacherModel.findTeachingYears(teacher.MaGV)
+    let namhoc = req.query.NamHoc || chooseYearList[0].NamHoc
+    for (let i in chooseYearList) {
+        chooseYearList[i].isSelected = (chooseYearList[i].NamHoc == namhoc)
+    }
+    const result = await teacherModel.getTeachingClassByNH(teacher.MaGV, limit, offset, namhoc)
+    const total = await teacherModel.countTeachingClassByNH(teacher.MaGV, namhoc)
     let nPage = Math.floor(total / limit)
     if (total % limit > 0) nPage++
     let nexPage = {check: true, value: (+page + 1)}
@@ -33,11 +38,17 @@ router.get('/teaching-class', async function (req, res) {
         teaching_class: true,
         teacher_name: teacher.HoTen,
         homeroom_teacher: req.session.isHomeroomTeacher,
+        chooseList: chooseYearList,
+        namhoc,
         result,
         nexPage,
         curPage,
         prevPage
     })
+})
+
+router.post('/teaching-class', function(req, res) {
+    res.redirect('/teacher/teaching-class?NamHoc='+req.body.value+'')
 })
 
 router.get('/teaching-class/students/:id', async function (req, res) {
@@ -400,7 +411,6 @@ router.get('/homeroom-class/achievements', async function (req, res) {
             && chooseSemesterList[i].NamHoc == namhoc);
     }
     const result = await teacherModel.getAchievementsByHKNH(classID, limit, offset, hocky, namhoc)
-    console.log(result)
     for (const achieve of result) {
         achieve.DiemThanhTich *= achieve.LoaiThanhTich
     }
@@ -476,6 +486,10 @@ router.post('/info/edit', async function (req, res) {
     }
     await teacherModel.updateTeacher(updatedTeacher,teacher.MaGV);
     res.redirect(req.headers.referer || '/teacher/info')
+})
+
+router.get('/homeroom-class/student-seating', function(req, res) {
+
 })
 
 export default router

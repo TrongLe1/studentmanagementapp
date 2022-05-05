@@ -49,13 +49,24 @@ export default {
     getAllTeacherWithout(teachers) {
         return db('giaovien').whereNotIn('MaGV', teachers)
     },
-    getTeachingClass(teacherID, limit, offset) {
-        return db('ctgiangday').where('MaGV', teacherID).join('lophoc', 'lophoc.MaLop', 'ctgiangday.MaLop')
+    getTeachingClassByNH(teacherID, limit, offset, NH) {
+        return db('ctgiangday').where('MaGV', teacherID)
+            .join('lophoc', 'lophoc.MaLop', 'ctgiangday.MaLop')
+            .where('NamHoc', NH)
             .join('monhoc', 'MonHoc', 'MaMon').limit(limit).offset(offset)
     },
-    async countTeachingClass(teacherID) {
-        const result = await db('ctgiangday').where('MaGV', teacherID).count('*')
+    async countTeachingClassByNH(teacherID, NH) {
+        const result = await db('ctgiangday').where('MaGV', teacherID)
+            .join('lophoc', 'lophoc.MaLop', 'ctgiangday.MaLop')
+            .where('NamHoc', NH).count('*')
         return result[0]['count(*)']
+    },
+    findTeachingYears(teacherID) {
+        return db('ctgiangday').where('ctgiangday.MaGV', teacherID)
+            .join('lophoc', 'lophoc.MaLop', 'ctgiangday.MaLop')
+            .select('NamHoc')
+            .groupBy('NamHoc')
+            .orderBy('NamHoc', 'desc')
     },
     getAchievementsByHKNH(classID, limit, offset, HK, NH) {
         return db('ctthanhtich').join('thanhtich', 'ctthanhtich.MaThanhTich', 'thanhtich.MaThanhTich')

@@ -16,7 +16,7 @@ export default function (app) {
                 ].join('/')
             },
             format_gender(val) {
-                if (val === 1) return 'Nam'
+                if (val === 0) return 'Nam'
                 else return 'Nữ'
             },
             format_achievement(val) {
